@@ -1,0 +1,7 @@
+{
+  "name": "rovianda_mobile_formulacion",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
