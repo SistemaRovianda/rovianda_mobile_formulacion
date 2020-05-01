@@ -1,0 +1,90 @@
+$color-primary: #e2bd53;
+$color-secundary: #707070;
+$color-text-primary: #e2bd53;
+$color-text-secondary: #dbdbdb;
+
+form {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0px 0px 25px -1px rgba(0, 0, 0, 0.75);
+  position: relative;
+
+  .form-grid {
+    padding: 8%;
+
+    .form-image {
+      height: 20%;
+
+      .image {
+        width: auto;
+        height: 80px;
+        background-image: url("src/assets/logo/rovianda_logo.svg");
+        background-repeat: no-repeat;
+        background-size: 50%;
+        background-position: center center;
+      }
+    }
+
+    .form-message {
+      h1 {
+        font-size: 2.5vw;
+        margin: 0;
+        color: $color-secundary;
+        font-weight: 300;
+      }
+    }
+
+    .form-input {
+      border: $color-text-secondary solid 1.5px;
+      border-radius: 5px;
+      width: 100%;
+      color: $color-text-secondary;
+      margin-top: 20px;
+      transform: 2s;
+
+      ion-input {
+        margin-left: 4%;
+        font-size: 2.5vw;
+      }
+
+      &.item-has-focus {
+        border: 1.5px solid $color-text-primary;
+        color: $color-text-primary;
+        ion-icon {
+          &.color {
+            color: $color-text-primary !important;
+          }
+        }
+      }
+    }
+
+    .error {
+      margin-top: 10px;
+      color: tomato;
+      font-size: 1.7vw;
+      height: 2%;
+      transform: 2s;
+    }
+
+    ion-button {
+      height: 10%;
+      width: 100%;
+      text-transform: none;
+      font-size: 3vw;
+      font-weight: 20;
+      margin: 0;
+      margin-top: 18%;
+      border-radius: 5px;
+
+      --ion-color-primary: #e2bd53;
+    }
+  }
+}
+
+ion-icon {
+  &.color {
+    color: $color-text-secondary;
+  }
+}

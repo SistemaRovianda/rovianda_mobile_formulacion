@@ -1,0 +1,37 @@
+$color-primary: #e2bd53;
+$color-secundary: #707070;
+$color-text-primary: #e2bd53;
+$color-text-secondary: #dbdbdb;
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  background-image: radial-gradient(
+    circle at 40% -20%,
+    $color-primary 50%,
+    transparent 50%
+  );
+  .item-head {
+    height: 15vh;
+    text-align: center;
+    h1 {
+      color: white;
+      font-weight: 600;
+      font-size: 5vw;
+    }
+  }
+  .item-body {
+    height: 75vh;
+    padding: 0 15%;
+    padding-top: 10%;
+  }
+  .item-footer {
+    height: 10vh;
+    text-align: center;
+    h1 {
+      color: $color-secundary;
+      font-size: 2.5vw;
+      font-weight: 300;
+    }
+  }
+}

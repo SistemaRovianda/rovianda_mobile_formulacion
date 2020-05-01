@@ -1,0 +1,65 @@
+<form [formGroup]="form">
+  <ion-grid fixed class="form-grid">
+    <ion-row class="form-image">
+      <ion-col size="12">
+        <div class="image"></div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="form-message">
+      <ion-col size="12">
+        <h1>Introduce tu usuario y contrase&ntilde;a</h1>
+        <h1>Para iniciar sesi&oacute;n</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item lines="none" class="form-input">
+        <ion-icon src="/assets/icons/user.svg" class="color"></ion-icon>
+        <ion-input
+          formControlName="email"
+          type="email"
+          placeholder="Nombre de usuario"
+          required
+        >
+        </ion-input>
+      </ion-item>
+    </ion-row>
+    <div class="error">
+      <ion-label *ngIf="email.errors">
+        Por favor ingresa un correo electr&oacute;nico v&aacute;lido
+      </ion-label>
+    </div>
+    <ion-row>
+      <ion-item lines="none" class="form-input">
+        <ion-icon src="/assets/icons/lock.svg" class="color"></ion-icon>
+        <ion-input
+          formControlName="password"
+          type="password"
+          placeholder="Contrase&ntilde;a"
+          required
+        >
+        </ion-input>
+      </ion-item>
+    </ion-row>
+    <div class="error">
+      <ion-label *ngIf="password.errors">
+        Por favor ingresa una contraseña válida
+      </ion-label>
+    </div>
+
+    <ion-button class="btn" (click)="onSubmit()">
+      <div style="padding: 10px 0;">
+        <label *ngIf="!loading">Iniciar Sesi&oacute;n</label>
+        <ion-spinner
+          *ngIf="loading"
+          name="crescent"
+          diameter="32"
+        ></ion-spinner>
+      </div>
+    </ion-button>
+    <div class="error">
+      <ion-label *ngIf="form.errors?.loginError">
+        {{ form.errors.loginError }} Error
+      </ion-label>
+    </div>
+  </ion-grid>
+</form>
