@@ -9,6 +9,13 @@ const routes: Routes = [
         (m) => m.LayoutModule
       ),
   },
+  {
+    path: "formulation",
+    loadChildren: () =>
+      import("./features/formulation/formulation.module").then(
+        (m) => m.FormulationModule
+      ),
+  },
 ];
 
 @NgModule({

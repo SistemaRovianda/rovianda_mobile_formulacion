@@ -1,0 +1,23 @@
+$color-text-primary: #575552;
+$color-text-secondary: #b2b2b2;
+
+ion-grid {
+  .title-menu {
+    color: $color-text-primary;
+    font-size: 3.8vw;
+    margin-top: 5%;
+    font-weight: 700;
+    margin-left: 5%;
+  }
+  .subtitle-menu {
+    font-size: 3.4vw;
+    margin-left: 5%;
+  }
+  .container-button {
+    height: 37vh;
+    width: 100%;
+    .button {
+      padding: 7%;
+    }
+  }
+}
