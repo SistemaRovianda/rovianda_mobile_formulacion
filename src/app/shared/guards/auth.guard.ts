@@ -11,9 +11,7 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class AuthGuard implements CanActivate {
-  constructor(private _authService: AuthService, private _router: Router) {
-    console.log("uard...........");
-  }
+  constructor(private _authService: AuthService, private _router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

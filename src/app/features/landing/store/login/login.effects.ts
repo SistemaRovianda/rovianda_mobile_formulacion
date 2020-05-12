@@ -21,9 +21,6 @@ export class LogginEffects {
       delay(2000),
       exhaustMap((action) =>
         this.authService.signIn(action.email, action.password).pipe(
-          tap((action) =>
-            console.log("signInEffect] info: ", action.uid, action.token)
-          ),
           switchMap(({ uid, token }) => [
             fromLoginActions.startLoad(),
             fromAuthenticationUser.loadUser({
