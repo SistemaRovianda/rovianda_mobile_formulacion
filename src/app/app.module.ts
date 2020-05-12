@@ -12,6 +12,8 @@ import { effects } from "./shared/store/effects/index.effects";
 import { reducers, metaReducers } from "./shared/store/reducers/index.reducer";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { HttpClientModule } from "@angular/common/http";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AppProvidersModule } from "./providers/app-providers.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +22,7 @@ import { HttpClientModule } from "@angular/common/http";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    AngularFireAuthModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
@@ -32,11 +35,13 @@ import { HttpClientModule } from "@angular/common/http";
       maxAge: 20,
     }),
     HttpClientModule,
+    AppProvidersModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AppProvidersModule,
   ],
   bootstrap: [AppComponent],
 })

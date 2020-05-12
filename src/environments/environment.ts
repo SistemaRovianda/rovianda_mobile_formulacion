@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  basePath: "https://2b363120-ed28-45ee-a76e-361e5ff912cd.mock.pstmn.io",
+  basePath: "https://us-central1-rovianda-88249.cloudfunctions.net/app",
 };
 
 /*

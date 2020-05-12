@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { User } from "src/app/shared/models/user.interface";
+import { AuthenticationUser } from "src/app/shared/models/storeState.interface";
 
 const SIGN_IN = "[LOGIN] Sign In";
 
@@ -24,7 +24,10 @@ export const signIn = createAction(
 
 export const signInSuccess = createAction(SIGN_IN_SUCCESS);
 
-export const signAuthSuccess = createAction(SIGN_AUTH_SUCCESS, props<User>());
+export const signAuthSuccess = createAction(
+  SIGN_AUTH_SUCCESS,
+  props<AuthenticationUser>()
+);
 
 export const startLoad = createAction(START_LOAD);
 

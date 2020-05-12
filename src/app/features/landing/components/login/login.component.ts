@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // this.submit.emit(this.form.value);
+    this.submit.emit(this.form.value);
   }
 
   shouldDisable(): boolean {
