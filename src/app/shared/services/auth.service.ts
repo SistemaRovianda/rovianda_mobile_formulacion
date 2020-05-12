@@ -6,7 +6,6 @@ import { from, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { API_ENDPOINT_PROVIDER } from "src/app/providers/tokens";
 import { AuthenticationUser } from "../models/storeState.interface";
-import { User } from "../Models/user.interface";
 import Auth = firebase.auth.Auth;
 
 @Injectable({
@@ -45,7 +44,23 @@ export class AuthService {
   }
 
   getUserData(uid: string): Observable<AuthenticationUser> {
-    return this.http.get<User>(`${this.url}/${uid}`);
+    // return this.http.get<User>(`${this.url}/${uid}`);
+    let user: AuthenticationUser = {
+      email: "formulacion@yopmail.com",
+      name: "Damian",
+      role: "FORMULATION",
+    };
+    return Observable.create((observer) => {
+      observer.next(user);
+      observer.complete();
+    });
+  }
+
+  isAuth(): boolean {
+    return (
+      localStorage.getItem("token") != null &&
+      localStorage.getItem("role") == "FORMULATION"
+    );
   }
 
   getTokenCurrentUser(): Observable<any> {

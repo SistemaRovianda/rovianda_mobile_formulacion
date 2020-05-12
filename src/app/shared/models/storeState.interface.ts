@@ -4,10 +4,10 @@ export interface LoginState {
 }
 
 export interface AuthenticationUser {
-  id?: string;
+  uid?: string;
+  name?: string;
   email?: string;
-  ingenioid?: number;
-  rol?: string;
+  role?: string;
   token?: string;
   currentToken?: string;
 }

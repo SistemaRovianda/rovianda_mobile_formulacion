@@ -10,12 +10,12 @@ export const SELECT_USER_TOKEN = createSelector(
 
 export const SELECT_USER_UID = createSelector(
   AUTHENTICATION_STATE,
-  (state) => state.id
+  (state) => state.uid
 );
 
 export const SELECT_USER_ROLE = createSelector(
   AUTHENTICATION_STATE,
-  (state) => state.rol
+  (state) => state.role
 );
 
 export const SELECT_USER_CURRENT_TOKEN = createSelector(

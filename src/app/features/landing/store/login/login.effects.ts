@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { forkJoin, from, of } from "rxjs";
-import { catchError, delay, exhaustMap, switchMap } from "rxjs/operators";
+import { from, of } from "rxjs";
+import { catchError, delay, exhaustMap, switchMap, tap } from "rxjs/operators";
 import * as fromLoginActions from "./login.action";
 import { AuthService } from "src/app/shared/Services/auth.service";
 import * as fromAuthenticationUser from "../authentication/authentication.action";
@@ -19,18 +19,65 @@ export class LogginEffects {
     this.action$.pipe(
       ofType(fromLoginActions.signIn),
       delay(2000),
-      exhaustMap((action) => {
-        return forkJoin(
-          this.authService.signIn(action.email, action.password),
-          this.authService.getTokenCurrentUser()
-        ).pipe(
-          switchMap(([{ uid, token }]) => {
+      exhaustMap((action) =>
+        this.authService.signIn(action.email, action.password).pipe(
+          tap((action) =>
+            console.log("signInEffect] info: ", action.uid, action.token)
+          ),
+          switchMap(({ uid, token }) => [
+            fromLoginActions.startLoad(),
+            fromAuthenticationUser.loadUser({
+              uid,
+              token,
+            }),
+            fromAuthenticationUser.loadCurrentToken({ uid: uid }),
+          ]),
+          catchError((error) =>
+            of(
+              fromLoginActions.finishLoad(),
+              fromLoginActions.signInFailure(error)
+            )
+          )
+        )
+      )
+    )
+  );
+
+  loadCurrentTokenUserEffect$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(fromAuthenticationUser.loadCurrentToken),
+      exhaustMap((action) =>
+        this.authService.getTokenCurrentUser().pipe(
+          switchMap(({ currentToken }) => {
+            localStorage.setItem("token", currentToken);
             return [
-              fromLoginActions.startLoad(),
-              fromLoginActions.signAuthSuccess({ id: uid, token: token }),
-              fromAuthenticationUser.loadCurrentToken({ uid: uid }),
+              fromAuthenticationUser.loadUser({ currentToken }),
+              fromLoginActions.signAuthSuccess({ uid: action.uid }),
+            ];
+          }),
+          catchError((error) =>
+            of(
+              fromLoginActions.finishLoad(),
+              fromLoginActions.signInFailure({ error: error.error })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  signAuthSuccessEffect$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(fromLoginActions.signAuthSuccess),
+      exhaustMap((action) =>
+        this.authService.getUserData(action.uid).pipe(
+          switchMap(({ email, name, role }) => {
+            localStorage.setItem("role", role);
+            return [
               fromAuthenticationUser.loadUser({
-                token,
+                email,
+                name,
+                role,
               }),
               fromLoginActions.signInSuccess(),
             ];
@@ -41,36 +88,10 @@ export class LogginEffects {
               fromLoginActions.signInFailure(error)
             )
           )
-        );
-      })
+        )
+      )
     )
   );
-
-  // signAuthSuccessEffect$ = createEffect(() =>
-  //   this.action$.pipe(
-  //     ofType(fromLoginActions.signAuthSuccess),
-  //     exhaustMap((action) =>
-  //       this.authService.getUserData(action.id).pipe(
-  //         switchMap(({ id, email, ingenioid, rol, token }) => [
-  //           fromAuthenticationUser.loadUser({
-  //             id,
-  //             email,
-  //             ingenioid,
-  //             rol,
-  //             token,
-  //           }),
-  //           fromLoginActions.signInSuccess(),
-  //         ]),
-  //         catchError((error) =>
-  //           of(
-  //             fromLoginActions.finishLoad(),
-  //             fromLoginActions.signInFailure(error)
-  //           )
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
 
   signInSuccessEffect$ = createEffect(() =>
     this.action$.pipe(

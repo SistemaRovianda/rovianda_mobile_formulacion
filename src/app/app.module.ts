@@ -14,6 +14,8 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { HttpClientModule } from "@angular/common/http";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AppProvidersModule } from "./providers/app-providers.module";
+import { AuthGuard } from "./shared/guards/auth.guard";
+import { IsAuthGuard } from "./shared/guards/isAuth.guard";
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,6 +40,8 @@ import { AppProvidersModule } from "./providers/app-providers.module";
     AppProvidersModule,
   ],
   providers: [
+    AuthGuard,
+    IsAuthGuard,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
