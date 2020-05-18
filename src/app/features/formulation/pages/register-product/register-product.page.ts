@@ -16,6 +16,6 @@ export class RegisterProductPageComponent implements OnInit {
 
   onSubmit(formulation: Formulation) {
     console.log(formulation);
-    this.store.dispatch(fromRegister.register({ formulation }));
+    this.store.dispatch(fromRegister.registerFormulation({ formulation }));
   }
 }

@@ -29,18 +29,21 @@ const initialState: newState = {
 
 export const registerFormulationReducer = createReducer<newState>(
   initialState,
-  on(fromRegisterActions.register, (state, { formulation }) => ({
+  on(fromRegisterActions.registerFormulation, (state, { formulation }) => ({
     ...state,
     loading: true,
   })),
 
-  on(fromRegisterActions.registerSucess, (state, { formulation }) => ({
-    ...state,
-    formulation,
-    loading: false,
-  })),
+  on(
+    fromRegisterActions.registerFormulationSucess,
+    (state, { formulation }) => ({
+      ...state,
+      formulation,
+      loading: false,
+    })
+  ),
 
-  on(fromRegisterActions.registerError, (state, { error }) => ({
+  on(fromRegisterActions.registerFormulationError, (state, { error }) => ({
     ...state,
     loading: false,
     error,

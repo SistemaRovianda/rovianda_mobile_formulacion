@@ -1,21 +1,21 @@
 import { createAction, props } from "@ngrx/store";
 import { Formulation } from "src/app/shared/models/formulation.interface";
 
-const REGISTER = "[REGISTER] Register formulation";
-const REGISTER_SUCCESS = "[REGISTER] Register Formulation Success";
-const REGISTER_ERROR = "[REGISTER] Register Formulation Error";
+const REGISTER_FORMULATION = "[REGISTER] Register formulation";
+const REGISTER_FORMULATION_SUCCESS = "[REGISTER] Register Formulation Success";
+const REGISTER_FORMULATION_ERROR = "[REGISTER] Register Formulation Error";
 
-export const register = createAction(
-  REGISTER,
+export const registerFormulation = createAction(
+  REGISTER_FORMULATION,
   props<{ formulation: Formulation }>()
 );
 
-export const registerSucess = createAction(
-  REGISTER_SUCCESS,
+export const registerFormulationSucess = createAction(
+  REGISTER_FORMULATION_SUCCESS,
   props<{ formulation: Formulation }>()
 );
 
-export const registerError = createAction(
-  REGISTER_ERROR,
+export const registerFormulationError = createAction(
+  REGISTER_FORMULATION_ERROR,
   props<{ error: string }>()
 );

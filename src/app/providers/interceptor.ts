@@ -34,9 +34,12 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
 
     const headers = new HttpHeaders()
       .set("Content-Type", "application/json")
-      .set("Authorization", this.token || "");
+      .set("Authorization", localStorage.getItem("token") || "");
 
-    if (this.token != "" || this.token != null) {
+    if (
+      localStorage.getItem("token") != "" ||
+      localStorage.getItem("token") != null
+    ) {
       request = req.clone({
         headers: headers,
       });

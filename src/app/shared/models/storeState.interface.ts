@@ -1,3 +1,5 @@
+import { ProductState } from "src/app/features/formulation/store/products/products.reducer";
+
 export interface LoginState {
   loading: boolean;
   error: string;
@@ -16,4 +18,5 @@ export interface AppStateInterface {
   login: LoginState;
   auth: AuthenticationUser;
   register: any;
+  products: ProductState;
 }

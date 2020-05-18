@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { AppStateInterface } from "src/app/shared/models/storeState.interface";
+import { Store } from "@ngrx/store";
 
 @Component({
   selector: "register-product-form",
@@ -10,7 +12,10 @@ export class RegisterProductFormComponent implements OnInit {
   form: FormGroup;
   @Output("onSubmit") submit = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private _store: Store<AppStateInterface>
+  ) {
     this.form = fb.group({
       productRoviandaId: ["", Validators.required],
       loteId: ["", Validators.required],
@@ -24,7 +29,11 @@ export class RegisterProductFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form.get("productRoviandaId").valueChanges.subscribe((productId) => {
+      // this._store.dispatch
+    });
+  }
 
   onSubmit() {
     this.submit.emit(this.form.value);

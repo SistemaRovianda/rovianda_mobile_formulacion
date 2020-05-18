@@ -17,15 +17,15 @@ export class RegisterFormulationEffects {
 
   addFormulation$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromRegisterActions.register),
+      ofType(fromRegisterActions.registerFormulation),
       delay(2000),
       exhaustMap((payload) =>
         this.formulationService.addFormulation(payload.formulation).pipe(
           switchMap((formulation: Formulation) => [
-            fromRegisterActions.registerSucess({ formulation }),
+            fromRegisterActions.registerFormulationSucess({ formulation }),
           ]),
           catchError((error) => {
-            return of(fromRegisterActions.registerError(error));
+            return of(fromRegisterActions.registerFormulationError(error));
           })
         )
       )

@@ -6,6 +6,7 @@ import { PrintReportPageModule } from "./pages/print-report/print-report.module"
 import { PrintReportPageComponent } from "./pages/print-report/print-report.page";
 import { RegisterProductPageModule } from "./pages/register-product/register-product.module";
 import { RegisterProductPageComponent } from "./pages/register-product/register-product.page";
+import { ProductsResolve } from "src/app/shared/resolvers/products.resolver";
 
 const routes: Routes = [
   {
@@ -13,6 +14,9 @@ const routes: Routes = [
     children: [
       {
         path: "register-product",
+        resolve: {
+          products: ProductsResolve,
+        },
         component: RegisterProductPageComponent,
       },
       {
@@ -34,6 +38,7 @@ const routes: Routes = [
     RegisterProductPageModule,
     AddIngredientPageModule,
   ],
+  providers: [ProductsResolve],
   exports: [RouterModule],
 })
 export class FormulationRoutingModule {}
