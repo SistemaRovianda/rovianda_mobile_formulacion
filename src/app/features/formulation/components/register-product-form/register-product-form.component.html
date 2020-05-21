@@ -9,7 +9,12 @@
             placeholder="Seleccione un producto*"
             formControlName="productRoviandaId"
           >
-            <ion-select-option value="f">Female</ion-select-option>
+            <!-- <ion-select-option value="f">Female</ion-select-option> -->
+            <ion-select-option
+              *ngFor="let product of products$ | async"
+              [value]="product.id"
+              >{{ product.name }}</ion-select-option
+            >
           </ion-select>
         </ion-item>
         <div class="error">
@@ -101,14 +106,40 @@
 
     <ion-row>
       <ion-card class="card">
-        <h1 class="ion-title">Ingredientes</h1>
+        <ion-card-header>
+          <ion-card-subtitle>
+            Ingredientes
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+              Col-1
+            </ion-col>
+            <ion-col
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+              "
+            >
+              <ion-spinner *ngIf="loadingIngredients"></ion-spinner>
+              <!-- <div *ngIf="!loadingIngredients"> -->
+              <ion-label *ngFor="let ingredient of ingredients$ | async">{{
+                ingredient.description
+              }}</ion-label>
+              <!-- </div> -->
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
       </ion-card>
     </ion-row>
     <ion-row size="12" class="ion-justify-content-end">
       <ion-nav-link
         class="text-sm"
-        routerLink="add-ingredient"
         style="padding: 0 10px;"
+        (click)="openModal()"
         >Agregar ingredientes</ion-nav-link
       >
     </ion-row>

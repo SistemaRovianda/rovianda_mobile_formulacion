@@ -23,10 +23,6 @@ const routes: Routes = [
         path: "print-report",
         component: PrintReportPageComponent,
       },
-      {
-        path: "add-ingredient",
-        component: AddIngredientPageComponent,
-      },
     ],
   },
 ];

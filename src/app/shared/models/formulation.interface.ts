@@ -15,4 +15,5 @@ export interface AssigmentLot {
 export interface Ingredient {
   lotId: string;
   ingredientId: number;
+  checked?: boolean;
 }
