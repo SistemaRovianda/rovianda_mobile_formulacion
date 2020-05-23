@@ -70,7 +70,7 @@
       </ion-col>
       <ion-col size="7" style="padding: 10px 5px 0 5px;">
         <h1 class="ion-title">Asignacion de lote</h1>
-        <ion-row formGroupName="assigmentLot">
+        <ion-row formGroupName="assignmentLot">
           <ion-col size="6">
             <ion-item class="form-input">
               <ion-label class="ion-label" position="floating">Lote</ion-label>
@@ -88,7 +88,7 @@
                 >Ingreso*</ion-label
               >
               <ion-datetime
-                formControlName="dateEntry"
+                (ionChange)="onChangeDate($event)"
                 placeholder="dd/mm/yyyy"
                 displayFormat="DD/MM/YYYY"
               >
@@ -121,9 +121,9 @@
                 align-items: flex-end;
               "
             >
-              <ion-item *ngFor="let lot of lots$ | async">
+              <ion-item *ngFor="let lot of lots$ | async; let i = index">
                 <ion-label>Lote</ion-label>
-                <ion-select (ionChange)="onSelect($event)">
+                <ion-select [formControl]="lotsFormArray.controls[i]">
                   <ion-select-option
                     *ngFor="let lotId of lot.lots"
                     [value]="lotId"
@@ -161,6 +161,6 @@
         >Agregar ingredientes</ion-nav-link
       >
     </ion-row>
-    <div></div>
+    <div>Arreglo Status: {{ lotsFormArray.status }}</div>
   </ion-grid>
 </form>

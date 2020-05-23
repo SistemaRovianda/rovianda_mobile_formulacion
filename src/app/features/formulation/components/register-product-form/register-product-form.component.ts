@@ -1,5 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormArray,
+  FormControl,
+} from "@angular/forms";
 import { AppStateInterface } from "src/app/shared/models/storeState.interface";
 import { Store, select } from "@ngrx/store";
 import { Product } from "src/app/shared/models/product.interface";
@@ -30,6 +36,8 @@ export class RegisterProductFormComponent implements OnInit {
 
   lots$: Observable<Lot[]>;
 
+  lotsFormArray = new FormArray([]);
+
   @Output("onSubmit") submit = new EventEmitter();
 
   constructor(
@@ -44,7 +52,7 @@ export class RegisterProductFormComponent implements OnInit {
       loteId: ["", Validators.required],
       temperature: [""],
       temperatureWater: [""],
-      assigmentLot: fb.group({
+      assignmentLot: fb.group({
         newLotId: [""],
         dateEntry: ["", Validators.required],
       }),
@@ -61,17 +69,41 @@ export class RegisterProductFormComponent implements OnInit {
 
     this.ingredients$ = this._store.select(SELECT_INGREDIENTS_CHECKED);
 
-    this.lots$ = this._store.select(SELECT_LOTS);
-
     this.form.get("productRoviandaId").valueChanges.subscribe((productId) => {
       this._store.dispatch(
         loadIngredientsByProductID({ productId: productId })
       );
     });
+
+    this.lots$ = this._store.select(SELECT_LOTS);
+    this.lots$.subscribe((res) => {
+      if (res.length != 0) this.createLotsFormArray(res.length);
+    });
+  }
+
+  onChangeDate(evt) {
+    let date = evt.detail.value.split("T")[0];
+    this.form.get("assignmentLot").get("dateEntry").setValue(date);
   }
 
   onSubmit() {
+    this.form
+      .get("ingredient")
+      .setValue(this.getLotsIdWithIngredientsId(this.lotsFormArray.value));
     this.submit.emit(this.form.value);
+  }
+
+  getLotsIdWithIngredientsId(lotsId: number[]) {
+    let arr;
+    this.ingredients$.subscribe((lots) => {
+      arr = lots.map((ingredient, i) => {
+        return {
+          lotId: lotsId[i].toString(),
+          ingredientId: ingredient.ingredientId,
+        };
+      });
+    });
+    return arr;
   }
 
   async openModal() {
@@ -87,8 +119,11 @@ export class RegisterProductFormComponent implements OnInit {
     await modal.present();
   }
 
-  onSelect(evt) {
-    console.log("Seleccionaste: ", evt.detail.value);
-    console.log("Seleccionaste: ", evt.target.value);
+  onSelect(evt) {}
+
+  createLotsFormArray(size?: number) {
+    for (let i = 0; i <= size - 1; i++) {
+      this.lotsFormArray.push(new FormControl("", Validators.required));
+    }
   }
 }

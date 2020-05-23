@@ -32,7 +32,7 @@
             style="text-transform: none;"
             size="large"
             (click)="form.onSubmit()"
-            [disabled]="form.form.invalid"
+            [disabled]="form.form.invalid || form.lotsFormArray.status == 'INVALID'"
           >
             Guardar el registro
           </ion-button>

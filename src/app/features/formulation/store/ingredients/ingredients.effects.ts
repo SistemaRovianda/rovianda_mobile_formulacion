@@ -33,7 +33,14 @@ export class IngredientsEffects {
             };
           }
         );
-        return [addIngredientsProductSuccess({ ingredients: ingredients })];
+        return [
+          addIngredientsProductSuccess({ ingredients: ingredients }),
+          loadLots({
+            ingredientsId: ingredients
+              .filter((ing) => ing.checked)
+              .map((ing) => ing.ingredientId),
+          }),
+        ];
       })
     )
   );
