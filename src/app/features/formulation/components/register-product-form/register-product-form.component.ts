@@ -6,21 +6,14 @@ import { Product } from "src/app/shared/models/product.interface";
 import { Observable } from "rxjs";
 import { SELECT_PRODUCTS } from "../../store/products/products.selectors";
 import { loadIngredientsByProductID } from "../../store/ingredients-product/ingredients-product.actions";
-import {
-  SELECT_INGREDIENTS_BY_PRODUCT_LOADING,
-  SELECT_INGREDIENTS_BY_PRODUCT,
-} from "../../store/ingredients-product/ingredients-product.selectors";
-import { Ingredient } from "src/app/shared/models/formulation.interface";
+import { SELECT_INGREDIENTS_BY_PRODUCT_LOADING } from "../../store/ingredients-product/ingredients-product.selectors";
 import { ModalController } from "@ionic/angular";
 import { AddIngredientComponent } from "../../dialogs/add-ingredient/add-ingredient.component";
 import { loadIngredientsOutlet } from "../../store/ingredients-outlet/ingredients-outlet.actions";
-import { SELECT_INGREDIENTS } from "../../store/ingredients/ingredients.selectors";
-import {
-  IngredientC,
-  IngredientP,
-} from "src/app/shared/models/ingredient.interface";
-
-const NAME_COMPONENT = "register-product-form";
+import { SELECT_INGREDIENTS_CHECKED } from "../../store/ingredients/ingredients.selectors";
+import { IngredientC } from "src/app/shared/models/ingredient.interface";
+import { Lot } from "src/app/shared/models/lot.interface";
+import { SELECT_LOTS } from "../../store/lots/lots.selectors";
 @Component({
   selector: "register-product-form",
   templateUrl: "./register-product-form.component.html",
@@ -34,6 +27,8 @@ export class RegisterProductFormComponent implements OnInit {
   products$: Observable<Product[]>;
 
   ingredients$: Observable<IngredientC[]>;
+
+  lots$: Observable<Lot[]>;
 
   @Output("onSubmit") submit = new EventEmitter();
 
@@ -61,14 +56,14 @@ export class RegisterProductFormComponent implements OnInit {
     this._store
       .select(SELECT_INGREDIENTS_BY_PRODUCT_LOADING)
       .subscribe((loading) => {
-        console.log(`[${NAME_COMPONENT}] loading: `, loading);
         this.loadingIngredients = loading;
       });
 
-    this.ingredients$ = this._store.select(SELECT_INGREDIENTS);
+    this.ingredients$ = this._store.select(SELECT_INGREDIENTS_CHECKED);
+
+    this.lots$ = this._store.select(SELECT_LOTS);
 
     this.form.get("productRoviandaId").valueChanges.subscribe((productId) => {
-      console.log(`[${NAME_COMPONENT}] productId: `, productId);
       this._store.dispatch(
         loadIngredientsByProductID({ productId: productId })
       );
@@ -90,5 +85,10 @@ export class RegisterProductFormComponent implements OnInit {
     });
 
     await modal.present();
+  }
+
+  onSelect(evt) {
+    console.log("Seleccionaste: ", evt.detail.value);
+    console.log("Seleccionaste: ", evt.target.value);
   }
 }

@@ -5,13 +5,14 @@ import {
   addIngredientsModal,
   addIngredientsProductSuccess,
   addIngredientsModalSuccess,
+  updateIngredients,
 } from "./ingredients.actions";
 import { exhaustMap } from "rxjs/operators";
 import {
   IngredientP,
   IngredientC,
 } from "src/app/shared/models/ingredient.interface";
-import { Ingredient } from "src/app/shared/models/formulation.interface";
+import { loadLots } from "../lots/lots.actions";
 
 @Injectable({
   providedIn: "root",
@@ -32,8 +33,6 @@ export class IngredientsEffects {
             };
           }
         );
-
-        console.log("[Arreglo Interno]: ", ingredients);
         return [addIngredientsProductSuccess({ ingredients: ingredients })];
       })
     )
@@ -52,8 +51,19 @@ export class IngredientsEffects {
             (im) => !withCheckIn.has(im.ingredientId)
           ),
         ];
-        console.log("merge: ", merge);
         return [addIngredientsModalSuccess({ ingredients: merge })];
+      })
+    )
+  );
+
+  updateIngredientsEffect$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(updateIngredients),
+      exhaustMap((action) => {
+        let checks = action.ingredients
+          .filter((ing) => ing.checked)
+          .map((ing) => ing.ingredientId);
+        return [loadLots({ ingredientsId: checks })];
       })
     )
   );

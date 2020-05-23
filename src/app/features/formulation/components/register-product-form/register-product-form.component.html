@@ -113,8 +113,25 @@
         </ion-card-header>
         <ion-card-content>
           <ion-row>
-            <ion-col>
-              Col-1
+            <ion-col
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+              "
+            >
+              <ion-item *ngFor="let lot of lots$ | async">
+                <ion-label>Lote</ion-label>
+                <ion-select (ionChange)="onSelect($event)">
+                  <ion-select-option
+                    *ngFor="let lotId of lot.lots"
+                    [value]="lotId"
+                  >
+                    {{ lotId }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
             </ion-col>
             <ion-col
               style="
@@ -126,9 +143,10 @@
             >
               <ion-spinner *ngIf="loadingIngredients"></ion-spinner>
               <!-- <div *ngIf="!loadingIngredients"> -->
-              <ion-label *ngFor="let ingredient of ingredients$ | async">{{
-                ingredient.description
-              }}</ion-label>
+              <ion-item *ngFor="let ingredient of ingredients$ | async">
+                <ion-label>{{ ingredient.description }}</ion-label>
+              </ion-item>
+
               <!-- </div> -->
             </ion-col>
           </ion-row>

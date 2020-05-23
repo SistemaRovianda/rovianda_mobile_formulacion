@@ -1,6 +1,6 @@
 import { Ingredient } from "src/app/shared/models/formulation.interface";
 import { IngredientsService } from "src/app/shared/services/ingredients.service";
-import { on, createReducer } from "@ngrx/store";
+import { on, createReducer, State } from "@ngrx/store";
 import {
   addIngredientsProduct,
   addIngredientsModal,
@@ -28,9 +28,14 @@ export const ingredientsReducer = createReducer<IngredientsState>(
     ...state,
     ingredients,
   })),
+  on(addIngredientsModal, (state) => ({
+    ...state,
+    loading: true,
+  })),
   on(addIngredientsModalSuccess, (state, { ingredients }) => ({
     ...state,
-    ingredients: [...state.ingredients, ...new Set(ingredients)], // evitara la duplicidad de los elementos dentro del array
+    loading: false,
+    ingredients,
   })),
   on(updateIngredients, (state, { ingredients }) => ({
     ...state,

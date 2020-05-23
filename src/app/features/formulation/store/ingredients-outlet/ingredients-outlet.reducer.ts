@@ -5,10 +5,11 @@ import {
   loadIngredientsOutletSuccess,
   loadIngredientsOutletError,
 } from "./ingredients-outlet.actions";
+import { IngredientC } from "src/app/shared/models/ingredient.interface";
 
 export interface IngredientsOutletState {
   loading: boolean;
-  ingredientsOutlet: Ingredient[];
+  ingredientsOutlet: IngredientC[];
   error: string;
 }
 

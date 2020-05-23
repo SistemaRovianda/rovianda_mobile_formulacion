@@ -15,20 +15,42 @@
     </ion-card-header>
     <ion-card-content>
       <ion-spinner *ngIf="loading"></ion-spinner>
-      <ion-row>
-        <ion-col>
+      <ion-row style="overflow-y: scroll; height: 100%;">
+        <ion-col style="overflow-y: scroll; height: 350px;">
           <div
             *ngIf="!loading"
             style="
               display: flex;
               flex-direction: column;
               justify-content: center;
+              overflow-y: scroll;
             "
           >
-            <ion-label *ngFor="let ing of ingredientsOutlet$ | async">{{
+            <!-- <ion-label *ngFor="let ing of ingredientsOutlet$ | async">{{
               ing.description
-            }}</ion-label>
+            }}</ion-label> -->
+            <form [formGroup]="ingredientsForm" #form>
+              <ion-item
+                *ngFor="
+                  let ing of ingredientsForm.controls.ingredients.controls;
+                  let i = index
+                "
+              >
+                <ion-checkbox
+                  type="checkbox"
+                  [formControl]="ing"
+                ></ion-checkbox>
+                {{ ingredients[i].description }}
+              </ion-item>
+            </form>
           </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="addIngredients(ingredientsForm.value)"
+            >Agregar</ion-button
+          >
         </ion-col>
       </ion-row>
     </ion-card-content>

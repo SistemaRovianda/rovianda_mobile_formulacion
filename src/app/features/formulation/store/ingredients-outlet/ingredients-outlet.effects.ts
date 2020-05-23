@@ -7,7 +7,6 @@ import {
   loadIngredientsOutletSuccess,
   loadIngredientsOutletError,
 } from "./ingredients-outlet.actions";
-import { Ingredient } from "src/app/shared/models/formulation.interface";
 import { of } from "rxjs";
 import {
   IngredientM,
@@ -27,12 +26,6 @@ export class IngredientsOutletEffects {
   loadIngredientsOutletEffect$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadIngredientsOutlet),
-      tap((action) =>
-        console.log(
-          "carga ingredientes modal (internos)",
-          action.ingredientsProductIn
-        )
-      ),
       exhaustMap((action) =>
         this._ingredientsService.getIngredients().pipe(
           switchMap((ingredients: IngredientM[]) => {

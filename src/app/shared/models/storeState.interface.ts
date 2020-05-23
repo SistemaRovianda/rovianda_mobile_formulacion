@@ -2,6 +2,7 @@ import { ProductState } from "src/app/features/formulation/store/products/produc
 import { IngredientsProductState } from "src/app/features/formulation/store/ingredients-product/ingredients-product.reducer";
 import { IngredientsOutletState } from "src/app/features/formulation/store/ingredients-outlet/ingredients-outlet.reducer";
 import { IngredientsState } from "src/app/features/formulation/store/ingredients/ingredients.reducer";
+import { LotsState } from "src/app/features/formulation/store/lots/lots.reducer";
 
 export interface LoginState {
   loading: boolean;
@@ -25,4 +26,5 @@ export interface AppStateInterface {
   ingredients: IngredientsState;
   ingredientsProduct: IngredientsProductState;
   ingredientsOutlet: IngredientsOutletState;
+  lots: LotsState;
 }

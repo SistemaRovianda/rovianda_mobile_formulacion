@@ -1,12 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppStateInterface } from "src/app/shared/models/storeState.interface";
-import { Ingredient } from "src/app/shared/models/formulation.interface";
 import { Observable } from "rxjs";
 import {
-  SELECT_INGREDIENTS_OUTLET,
-  SELECT_INGREDIENTS_OUTLET_LOADING,
-} from "../../store/ingredients-outlet/ingredients-outlet.selectors";
+  SELECT_INGREDIENTS,
+  SELECT_INGREDIENTS_LOADING,
+} from "../../store/ingredients/ingredients.selectors";
+import { IngredientC } from "src/app/shared/models/ingredient.interface";
+import { FormGroup, FormBuilder, FormArray, FormControl } from "@angular/forms";
+import { updateIngredients } from "../../store/ingredients/ingredients.actions";
 
 @Component({
   selector: "app-add-ingredient",
@@ -14,18 +16,64 @@ import {
   styleUrls: ["./add-ingredient.component.scss"],
 })
 export class AddIngredientComponent implements OnInit {
-  ingredientsOutlet$: Observable<Ingredient[]>;
+  ingredientsOutlet$: Observable<IngredientC[]>;
+
+  ingredientsForm: FormGroup;
 
   loading: boolean;
 
-  constructor(private _store: Store<AppStateInterface>) {
+  constructor(
+    private _store: Store<AppStateInterface>,
+    private _fb: FormBuilder
+  ) {
     this.loading = true;
-    this.ingredientsOutlet$ = this._store.select(SELECT_INGREDIENTS_OUTLET);
+    this._store
+      .select(SELECT_INGREDIENTS_LOADING)
+      .subscribe((loading) => (this.loading = loading));
   }
 
+  ingredients: IngredientC[];
+
   ngOnInit() {
-    this._store
-      .select(SELECT_INGREDIENTS_OUTLET_LOADING)
-      .subscribe((loading) => (this.loading = loading));
+    this.ingredientsOutlet$ = this._store.select(SELECT_INGREDIENTS);
+    this.ingredientsOutlet$.subscribe((res) => {
+      this.ingredients = res;
+      this.createIngredientsForm();
+    });
+  }
+
+  createIngredientsForm() {
+    this.ingredientsForm = this._fb.group({
+      ingredients: this.createIngredients(this.ingredients),
+    });
+  }
+
+  createIngredients(ingredients: IngredientC[]): FormArray {
+    const arrIngredients = ingredients.map(
+      (ingredient) => new FormControl(ingredient.checked || false)
+    );
+    return new FormArray(arrIngredients);
+  }
+
+  getSelected(formValue) {
+    let arr = Object.assign(
+      {},
+      {
+        ingredients: formValue.ingredients.map((value, i) => {
+          return {
+            ingredientId: this.ingredients[i].ingredientId,
+            description: this.ingredients[i].description,
+            checked: value,
+          };
+        }),
+      }
+    );
+    return Object.keys(arr.ingredients).map((e, i) => arr.ingredients[i]);
+  }
+
+  addIngredients(formValue) {
+    this._store.dispatch(
+      updateIngredients({ ingredients: this.getSelected(formValue) })
+    );
   }
 }
