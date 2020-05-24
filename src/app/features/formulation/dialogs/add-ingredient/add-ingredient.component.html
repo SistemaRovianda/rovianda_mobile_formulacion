@@ -51,6 +51,16 @@
           <ion-button (click)="addIngredients(ingredientsForm.value)"
             >Agregar</ion-button
           >
+          <ion-button (click)="onCancel()">Cancelar</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item *ngIf="showError">
+            <ion-label>
+              No ha seleccionado ningun ingrediente.
+            </ion-label>
+          </ion-item>
         </ion-col>
       </ion-row>
     </ion-card-content>

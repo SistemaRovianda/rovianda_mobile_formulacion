@@ -9,6 +9,7 @@ import {
 import { IngredientC } from "src/app/shared/models/ingredient.interface";
 import { FormGroup, FormBuilder, FormArray, FormControl } from "@angular/forms";
 import { updateIngredients } from "../../store/ingredients/ingredients.actions";
+import { ModalController } from "@ionic/angular";
 
 @Component({
   selector: "app-add-ingredient",
@@ -22,10 +23,14 @@ export class AddIngredientComponent implements OnInit {
 
   loading: boolean;
 
+  showError: boolean;
+
   constructor(
     private _store: Store<AppStateInterface>,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _modalCtrl: ModalController
   ) {
+    this.showError = false;
     this.loading = true;
     this._store
       .select(SELECT_INGREDIENTS_LOADING)
@@ -72,8 +77,23 @@ export class AddIngredientComponent implements OnInit {
   }
 
   addIngredients(formValue) {
-    this._store.dispatch(
-      updateIngredients({ ingredients: this.getSelected(formValue) })
-    );
+    // console.log("Validacion: ", this.notSelected(this.getSelected(formValue)));
+    if (this.notSelected(this.getSelected(formValue))) {
+      this.showError = false;
+      this._store.dispatch(
+        updateIngredients({ ingredients: this.getSelected(formValue) })
+      );
+      this._modalCtrl.dismiss();
+    } else {
+      this.showError = true;
+    }
+  }
+
+  notSelected(arrChecked: IngredientC[]) {
+    return arrChecked.filter((ing) => ing.checked).length != 0 ? true : false;
+  }
+
+  onCancel() {
+    this._modalCtrl.dismiss();
   }
 }
