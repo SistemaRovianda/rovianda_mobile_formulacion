@@ -29,7 +29,7 @@ export class AuthService {
 
     this.auth = firebase.auth();
 
-    this.url = `${endpoint.basePathMock}`;
+    this.url = `${endpoint}`;
   }
 
   signIn(email: string, password: string): Observable<any> {
