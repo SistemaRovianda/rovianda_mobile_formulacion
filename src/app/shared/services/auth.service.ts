@@ -29,7 +29,7 @@ export class AuthService {
 
     this.auth = firebase.auth();
 
-    this.url = `${endpoint.basePath}`;
+    this.url = `${endpoint.basePathMock}`;
   }
 
   signIn(email: string, password: string): Observable<any> {
@@ -46,22 +46,13 @@ export class AuthService {
   }
 
   getUserData(uid: string): Observable<AuthenticationUser> {
-    // return this.http.get<User>(`${this.url}/${uid}`);
-    let user: AuthenticationUser = {
-      email: "formulacion@yopmail.com",
-      name: "Damian",
-      role: "FORMULATION",
-    };
-    return Observable.create((observer) => {
-      observer.next(user);
-      observer.complete();
-    });
+    return this.http.get<AuthenticationUser>(`${this.url}/user/${uid}`);
   }
 
   isAuth(): boolean {
     return (
       localStorage.getItem("token") != null &&
-      localStorage.getItem("role") == "FORMULATION"
+      localStorage.getItem("role") == "Formulation"
     );
   }
 
