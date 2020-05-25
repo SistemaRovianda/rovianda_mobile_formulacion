@@ -1,7 +1,8 @@
 <title-header
-  [titlePath]="'Regresar'"
+  [titlePath]="'Salir'"
   [path]="'/'"
   [title]="'Registro'"
+  (click)="logout()"
 ></title-header>
 
 <ion-content class="container">
@@ -34,7 +35,8 @@
             (click)="form.onSubmit()"
             [disabled]="form.form.invalid || form.lotsFormArray.status == 'INVALID'"
           >
-            Guardar el registro
+            <ion-spinner *ngIf="loadingSave"></ion-spinner>
+            <span *ngIf="!loadingSave">Guardar registro</span>
           </ion-button>
         </div>
       </ion-row>

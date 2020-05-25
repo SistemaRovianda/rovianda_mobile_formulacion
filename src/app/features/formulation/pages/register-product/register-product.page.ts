@@ -3,6 +3,11 @@ import { Formulation } from "src/app/shared/models/formulation.interface";
 import { Store } from "@ngrx/store";
 import { AppStateInterface } from "src/app/shared/models/storeState.interface";
 import * as fromRegister from "../../store/register-formulation/register-formulation.action";
+import { AlertController } from "@ionic/angular";
+import { SELECT_REGISTER_FORMULATION_LOADING } from "../../store/register-formulation/register-formulation.selector";
+import { Router } from "@angular/router";
+import { log } from "console";
+import { signOut } from "src/app/features/landing/store/login/login.action";
 
 @Component({
   selector: "register-product",
@@ -10,11 +15,50 @@ import * as fromRegister from "../../store/register-formulation/register-formula
   styleUrls: ["./register-product.page.scss"],
 })
 export class RegisterProductPageComponent implements OnInit {
-  constructor(private store: Store<AppStateInterface>) {}
+  loadingSave: boolean;
 
-  ngOnInit() {}
+  constructor(
+    private store: Store<AppStateInterface>,
+    private _alertCtrl: AlertController,
+    private _router: Router
+  ) {
+    this.loadingSave = false;
+  }
+
+  ngOnInit() {
+    this.store
+      .select(SELECT_REGISTER_FORMULATION_LOADING)
+      .subscribe((res) => (this.loadingSave = res));
+  }
 
   onSubmit(formulation: Formulation) {
-    this.store.dispatch(fromRegister.registerFormulation({ formulation }));
+    this.openModal(formulation);
+  }
+
+  async openModal(formulation: Formulation) {
+    const alert = await this._alertCtrl.create({
+      header: "Guardar formula",
+      message: "Confirmar y guardar nueva formula",
+      buttons: [
+        {
+          text: "Cancelar",
+          role: "cancel",
+        },
+        {
+          text: "Confirmar",
+          handler: () => {
+            this.store.dispatch(
+              fromRegister.registerFormulation({ formulation })
+            );
+            this._router.navigate(["/formulation/print-report"]);
+          },
+        },
+      ],
+    });
+    (await alert).present();
+  }
+
+  logout() {
+    this.store.dispatch(signOut());
   }
 }

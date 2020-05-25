@@ -2,13 +2,13 @@ import { createReducer, on } from "@ngrx/store";
 import { Formulation } from "src/app/shared/models/formulation.interface";
 import * as fromRegisterActions from "./register-formulation.action";
 
-export interface newState {
+export interface RegisterFormulationState {
   formulation: Formulation;
   error: string;
   loading: boolean;
 }
 
-const initialState: newState = {
+const initialState: RegisterFormulationState = {
   formulation: {
     productRoviandaId: null,
     lotId: "",
@@ -27,7 +27,9 @@ const initialState: newState = {
   loading: false,
 };
 
-export const registerFormulationReducer = createReducer<newState>(
+export const registerFormulationReducer = createReducer<
+  RegisterFormulationState
+>(
   initialState,
   on(fromRegisterActions.registerFormulation, (state, { formulation }) => ({
     ...state,

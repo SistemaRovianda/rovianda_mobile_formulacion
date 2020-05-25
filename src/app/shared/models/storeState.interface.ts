@@ -3,6 +3,7 @@ import { IngredientsProductState } from "src/app/features/formulation/store/ingr
 import { IngredientsOutletState } from "src/app/features/formulation/store/ingredients-outlet/ingredients-outlet.reducer";
 import { IngredientsState } from "src/app/features/formulation/store/ingredients/ingredients.reducer";
 import { LotsState } from "src/app/features/formulation/store/lots/lots.reducer";
+import { RegisterFormulationState } from "src/app/features/formulation/store/register-formulation/register-formulation.reducer";
 
 export interface LoginState {
   loading: boolean;
@@ -21,7 +22,7 @@ export interface AuthenticationUser {
 export interface AppStateInterface {
   login: LoginState;
   auth: AuthenticationUser;
-  register: any;
+  register: RegisterFormulationState;
   products: ProductState;
   ingredients: IngredientsState;
   ingredientsProduct: IngredientsProductState;

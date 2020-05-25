@@ -7,6 +7,7 @@ import { map } from "rxjs/operators";
 import { API_ENDPOINT_PROVIDER } from "src/app/providers/tokens";
 import { AuthenticationUser } from "../models/storeState.interface";
 import Auth = firebase.auth.Auth;
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -18,6 +19,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private _router: Router,
     @Inject(API_ENDPOINT_PROVIDER) private endpoint
   ) {
     firebase.initializeApp({
@@ -74,5 +76,14 @@ export class AuthService {
           return Promise.all([error]);
         })
     ).pipe(map(([currentToken]) => ({ currentToken })));
+  }
+
+  signOut(): Observable<any> {
+    localStorage.clear();
+    return from(
+      this.auth.signOut().then(() => {
+        this._router.navigate(["/"], { replaceUrl: true });
+      })
+    );
   }
 }

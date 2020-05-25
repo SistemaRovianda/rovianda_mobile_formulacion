@@ -110,4 +110,16 @@ export class LogginEffects {
       )
     )
   );
+
+  signOutEffect = createEffect(() =>
+    this.action$.pipe(
+      ofType(fromLoginActions.signOut),
+      exhaustMap((action) =>
+        this.authService.signOut().pipe(
+          switchMap((action) => [fromAuthenticationUser.clearUser()]),
+          catchError((error) => of(fromLoginActions.signInFailure(error)))
+        )
+      )
+    )
+  );
 }

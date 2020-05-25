@@ -3,8 +3,14 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
 import { PrintReportPageComponent } from "./print-report.page";
+import { TitleHeaderModule } from "src/app/shared/components/header/header.module";
 
-const COMMON_IMPORTS = [CommonModule, IonicModule, RouterModule];
+const COMMON_IMPORTS = [
+  CommonModule,
+  IonicModule,
+  RouterModule,
+  TitleHeaderModule,
+];
 
 const COMMON_DECLARATIONS = [PrintReportPageComponent];
 
