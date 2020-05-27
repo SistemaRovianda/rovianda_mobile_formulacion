@@ -37,6 +37,10 @@
                 "
               >
                 <ion-checkbox
+                  style="
+                    --background-checked: #e2bd53;
+                    --border-color-checked: #e2bd53;
+                  "
                   type="checkbox"
                   [formControl]="ing"
                 ></ion-checkbox>
@@ -48,10 +52,14 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button (click)="addIngredients(ingredientsForm.value)"
+          <ion-button
+            class="btn-add"
+            (click)="addIngredients(ingredientsForm.value)"
             >Agregar</ion-button
           >
-          <ion-button (click)="onCancel()">Cancelar</ion-button>
+          <ion-button class="btn-cancel" (click)="onCancel()"
+            >Cancelar</ion-button
+          >
         </ion-col>
       </ion-row>
       <ion-row>

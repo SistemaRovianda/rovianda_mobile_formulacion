@@ -46,6 +46,7 @@ export class RegisterProductPageComponent implements OnInit {
         },
         {
           text: "Confirmar",
+          cssClass: "btn-confirm-dialog",
           handler: () => {
             this.store.dispatch(
               fromRegister.registerFormulation({ formulation })
