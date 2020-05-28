@@ -14,7 +14,7 @@ import { API_ENDPOINT_PROVIDER } from "./tokens";
     },
     {
       provide: API_ENDPOINT_PROVIDER,
-      useValue: environment.basePathMock,
+      useValue: environment.basePath,
     },
   ],
 })
