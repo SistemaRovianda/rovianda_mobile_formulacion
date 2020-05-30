@@ -25,7 +25,10 @@
     </ion-row>
     <div class="error">
       <ion-label *ngIf="email.invalid && (email.dirty || email.touched)">
-        Por favor ingresa un correo electrónico válido
+        Dato inválido
+      </ion-label>
+      <ion-label *ngIf="form.get('email').hasError('email')">
+        Ingrese un correo electrónico
       </ion-label>
       <ion-label *ngIf="email.touched && email.errors?.whitespace">
         No se aceptan expacios en blanco
@@ -47,7 +50,7 @@
       <ion-label
         *ngIf="password.invalid && (password.dirty || password.touched)"
       >
-        Por favor ingresa una contraseña válida
+        Dato inválido
       </ion-label>
       <ion-label *ngIf="password.touched && password.errors?.whitespace">
         No se aceptan expacios en blanco
