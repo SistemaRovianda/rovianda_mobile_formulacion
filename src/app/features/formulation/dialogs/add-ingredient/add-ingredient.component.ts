@@ -25,11 +25,14 @@ export class AddIngredientComponent implements OnInit {
 
   showError: boolean;
 
+  ingredientsNull: boolean;
+
   constructor(
     private _store: Store<AppStateInterface>,
     private _fb: FormBuilder,
     private _modalCtrl: ModalController
   ) {
+    this.ingredientsNull = false;
     this.showError = false;
     this.loading = true;
     this._store
@@ -54,10 +57,15 @@ export class AddIngredientComponent implements OnInit {
   }
 
   createIngredients(ingredients: IngredientC[]): FormArray {
-    const arrIngredients = ingredients.map(
-      (ingredient) => new FormControl(ingredient.checked || false)
-    );
-    return new FormArray(arrIngredients);
+    if (ingredients.length != 0) {
+      this.ingredientsNull = false;
+      const arrIngredients = ingredients.map(
+        (ingredient) => new FormControl(ingredient.checked || false)
+      );
+      return new FormArray(arrIngredients);
+    }
+    this.ingredientsNull = true;
+    return new FormArray([]);
   }
 
   getSelected(formValue) {

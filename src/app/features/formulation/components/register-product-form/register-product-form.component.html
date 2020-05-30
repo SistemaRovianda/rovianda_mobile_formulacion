@@ -18,8 +18,16 @@
           </ion-select>
         </ion-item>
         <div class="error">
-          <ion-label *ngIf="form.hasError('required', 'productRoviandaId')">
+          <!-- <ion-label *ngIf="form.hasError('required', 'productRoviandaId')">
             Este campo es requerido.
+          </ion-label> -->
+          <ion-label
+            *ngIf="
+              productRoviandaId.invalid &&
+              (productRoviandaId.dirty || productRoviandaId.touched)
+            "
+          >
+            La selección es requerida.
           </ion-label>
         </div>
       </ion-col>
@@ -36,8 +44,14 @@
           </ion-input>
         </ion-item>
         <div class="error">
-          <ion-label *ngIf="form.hasError('required', 'loteId')">
-            Este campo es requerido.
+          <ion-label *ngIf="loteId.invalid && (loteId.dirty || loteId.touched)">
+            Campo requerido.-
+          </ion-label>
+          <ion-label *ngIf="loteId.touched && loteId.errors?.whitespace">
+            No se aceptan espacios en blanco
+          </ion-label>
+          <ion-label *ngIf="loteId.errors?.noValid">
+            Carácter no válido
           </ion-label>
         </div>
       </ion-col>
@@ -56,6 +70,20 @@
           >
           </ion-input>
         </ion-item>
+        <div class="error">
+          <ion-label
+            *ngIf="
+              temperature.invalid && (temperature.dirty || temperature.touched)
+            "
+          >
+            Campo requerido.-
+          </ion-label>
+          <ion-label
+            *ngIf="temperature.touched && temperature.errors?.whitespace"
+          >
+            No se aceptan espacios en blanco
+          </ion-label>
+        </div>
         <ion-item class="form-input">
           <ion-label class="ion-label" position="floating"
             >Temperatura del agua</ion-label
@@ -67,6 +95,23 @@
           >
           </ion-input>
         </ion-item>
+        <div class="error">
+          <ion-label
+            *ngIf="
+              temperatureWater.invalid &&
+              (temperatureWater.dirty || temperatureWater.touched)
+            "
+          >
+            Campo requerido.-
+          </ion-label>
+          <ion-label
+            *ngIf="
+              temperatureWater.touched && temperatureWater.errors?.whitespace
+            "
+          >
+            No se aceptan espacios en blanco
+          </ion-label>
+        </div>
       </ion-col>
       <ion-col size="7" style="padding: 10px 5px 0 5px;">
         <h1 class="ion-title">Asignacion de lote</h1>
@@ -81,6 +126,18 @@
               >
               </ion-input>
             </ion-item>
+            <div class="error">
+              <ion-label
+                *ngIf="newLotId.invalid && (newLotId.dirty || newLotId.touched)"
+              >
+                Campo requerido.-
+              </ion-label>
+              <ion-label
+                *ngIf="newLotId.touched && newLotId.errors?.whitespace"
+              >
+                No se aceptan espacios en blanco
+              </ion-label>
+            </div>
           </ion-col>
           <ion-col size="6">
             <ion-item class="form-input">
@@ -95,7 +152,11 @@
               </ion-datetime>
             </ion-item>
             <div class="error">
-              <ion-label *ngIf="form.hasError('required', 'dateEntry')">
+              <ion-label
+                *ngIf="
+                  dateEntry.invalid && (dateEntry.dirty || dateEntry.touched)
+                "
+              >
                 Este campo es requerido.
               </ion-label>
             </div>
@@ -156,7 +217,7 @@
     <ion-row size="12" class="ion-justify-content-end">
       <ion-nav-link
         class="text-sm"
-        style="padding: 0 10px;"
+        style="padding: 0 10px; color: #e2bd53;"
         (click)="openModal()"
         >Agregar ingredientes</ion-nav-link
       >

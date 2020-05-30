@@ -38,7 +38,7 @@ export class RegisterProductPageComponent implements OnInit {
   async openModal(formulation: Formulation) {
     const alert = await this._alertCtrl.create({
       header: "Guardar formula",
-      message: "Confirmar y guardar nueva formula",
+      message: "Una vez que genere el reporte este no podrá ser modificado.",
       buttons: [
         {
           text: "Cancelar",

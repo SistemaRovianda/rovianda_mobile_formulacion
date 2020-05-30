@@ -1,13 +1,22 @@
 ion-content {
   ion-card {
+    box-shadow: none;
     height: 95%;
+
+    ion-card-content {
+      height: 93%;
+    }
   }
 }
 
 .btn-add {
   --background: #e2bd53;
+  width: 40%;
+  height: 45px;
 }
 
 .btn-cancel {
   --background: #575552;
+  width: 40%;
+  height: 45px;
 }

@@ -15,10 +15,10 @@
     </ion-card-header>
     <ion-card-content>
       <ion-spinner *ngIf="loading"></ion-spinner>
-      <ion-row style="overflow-y: scroll; height: 100%;">
-        <ion-col style="overflow-y: scroll; height: 350px;">
+      <ion-row style="overflow-y: scroll; height: 90%;">
+        <ion-col style="overflow-y: scroll; height: 100%;">
           <div
-            *ngIf="!loading"
+            *ngIf="!loading && !ingredientsNull"
             style="
               display: flex;
               flex-direction: column;
@@ -48,10 +48,32 @@
               </ion-item>
             </form>
           </div>
+          <div
+            *ngIf="ingredientsNull"
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              align-content: center;
+              overflow-y: scroll;
+              height: 100%;
+            "
+          >
+            No se encontraron ingredientes
+          </div>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
+        <ion-col
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            height: 10%;
+          "
+        >
           <ion-button
             class="btn-add"
             (click)="addIngredients(ingredientsForm.value)"

@@ -20,6 +20,8 @@ import { SELECT_INGREDIENTS_CHECKED } from "../../store/ingredients/ingredients.
 import { IngredientC } from "src/app/shared/models/ingredient.interface";
 import { Lot } from "src/app/shared/models/lot.interface";
 import { SELECT_LOTS } from "../../store/lots/lots.selectors";
+import { noWhiteSpace } from "src/app/shared/validators/white-space.validator";
+import { textValidator } from "src/app/shared/validators/text.validator";
 @Component({
   selector: "register-product-form",
   templateUrl: "./register-product-form.component.html",
@@ -48,13 +50,13 @@ export class RegisterProductFormComponent implements OnInit {
     this.loadingIngredients = true;
     this.products$ = this._store.pipe(select(SELECT_PRODUCTS));
     this.form = fb.group({
-      productRoviandaId: ["", Validators.required],
-      loteId: ["", Validators.required],
-      temperature: [""],
-      temperatureWater: [""],
+      productRoviandaId: ["", [Validators.required]],
+      loteId: ["", [Validators.required, noWhiteSpace, textValidator]],
+      temperature: ["", [Validators.required, noWhiteSpace, textValidator]],
+      temperatureWater: ["", [Validators.required, noWhiteSpace]],
       assignmentLot: fb.group({
-        newLotId: [""],
-        dateEntry: ["", Validators.required],
+        newLotId: ["", [Validators.required, noWhiteSpace]],
+        dateEntry: ["", [Validators.required]],
       }),
       ingredient: [[]],
     });
@@ -125,5 +127,29 @@ export class RegisterProductFormComponent implements OnInit {
     for (let i = 0; i <= size - 1; i++) {
       this.lotsFormArray.push(new FormControl("", Validators.required));
     }
+  }
+
+  get productRoviandaId() {
+    return this.form.get("productRoviandaId");
+  }
+
+  get loteId() {
+    return this.form.get("loteId");
+  }
+
+  get temperature() {
+    return this.form.get("temperature");
+  }
+
+  get temperatureWater() {
+    return this.form.get("temperatureWater");
+  }
+
+  get newLotId() {
+    return this.form.get("assignmentLot").get("newLotId");
+  }
+
+  get dateEntry() {
+    return this.form.get("assignmentLot").get("dateEntry");
   }
 }
