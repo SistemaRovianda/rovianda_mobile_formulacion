@@ -12,6 +12,7 @@ import {
   ERROR_PASSWORD_INVALID,
 } from "src/app/providers/conts";
 import { error } from "protractor";
+import { noWhiteSpace } from "src/app/shared/validators/white-space.validator";
 
 @Component({
   selector: "app-login",
@@ -32,8 +33,8 @@ export class LoginComponent implements OnInit {
     this.loading = false;
     this.form = fb.group(
       {
-        email: ["", [Validators.required, Validators.email]],
-        password: ["", [Validators.required]],
+        email: ["", [Validators.required, Validators.email, noWhiteSpace]],
+        password: ["", [Validators.required, noWhiteSpace]],
       },
       {
         asyncValidators: [

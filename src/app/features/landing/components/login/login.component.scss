@@ -61,6 +61,11 @@ form {
     }
 
     .error {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
       margin-top: 10px;
       color: tomato;
       font-size: 1.7vw;

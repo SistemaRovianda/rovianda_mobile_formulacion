@@ -24,8 +24,11 @@
       </ion-item>
     </ion-row>
     <div class="error">
-      <ion-label *ngIf="email.errors">
-        Por favor ingresa un correo electr&oacute;nico v&aacute;lido
+      <ion-label *ngIf="email.invalid && (email.dirty || email.touched)">
+        Por favor ingresa un correo electrónico válido
+      </ion-label>
+      <ion-label *ngIf="email.touched && email.errors?.whitespace">
+        No se aceptan expacios en blanco
       </ion-label>
     </div>
     <ion-row>
@@ -41,11 +44,20 @@
       </ion-item>
     </ion-row>
     <div class="error">
-      <ion-label *ngIf="password.errors">
+      <ion-label
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+      >
         Por favor ingresa una contraseña válida
       </ion-label>
+      <ion-label *ngIf="password.touched && password.errors?.whitespace">
+        No se aceptan expacios en blanco
+      </ion-label>
     </div>
-    <ion-button class="btn" (click)="onSubmit()" [disabled]="loading">
+    <ion-button
+      class="btn"
+      (click)="onSubmit()"
+      [disabled]="form.invalid || loading"
+    >
       <div style="padding: 10px 0;">
         <label *ngIf="!loading">Iniciar sesión</label>
         <ion-spinner
