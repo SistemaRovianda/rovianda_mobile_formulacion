@@ -111,6 +111,17 @@ export class LogginEffects {
     )
   );
 
+  signInFailureEffect$ = createEffect(
+    () =>
+      this.action$.pipe(
+        ofType(fromLoginActions.signInFailure),
+        tap((action) => localStorage.clear())
+      ),
+    {
+      dispatch: false,
+    }
+  );
+
   signOutEffect = createEffect(() =>
     this.action$.pipe(
       ofType(fromLoginActions.signOut),
