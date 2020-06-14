@@ -9,7 +9,7 @@
 <ion-content padding>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>
+      <ion-card-title class="ion-text-sm-start ion-text-lg-start">
         Lista de ingredientes
       </ion-card-title>
     </ion-card-header>
@@ -37,6 +37,7 @@
                 "
               >
                 <ion-checkbox
+                  class="ion-margin-start ion-margin-end"
                   style="
                     --background-checked: #e2bd53;
                     --border-color-checked: #e2bd53;
@@ -49,6 +50,7 @@
             </form>
           </div>
           <div
+            class="ion-text-sm-center ion-text-lg-center"
             *ngIf="ingredientsNull"
             style="
               display: flex;
@@ -76,10 +78,11 @@
         >
           <ion-button
             class="btn-add"
+            color="primary"
             (click)="addIngredients(ingredientsForm.value)"
             >Agregar</ion-button
           >
-          <ion-button class="btn-cancel" (click)="onCancel()"
+          <ion-button class="btn-cancel" color="secondary" (click)="onCancel()"
             >Cancelar</ion-button
           >
         </ion-col>

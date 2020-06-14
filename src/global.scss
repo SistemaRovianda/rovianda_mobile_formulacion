@@ -28,3 +28,15 @@
 .btn-confirm-dialog {
   --color: #e2bd53;
 }
+
+::-webkit-input-placeholder {
+  color: rgb(80, 80, 80);
+  font-size: 13px;
+}
+
+@media screen and (max-width: "768px") {
+  ::-webkit-input-placeholder {
+    color: rgb(121, 63, 63);
+    font-size: 14px;
+  }
+}

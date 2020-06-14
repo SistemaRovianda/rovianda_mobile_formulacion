@@ -2,6 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button
+        class="ion-text-sm-center ion-text-lg-center"
         [text]="titlePath || 'titlePath'"
         [defaultHref]="path || '/'"
         icon="arrow-back"
@@ -11,7 +12,11 @@
       <ion-grid>
         <ion-row>
           <ion-col size="12"
-            ><label> {{ title || "Seccion" }}</label></ion-col
+            ><label
+              class="ion-text-sm-center ion-text-lg-center ion-text-xl-center"
+            >
+              {{ title || "Seccion" }}</label
+            ></ion-col
           >
         </ion-row>
       </ion-grid>
