@@ -51,7 +51,7 @@ export class RegisterProductFormComponent implements OnInit {
     this.products$ = this._store.pipe(select(SELECT_PRODUCTS));
     this.form = fb.group({
       productRoviandaId: ["", [Validators.required]],
-      loteId: ["", [Validators.required, noWhiteSpace, textValidator]],
+      lotId: ["", [Validators.required, noWhiteSpace, textValidator]],
       temperature: ["", [Validators.required, noWhiteSpace, textValidator]],
       temperatureWater: ["", [Validators.required, noWhiteSpace]],
       assignmentLot: fb.group({
@@ -92,6 +92,12 @@ export class RegisterProductFormComponent implements OnInit {
     this.form
       .get("ingredient")
       .setValue(this.getLotsIdWithIngredientsId(this.lotsFormArray.value));
+
+    // const f = {
+    //   ...this.form.value,
+    //   lotId: parseInt(this.form.get("lotId").value),
+    // };
+    // console.log("[formComponent]: ", f);
     this.submit.emit(this.form.value);
   }
 
@@ -133,8 +139,8 @@ export class RegisterProductFormComponent implements OnInit {
     return this.form.get("productRoviandaId");
   }
 
-  get loteId() {
-    return this.form.get("loteId");
+  get lotId() {
+    return this.form.get("lotId");
   }
 
   get temperature() {

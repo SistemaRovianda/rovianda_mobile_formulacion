@@ -7,7 +7,8 @@ export interface IngredientM {
 
 // /product-rovianda/:productId
 export interface IngredientP {
-  id: number;
+  //id: number;
+  productId?: number;
   description: string;
   type: string;
 }

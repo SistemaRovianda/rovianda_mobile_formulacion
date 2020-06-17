@@ -31,6 +31,7 @@
             }}</ion-label> -->
             <form [formGroup]="ingredientsForm" #form>
               <ion-item
+                style="font-size: 1.3rem;"
                 *ngFor="
                   let ing of ingredientsForm.controls.ingredients.controls;
                   let i = index

@@ -37,20 +37,20 @@
             >Lote interno*</ion-label
           >
           <ion-input
-            formControlName="loteId"
+            formControlName="lotId"
             type="text"
             placeholder="Ingresa lote"
           >
           </ion-input>
         </ion-item>
         <div class="error">
-          <ion-label *ngIf="loteId.invalid && (loteId.dirty || loteId.touched)">
+          <ion-label *ngIf="lotId.invalid && (lotId.dirty || lotId.touched)">
             Campo requerido.-
           </ion-label>
-          <ion-label *ngIf="loteId.touched && loteId.errors?.whitespace">
+          <ion-label *ngIf="lotId.touched && lotId.errors?.whitespace">
             No se aceptan espacios en blanco
           </ion-label>
-          <ion-label *ngIf="loteId.errors?.noValid">
+          <ion-label *ngIf="lotId.errors?.noValid">
             Carácter no válido
           </ion-label>
         </div>
@@ -157,6 +157,7 @@
                 >Ingreso*</ion-label
               >
               <ion-datetime
+                style="font-size: 12px;"
                 (ionChange)="onChangeDate($event)"
                 placeholder="dd/mm/yyyy"
                 displayFormat="DD/MM/YYYY"

@@ -20,7 +20,7 @@ export class LotService {
   // Obteiene los lotes de los ingredientes que se envian
   getLots(ingredientsId: number[]): Observable<Lot[]> {
     return this._http.post<Lot[]>(`${this.url}/ingredients/lots`, {
-      body: ingredientsId,
+      lotsId: ingredientsId,
     });
   }
 }

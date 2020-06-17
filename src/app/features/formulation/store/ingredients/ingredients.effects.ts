@@ -27,7 +27,7 @@ export class IngredientsEffects {
         let ingredients: IngredientC[] = action.ingredients.map(
           (ingredient: IngredientP) => {
             return {
-              ingredientId: ingredient.id,
+              ingredientId: ingredient.productId,
               description: ingredient.description,
               checked: true,
             };
@@ -49,6 +49,7 @@ export class IngredientsEffects {
     this._actions$.pipe(
       ofType(addIngredientsModal),
       exhaustMap((action) => {
+        console.log("action: ", action);
         let withCheckIn = new Set(
           action.ingredientsProductIn.map((ip) => ip.ingredientId)
         );
@@ -58,6 +59,9 @@ export class IngredientsEffects {
             (im) => !withCheckIn.has(im.ingredientId)
           ),
         ];
+
+        console.log("merge: ", merge);
+
         return [addIngredientsModalSuccess({ ingredients: merge })];
       })
     )

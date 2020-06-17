@@ -16,6 +16,10 @@ export class FormulationService {
   }
 
   addFormulation(payload: Formulation) {
+    // const f = {
+    //   ...payload,
+    //   loteId: parseInt(payload.lotId),
+    // };
     return this.http.post(`${this.url}/formulation`, payload);
   }
 }
