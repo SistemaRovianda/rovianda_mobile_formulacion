@@ -51,7 +51,7 @@ export class RegisterProductFormComponent implements OnInit {
     this.products$ = this._store.pipe(select(SELECT_PRODUCTS));
     this.form = fb.group({
       productRoviandaId: ["", [Validators.required]],
-      lotId: ["", [Validators.required, noWhiteSpace, textValidator]],
+      lotId: ["", [Validators.required, noWhiteSpace]],
       temperature: ["", [Validators.required, noWhiteSpace, textValidator]],
       temperatureWater: ["", [Validators.required, noWhiteSpace]],
       assignmentLot: fb.group({
