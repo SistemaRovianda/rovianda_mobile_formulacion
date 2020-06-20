@@ -1,9 +1,8 @@
-$color-text-primary: #575552;
-$color-text-secondary: #b2b2b2;
-
 ion-grid {
-  .title-menu {
-    color: $color-text-primary;
+  height: 100%;
+
+  .title {
+    color: var(--ion-color-medium-shade);
     font-size: 2em;
     margin-top: 5%;
     font-weight: 700;
@@ -13,11 +12,25 @@ ion-grid {
     font-size: 3.4vw;
     margin-left: 5%;
   }
-  .container-button {
-    height: 37vh;
-    width: 100%;
-    .button {
-      padding: 7%;
+
+  .row {
+    &-1 {
+      height: 10%;
+    }
+
+    &-2 {
+      height: 70%;
+    }
+
+    &-3 {
+      height: 20%;
+
+      ion-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }

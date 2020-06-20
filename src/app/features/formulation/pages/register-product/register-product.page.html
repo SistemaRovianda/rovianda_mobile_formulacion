@@ -7,32 +7,29 @@
 
 <ion-content class="container">
   <ion-grid>
-    <ion-row>
+    <ion-row class="row row-1">
       <ion-col size="12">
-        <h1
-          class="title-menu ion-text-sm-start ion-text-lg-start ion-text-xl-start"
-        >
+        <h1 class="title ion-text-sm-start ion-text-lg-start ion-text-xl-start">
           Información principal
         </h1>
       </ion-col>
     </ion-row>
-    <ion-row size="12">
-      <register-product-form
-        #form
-        (onSubmit)="onSubmit($event)"
-      ></register-product-form>
+    <ion-row class="row row-2">
+      <ion-col size="12">
+        <register-product-form
+          #form
+          (onSubmit)="onSubmit($event)"
+        ></register-product-form>
+      </ion-col>
     </ion-row>
-  </ion-grid>
-  <div class="ion-justify-content-center">
-    <ion-col>
-      <ion-row size="12">
-        <div class="linea"></div>
-        <div class="linea"></div>
-      </ion-row>
-      <ion-row class="ion-justify-content-center btn">
-        <div class="ion-justify-content-center btn">
+    <ion-row
+      class="row row-3 ion-justify-content-center ion-align-items-center"
+    >
+      <ion-col class="ion-align-self-center" size="12">
+        <div>
           <ion-button
             expand="block"
+            size="large"
             class="ion-text-sm-center ion-text-lg-center ion-text-xl-center"
             color="primary"
             (click)="form.onSubmit()"
@@ -47,7 +44,7 @@
             ></ion-icon>
           </ion-button>
         </div>
-      </ion-row>
-    </ion-col>
-  </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

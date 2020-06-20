@@ -4,7 +4,7 @@ ion-toolbar {
   margin-top: 3%;
   ion-buttons {
     position: absolute !important;
-    color: $color-text-secondary;
+    color: var(--ion-color-medium-shade);
     font-weight: 100;
     ion-back-button {
       text-transform: none;
@@ -15,6 +15,10 @@ ion-toolbar {
 
 ion-title {
   text-align: center;
-  color: $color-text-secondary;
-  font-size: 3.1vh;
+  color: var(--ion-color-medium-shade);
+}
+
+label {
+  --color: red;
+  font-size: 2.2rem;
 }
