@@ -17,6 +17,8 @@ const ADD_INGREDIENTS_MODAL_SUCCESS =
 
 const UPDATE_INGREDIENTS = "[INGREDIENTS] Update Ingredients";
 
+const CLEAR_INGREDIENTS = "[INGREDIENTS] Clear Ingredients";
+
 export const addIngredientsProduct = createAction(
   ADD_INGREDIENTS_PRODUCT,
   props<{ ingredients: IngredientP[] }>()
@@ -44,3 +46,5 @@ export const updateIngredients = createAction(
   UPDATE_INGREDIENTS,
   props<{ ingredients: IngredientC[] }>()
 );
+
+export const clearIngredients = createAction(CLEAR_INGREDIENTS);

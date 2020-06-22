@@ -26,6 +26,7 @@ export class RegisterProductPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("Entra a formulacion form");
     this.store
       .select(SELECT_REGISTER_FORMULATION_LOADING)
       .subscribe((res) => (this.loadingSave = res));
@@ -51,7 +52,7 @@ export class RegisterProductPageComponent implements OnInit {
             this.store.dispatch(
               fromRegister.registerFormulation({ formulation })
             );
-            this._router.navigate(["/formulation/print-report"]);
+            // this._router.navigate(["/formulation/print-report"]);
           },
         },
       ],

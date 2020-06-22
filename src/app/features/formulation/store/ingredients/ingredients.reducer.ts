@@ -7,6 +7,7 @@ import {
   updateIngredients,
   addIngredientsProductSuccess,
   addIngredientsModalSuccess,
+  clearIngredients,
 } from "./ingredients.actions";
 import { IngredientC } from "src/app/shared/models/ingredient.interface";
 
@@ -40,5 +41,9 @@ export const ingredientsReducer = createReducer<IngredientsState>(
   on(updateIngredients, (state, { ingredients }) => ({
     ...state,
     ingredients,
+  })),
+  on(clearIngredients, (state) => ({
+    ...state,
+    ingredients: [],
   }))
 );

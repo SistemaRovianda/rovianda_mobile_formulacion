@@ -7,3 +7,8 @@ export const SELECT_REGISTER_FORMULATION_LOADING = createSelector(
   FORMULATION_STATE,
   (state) => state.loading
 );
+
+export const SELECT_FORMULARION_REGISTER_SAVE = createSelector(
+  FORMULATION_STATE,
+  (state) => state.successSave
+);

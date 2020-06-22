@@ -2,7 +2,12 @@
 
 import { Lot } from "src/app/shared/models/lot.interface";
 import { createReducer, on } from "@ngrx/store";
-import { loadLots, loadLotsSuccess, loadLotsError } from "./lots.actions";
+import {
+  loadLots,
+  loadLotsSuccess,
+  loadLotsError,
+  clearLots,
+} from "./lots.actions";
 
 export interface LotsState {
   loading: boolean;
@@ -31,5 +36,9 @@ export const lotsReducer = createReducer<LotsState>(
     ...state,
     loading: false,
     error,
+  })),
+  on(clearLots, (state) => ({
+    ...state,
+    lots: [],
   }))
 );

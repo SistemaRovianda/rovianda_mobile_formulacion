@@ -4,6 +4,7 @@ import * as fromRegisterActions from "./register-formulation.action";
 
 export interface RegisterFormulationState {
   formulation: Formulation;
+  successSave: boolean;
   error: string;
   loading: boolean;
 }
@@ -23,6 +24,7 @@ const initialState: RegisterFormulationState = {
       ingredientId: null,
     },
   },
+  successSave: false,
   error: null,
   loading: false,
 };
@@ -38,12 +40,17 @@ export const registerFormulationReducer = createReducer<
 
   on(
     fromRegisterActions.registerFormulationSucess,
-    (state, { formulation }) => ({
+    (state, { successSave }) => ({
       ...state,
-      formulation,
+      successSave,
       loading: false,
     })
   ),
+
+  on(fromRegisterActions.registerNewRegistration, (state) => ({
+    ...state,
+    successSave: false,
+  })),
 
   on(fromRegisterActions.registerFormulationError, (state, { error }) => ({
     ...state,

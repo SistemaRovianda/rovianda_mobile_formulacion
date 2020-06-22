@@ -5,6 +5,10 @@ import { catchError, exhaustMap, switchMap, tap, delay } from "rxjs/operators";
 import { Formulation } from "src/app/shared/models/formulation.interface";
 import { FormulationService } from "src/app/shared/services/formulation.service";
 import * as fromRegisterActions from "./register-formulation.action";
+import { clearIngredients } from "../ingredients/ingredients.actions";
+import { Router } from "@angular/router";
+import { ToastService } from "src/app/shared/services/toast.service";
+import { clearLots } from "../lots/lots.actions";
 
 @Injectable({
   providedIn: "root",
@@ -12,7 +16,9 @@ import * as fromRegisterActions from "./register-formulation.action";
 export class RegisterFormulationEffects {
   constructor(
     private actions$: Actions,
-    private formulationService: FormulationService
+    private _router: Router,
+    private formulationService: FormulationService,
+    private _toastService: ToastService
   ) {}
 
   addFormulation$ = createEffect(() =>
@@ -22,13 +28,30 @@ export class RegisterFormulationEffects {
       exhaustMap((payload) =>
         this.formulationService.addFormulation(payload.formulation).pipe(
           switchMap((formulation: Formulation) => [
-            fromRegisterActions.registerFormulationSucess({ formulation }),
+            fromRegisterActions.registerFormulationSucess({
+              successSave: true,
+            }),
           ]),
           catchError((error) => {
             return of(fromRegisterActions.registerFormulationError(error));
           })
         )
       )
+    )
+  );
+
+  registerFormulationSuccessEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromRegisterActions.registerFormulationSucess),
+      exhaustMap((_) => {
+        this._toastService.presentToastSuccess();
+        this._router.navigate(["/formulation/print-report"]);
+        return [clearIngredients(), clearLots()];
+      }),
+      catchError((error) => {
+        this._toastService.presentToastError();
+        return [];
+      })
     )
   );
 }

@@ -6,6 +6,8 @@ import { catchError, delay, exhaustMap, switchMap, tap } from "rxjs/operators";
 import * as fromLoginActions from "./login.action";
 import { AuthService } from "src/app/shared/Services/auth.service";
 import * as fromAuthenticationUser from "../authentication/authentication.action";
+import { clearIngredients } from "src/app/features/formulation/store/ingredients/ingredients.actions";
+import { clearLots } from "src/app/features/formulation/store/lots/lots.actions";
 
 @Injectable()
 export class LogginEffects {
@@ -127,7 +129,11 @@ export class LogginEffects {
       ofType(fromLoginActions.signOut),
       exhaustMap((action) =>
         this.authService.signOut().pipe(
-          switchMap((action) => [fromAuthenticationUser.clearUser()]),
+          switchMap((action) => [
+            fromAuthenticationUser.clearUser(),
+            clearIngredients(),
+            clearLots(),
+          ]),
           catchError((error) => of(fromLoginActions.signInFailure(error)))
         )
       )

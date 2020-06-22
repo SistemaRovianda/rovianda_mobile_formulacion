@@ -22,6 +22,8 @@ import { Lot } from "src/app/shared/models/lot.interface";
 import { SELECT_LOTS } from "../../store/lots/lots.selectors";
 import { noWhiteSpace } from "src/app/shared/validators/white-space.validator";
 import { textValidator } from "src/app/shared/validators/text.validator";
+import { SELECT_FORMULARION_REGISTER_SAVE } from "../../store/register-formulation/register-formulation.selector";
+import { registerNewRegistration } from "../../store/register-formulation/register-formulation.action";
 @Component({
   selector: "register-product-form",
   templateUrl: "./register-product-form.component.html",
@@ -63,6 +65,13 @@ export class RegisterProductFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._store.select(SELECT_FORMULARION_REGISTER_SAVE).subscribe((res) => {
+      if (res) {
+        this.form.reset();
+        this._store.dispatch(registerNewRegistration());
+      }
+    });
+
     this._store
       .select(SELECT_INGREDIENTS_BY_PRODUCT_LOADING)
       .subscribe((loading) => {
@@ -98,7 +107,9 @@ export class RegisterProductFormComponent implements OnInit {
     //   lotId: parseInt(this.form.get("lotId").value),
     // };
     // console.log("[formComponent]: ", f);
+
     this.submit.emit(this.form.value);
+    // this.form.reset();
   }
 
   getLotsIdWithIngredientsId(lotsId: number[]) {

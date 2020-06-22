@@ -31,12 +31,19 @@
             }}</ion-label> -->
             <form [formGroup]="ingredientsForm" #form>
               <ion-item
-                style="font-size: 1.3rem;"
+                style="
+                  font-size: 1.3rem;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  align-items: center;
+                "
                 *ngFor="
                   let ing of ingredientsForm.controls.ingredients.controls;
                   let i = index
                 "
               >
+                <ion-label> {{ ingredients[i].description }}</ion-label>
                 <ion-checkbox
                   class="ion-margin-start ion-margin-end"
                   style="
@@ -46,7 +53,6 @@
                   type="checkbox"
                   [formControl]="ing"
                 ></ion-checkbox>
-                {{ ingredients[i].description }}
               </ion-item>
             </form>
           </div>
