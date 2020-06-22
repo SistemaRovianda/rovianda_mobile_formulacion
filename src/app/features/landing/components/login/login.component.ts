@@ -13,6 +13,7 @@ import {
 } from "src/app/providers/conts";
 import { error } from "protractor";
 import { noWhiteSpace } from "src/app/shared/validators/white-space.validator";
+import { Keyboard } from "@ionic-native/keyboard/ngx";
 
 @Component({
   selector: "app-login",
@@ -24,12 +25,16 @@ export class LoginComponent implements OnInit {
 
   loading: boolean;
 
+  openKeyboard: boolean;
+
   @Output("onSubmit") submit = new EventEmitter();
 
   constructor(
+    private keyboard: Keyboard,
     private fb: FormBuilder,
     private _store: Store<AppStateInterface>
   ) {
+    this.openKeyboard = this.keyboard.isVisible;
     this.loading = false;
     this.form = fb.group(
       {

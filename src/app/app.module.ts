@@ -16,13 +16,19 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AppProvidersModule } from "./providers/app-providers.module";
 import { AuthGuard } from "./shared/guards/auth.guard";
 import { IsAuthGuard } from "./shared/guards/isAuth.guard";
+import { Keyboard } from "@ionic-native/keyboard/ngx";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      scrollPadding: true,
+      scrollAssist: true,
+      inputBlurring: true,
+      inputShims: true,
+    }),
     AppRoutingModule,
     AngularFireAuthModule,
     StoreModule.forRoot(reducers, {
@@ -44,6 +50,7 @@ import { IsAuthGuard } from "./shared/guards/isAuth.guard";
     IsAuthGuard,
     StatusBar,
     SplashScreen,
+    Keyboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AppProvidersModule,
   ],

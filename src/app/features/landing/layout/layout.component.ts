@@ -3,6 +3,7 @@ import { Store } from "@ngrx/store";
 import { AppStateInterface } from "src/app/shared/models/storeState.interface";
 import { SignIn } from "src/app/shared/models/user.interface";
 import * as fromLoginActions from "../store/login/login.action";
+import { Keyboard } from "@ionic-native/keyboard/ngx";
 
 @Component({
   selector: "app-layout",
@@ -10,9 +11,26 @@ import * as fromLoginActions from "../store/login/login.action";
   styleUrls: ["./layout.component.scss"],
 })
 export class LayoutComponent implements OnInit {
-  constructor(private store: Store<AppStateInterface>) {}
+  openKeyboard: boolean;
 
-  ngOnInit() {}
+  constructor(
+    private keyboard: Keyboard,
+    private store: Store<AppStateInterface>
+  ) {
+    this.openKeyboard = false;
+  }
+
+  ngOnInit() {
+    window.addEventListener("keyboardWillShow", () => {
+      this.openKeyboard = true;
+      console.log("Keyboard will Show");
+    });
+
+    window.addEventListener("keyboardWillHide", () => {
+      this.openKeyboard = false;
+      console.log("Keyboard is Hidden");
+    });
+  }
 
   onLogin(payload: SignIn) {
     this.store.dispatch(fromLoginActions.signIn(payload));
