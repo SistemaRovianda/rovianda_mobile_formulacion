@@ -1,146 +1,18 @@
 @import "../../../../../theme/mixins.scss";
 
-// form {
-//   // position: fixed;
-//   background-color: var(--ion-color-medium-contrast);
-//   height: 100%;
-//   width: 100%;
-//   border-radius: 15px;
-//   box-shadow: 0px 0px 25px -1px rgba(0, 0, 0, 0.75);
-//   position: relative;
-
-//   .form-grid {
-//     border: 1px solid orange;
-//     padding: 8%;
-//     width: 100%;
-//     height: 100%;
-
-//     .form-image {
-//       height: 20%;
-
-//       .image {
-//         width: auto;
-//         height: 80px;
-//         background-image: url("src/assets/logo/rovianda_logo.svg");
-//         background-repeat: no-repeat;
-//         background-size: 50%;
-//         background-position: center center;
-//       }
-//     }
-
-//     .form-message {
-//       height: 10%;
-//       h1 {
-//         font-size: 1.5rem;
-//         margin: 0;
-//         color: var(--ion-color-medium-shade);
-//         font-weight: 300;
-//       }
-//     }
-
-//     .form-input {
-//       border: var(--ion-color-secondary-tint) solid 1.5px;
-//       border-radius: 5px;
-//       width: 100%;
-//       color: var(--ion-color-medium-tint);
-//       margin-top: 20px;
-//       transform: 2s;
-
-//       ion-input {
-//         margin-left: 4%;
-//         font-size: 1.5rem;
-//       }
-
-//       &.item-has-focus {
-//         border: 1.5px solid var(--ion-color-primary-shade);
-//         color: var(--ion-color-dark);
-//         ion-icon {
-//           &.color {
-//             color: var(--ion-color-dark) !important;
-//           }
-//         }
-//       }
-//     }
-
-//     .error {
-//       display: flex;
-//       flex-direction: column;
-//       justify-content: center;
-//       align-items: center;
-//       align-content: center;
-//       margin-top: 10px;
-//       color: var(--ion-color-error);
-//       font-size: 1.4rem;
-//       height: 2%;
-//       transform: 2s;
-//     }
-
-//     ion-button {
-//       height: 10%;
-//       width: 100%;
-//       text-transform: none;
-//       font-size: 1.6rem;
-//       font-weight: 20;
-//       margin: 0;
-//       margin-top: 18%;
-//       border-radius: 5px;
-
-//       // --ion-color-primary: #e2bd53;
-//     }
-//   }
-// }
-
-// ion-icon {
-//   &.color {
-//     color: var(--ion-color-secondary-tint);
-//   }
-// }
-
-// @media screen and (min-width: "960px") {
-//   form {
-//     .form-grid {
-//       padding: 3%;
-//       border: 1px solid red;
-
-//       .form-image {
-//         .image {
-//           width: 50%;
-//           height: 80px;
-//           background-image: url("src/assets/logo/rovianda_logo.svg");
-//           background-repeat: no-repeat;
-//           background-size: 50%;
-//           background-position: center center;
-//         }
-//       }
-
-//       .form-message {
-//         ion-col {
-//           h1 {
-//             font-size: 1.2rem;
-//             text-align: center;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
 form {
   background-color: var(--ion-color-medium-contrast);
   border-radius: 18px;
   box-shadow: 0px 0px 25px -1px rgba(0, 0, 0, 0.75);
-  // border: 1px solid red;
   height: 100%;
 
   .form-grid {
     height: 100%;
     padding: 8%;
-    // border: 1px solid green;
 
     .row {
       &-1 {
         height: 25%;
-        // border: 1px solid green;
 
         ion-col {
           display: flex;
@@ -152,34 +24,22 @@ form {
             width: 180px;
 
             @include breakpoint-size(ms-medium) {
-              // @media (min-width: 560px) and (max-width: 720px) {
-              // border: 1px solid rgb(24, 201, 24);
               width: 50%;
             }
 
             @include breakpoint-size(ms-large) {
-              // @media (min-width: 960px) and (max-width: 961px) {
-              // border: 1px solid red;
               width: 20%;
             }
 
             @include breakpoint-size(ms-extra-large) {
-              // @media (min-width: 721px) and (max-width: 959px) {
-              // border: 1px solid rgb(202, 214, 37);
               width: 35%;
             }
-
-            // @media (min-width: 961px) {
-            //   border: 1px solid rgb(53, 125, 233);
-            //   width: 20%;
-            // }
           }
         }
       }
 
       &-2 {
         height: 10%;
-        // border: 1px solid green;
         @include breakpoint-size(ms-medium) {
           height: 10%;
         }
@@ -199,31 +59,25 @@ form {
 
       &-3 {
         height: 16%;
-        // border: 1px solid green;
 
         @include breakpoint-size(ms-small) {
-          // background-color: red;
           height: 9%;
         }
 
         @include breakpoint-size(ms-medium) {
-          // background-color: rgb(0, 255, 55);
           height: 12%;
         }
 
         @include breakpoint-size(ms-large) {
-          // background-color: rgb(238, 255, 0);
           height: 11%;
         }
 
         @include breakpoint-size(ms-extra-large) {
-          // background-color: rgb(0, 81, 255);
           height: 15%;
         }
 
         ion-col {
           width: 90%;
-          // border: 1px solid black;
           ion-item {
             border: 2px solid var(--ion-color-secondary-tint);
             border-radius: 10px;
@@ -251,15 +105,18 @@ form {
 
       &-4 {
         height: 5%;
-        // border: 1px solid green;
+        @include breakpoint-size(ms-small) {
+          height: 10%;
+        }
 
         ion-col {
           .error {
             ion-label {
-              // font-size: 0.9rem;
-              // color: var(--ion-color-error);
-
               @include message-error(1.2rem, var(--ion-color-error));
+
+              @include breakpoint-size(ms-small) {
+                font-size: var(--font-size-sm);
+              }
 
               @include breakpoint-size(ms-medium) {
                 font-size: var(--font-size-md);
@@ -275,24 +132,20 @@ form {
 
       &-5 {
         height: 16%;
-        // border: 1px solid green;
 
         @include breakpoint-size(ms-small) {
           height: 9%;
         }
 
         @include breakpoint-size(ms-medium) {
-          // background-color: rgb(0, 255, 55);
           height: 12%;
         }
 
         @include breakpoint-size(ms-large) {
-          // background-color: rgb(238, 255, 0);
           height: 11%;
         }
 
         @include breakpoint-size(ms-extra-large) {
-          // background-color: rgb(0, 81, 255);
           height: 15%;
         }
 
@@ -311,15 +164,19 @@ form {
 
       &-6 {
         height: 5%;
-        // border: 1px solid green;
+
+        @include breakpoint-size(ms-small) {
+          height: 10%;
+        }
 
         ion-col {
           .error {
             ion-label {
-              // font-size: 0.9rem;
-              // color: var(--ion-color-error);
-
               @include message-error(1.2rem, var(--ion-color-error));
+
+              @include breakpoint-size(ms-small) {
+                font-size: var(--font-size-sm);
+              }
 
               @include breakpoint-size(ms-medium) {
                 font-size: var(--font-size-md);
@@ -335,7 +192,6 @@ form {
 
       &-7 {
         height: 15%;
-        // border: 1px solid green;
 
         @include breakpoint-size(ms-medium) {
           height: 22%;
@@ -354,13 +210,21 @@ form {
           ion-button {
             height: 75px;
             width: 300px;
+
+            @include breakpoint-size(ms-small) {
+              height: 70px;
+              width: 240px;
+            }
           }
         }
       }
 
       &-8 {
         height: 5%;
-        // border: 1px solid green;
+
+        @include breakpoint-size(ms-small) {
+          height: 8%;
+        }
 
         @include breakpoint-size(ms-medium) {
           height: 10%;
@@ -373,10 +237,11 @@ form {
         ion-col {
           .error {
             ion-label {
-              // font-size: 0.9rem;
-              // color: var(--ion-color-error);
-
               @include message-error(1.2rem, var(--ion-color-error));
+
+              @include breakpoint-size(ms-small) {
+                font-size: var(--font-size-sm);
+              }
 
               @include breakpoint-size(ms-medium) {
                 font-size: var(--font-size-md);

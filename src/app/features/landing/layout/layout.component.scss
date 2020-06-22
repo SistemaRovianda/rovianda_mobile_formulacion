@@ -4,9 +4,7 @@ ion-content {
   .container {
     overflow-y: scroll;
     height: 100%;
-    // min-height: calc(100vh + 800px);
     width: 100%;
-    // border: 2px solid red;
 
     @include breakpoint-size(ms-extra-large) {
       height: 800px;
@@ -19,7 +17,6 @@ ion-content {
     );
 
     .item-head {
-      // border: 1px solid blue;
       height: 15%;
       text-align: center;
       h1 {
@@ -27,27 +24,15 @@ ion-content {
         font-weight: 600;
         font-size: 5vw;
       }
-
-      // @include breakpoint-size(ms-medium) {
-      //   height: 20%;
-      // }
-
-      // @include breakpoint-size(ms-extra-large) {
-      //   height: 800px;
-      // }
     }
 
     .item-body {
-      // border: 1px solid green;
       overflow-y: scroll;
       width: 100%;
       height: 85%;
-      // max-height: 85%;
       padding: 10% 15% 20% 15%;
-      // padding-top: 10%;
 
       ion-col {
-        // border: 2px solid rebeccapurple;
         height: 100%;
       }
 
@@ -62,14 +47,3 @@ ion-content {
     }
   }
 }
-
-// @media screen and (min-width: 1280px) {
-//   ion-content {
-//     .container {
-//       border: 5px solid rgb(60, 255, 0);
-//       ion-row.item-body {
-//         padding: 5% 15%;
-//       }
-//     }
-//   }
-// }
