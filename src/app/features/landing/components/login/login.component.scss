@@ -11,6 +11,7 @@ form {
     padding: 8%;
 
     .row {
+      // row for image
       &-1 {
         height: 25%;
 
@@ -23,8 +24,16 @@ form {
           img.header__logo {
             width: 180px;
 
+            @include breakpoint-size(ms-extra-small) {
+              width: 70%;
+            }
+
+            @include breakpoint-size(ms-small) {
+              width: 64%;
+            }
+
             @include breakpoint-size(ms-medium) {
-              width: 50%;
+              width: 30%;
             }
 
             @include breakpoint-size(ms-large) {
@@ -38,6 +47,7 @@ form {
         }
       }
 
+      // row for instruction
       &-2 {
         height: 10%;
         @include breakpoint-size(ms-medium) {
@@ -47,25 +57,39 @@ form {
         h6 {
           margin: 0;
 
+          @include breakpoint-size(ms-extra-small) {
+            font-size: var(--fs-text-xsm);
+          }
+
+          @include breakpoint-size(ms-small) {
+            font-size: var(--fs-text-sm);
+          }
+
           @include breakpoint-size(ms-medium) {
-            font-size: 1.4rem;
+            font-size: var(--fs-text-medium);
           }
 
           @include breakpoint-size(ms-extra-large) {
             text-align: center;
+            font-size: var(--fs-text-xl);
           }
         }
       }
 
+      // row for input email
       &-3 {
         height: 16%;
+
+        @include breakpoint-size(ms-extra-small) {
+          height: 12%;
+        }
 
         @include breakpoint-size(ms-small) {
           height: 9%;
         }
 
         @include breakpoint-size(ms-medium) {
-          height: 12%;
+          height: 16%;
         }
 
         @include breakpoint-size(ms-large) {
@@ -86,8 +110,16 @@ form {
             ion-input {
               margin-left: 4%;
               font-size: 1.4rem;
-              --placeholder-font-weight: 900;
+              // --placeholder-font-weight: 900;
               --placeholder-font-size: 1.2rem;
+
+              @include breakpoint-size(ms-medium) {
+                font-size: var(--fs-text-md);
+              }
+
+              @include breakpoint-size(ms-extra-large) {
+                font-size: var(--fs-text-xl);
+              }
             }
 
             &.item-has-focus {
@@ -103,10 +135,20 @@ form {
         }
       }
 
+      // row for message error email
       &-4 {
         height: 5%;
+
+        @include breakpoint-size(ms-extra-small) {
+          height: 7%;
+        }
+
         @include breakpoint-size(ms-small) {
           height: 10%;
+        }
+
+        @include breakpoint-size(ms-medium) {
+          height: 6%;
         }
 
         ion-col {
@@ -119,26 +161,31 @@ form {
               }
 
               @include breakpoint-size(ms-medium) {
-                font-size: var(--font-size-md);
+                font-size: var(--fs-text-md);
               }
 
               @include breakpoint-size(ms-extra-large) {
-                font-size: var(--font-size-xl);
+                font-size: 1.5rem;
               }
             }
           }
         }
       }
 
+      // row for input password
       &-5 {
         height: 16%;
+
+        @include breakpoint-size(ms-extra-small) {
+          height: 12%;
+        }
 
         @include breakpoint-size(ms-small) {
           height: 9%;
         }
 
         @include breakpoint-size(ms-medium) {
-          height: 12%;
+          height: 16%;
         }
 
         @include breakpoint-size(ms-large) {
@@ -150,23 +197,53 @@ form {
         }
 
         ion-col {
+          width: 90%;
           ion-item {
-            border: 0.5px solid var(--ion-color-secondary-tint);
+            border: 2px solid var(--ion-color-secondary-tint);
             border-radius: 5px;
+            height: 100%;
 
             ion-input {
               margin-left: 4%;
               font-size: 1.4rem;
+              --placeholder-font-size: 1.2rem;
+
+              @include breakpoint-size(ms-medium) {
+                font-size: var(--fs-text-md);
+              }
+
+              @include breakpoint-size(ms-extra-large) {
+                font-size: var(--fs-text-xl);
+              }
+            }
+
+            &.item-has-focus {
+              border: 2.5px solid var(--ion-color-primary-shade);
+              color: var(--ion-color-dark);
+              ion-icon {
+                &.color {
+                  color: var(--ion-color-dark) !important;
+                }
+              }
             }
           }
         }
       }
 
+      // row for error message password
       &-6 {
         height: 5%;
 
+        @include breakpoint-size(ms-extra-small) {
+          height: 7%;
+        }
+
         @include breakpoint-size(ms-small) {
           height: 10%;
+        }
+
+        @include breakpoint-size(ms-medium) {
+          height: 6%;
         }
 
         ion-col {
@@ -179,17 +256,18 @@ form {
               }
 
               @include breakpoint-size(ms-medium) {
-                font-size: var(--font-size-md);
+                font-size: var(--fs-text-md);
               }
 
               @include breakpoint-size(ms-extra-large) {
-                font-size: var(--font-size-xl);
+                font-size: 1.5rem;
               }
             }
           }
         }
       }
 
+      // row for button
       &-7 {
         height: 15%;
 
@@ -211,14 +289,30 @@ form {
             height: 75px;
             width: 300px;
 
+            @include breakpoint-size(ms-extra-small) {
+              height: 75px;
+              width: 280px;
+            }
+
             @include breakpoint-size(ms-small) {
-              height: 70px;
-              width: 240px;
+              height: 80px;
+              width: 290x;
+            }
+
+            @include breakpoint-size(ms-medium) {
+              height: 60px;
+              width: 310px;
+            }
+
+            @include breakpoint-size(ms-extra-large) {
+              height: 80px;
+              width: 300px;
             }
           }
         }
       }
 
+      // Row for error message server
       &-8 {
         height: 5%;
 

@@ -1,48 +1,107 @@
 @import "../../../../theme/mixins.scss";
+.container {
+  // border: 1px solid blue;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
 
-ion-content {
-  .container {
-    overflow-y: scroll;
+  &--all {
     height: 100%;
-    width: 100%;
-
-    @include breakpoint-size(ms-extra-large) {
-      height: 800px;
-    }
-
     background-image: radial-gradient(
-      circle at 40% -20%,
+      circle at 15% -20%,
       var(--ion-color-primary) 50%,
       transparent 50%
     );
 
-    .item-head {
-      height: 15%;
-      text-align: center;
-      h1 {
-        color: var(--ion-color-medium-contrast);
-        font-weight: 600;
-        font-size: 5vw;
-      }
+    @include breakpoint-size(ms-extra-small) {
+      min-height: 800px;
     }
 
-    .item-body {
-      overflow-y: scroll;
-      width: 100%;
-      height: 85%;
-      padding: 10% 15% 20% 15%;
+    @include breakpoint-size(ms-medium) {
+      height: 600px;
+    }
 
-      ion-col {
-        height: 100%;
+    @include breakpoint-size(ms-extra-large) {
+      height: 800px;
+    }
+  }
+
+  &__column {
+    height: 100%;
+
+    &--title {
+      position: relative;
+    }
+
+    &--form {
+      @include breakpoint-size(ms-extra-small) {
+        padding: 2% 5%;
+      }
+
+      @include breakpoint-size(ms-small) {
+        padding: 2% 5%;
       }
 
       @include breakpoint-size(ms-medium) {
-        height: 1015px;
+        padding: 2% 5%;
+      }
+
+      @include breakpoint-size(ms-extra-large) {
+        padding: 5% 10%;
+      }
+    }
+  }
+
+  &__title {
+    margin: 0;
+    height: auto;
+    color: var(--ion-color-medium-contrast);
+    font-weight: 700;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @include breakpoint-size(ms-extra-small) {
+      font-size: 2.4rem; //var(--fs-text-title-xsm);
+    }
+
+    @include breakpoint-size(ms-small) {
+      font-size: 3rem;
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      font-size: 4rem;
+    }
+  }
+
+  &__row {
+    &--title {
+      height: 15%;
+    }
+
+    &--form {
+      height: 85%;
+      padding: 10% 15%;
+
+      @include breakpoint-size(ms-extra-small) {
+        padding: 10% 10%;
+      }
+
+      @include breakpoint-size(ms-medium) {
+        height: 600px;
+        padding: 2% 10%;
+      }
+
+      @include breakpoint-size(ms-small) {
+        // height: 1010px;
+        padding: 5% 10%;
       }
 
       @include breakpoint-size(ms-extra-large) {
         height: 800px;
-        padding: 5% 15%;
+        padding: 2% 10%;
       }
     }
   }
