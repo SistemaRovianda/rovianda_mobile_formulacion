@@ -40,7 +40,7 @@ export class RegisterProductFormComponent implements OnInit {
 
   lots$: Observable<Lot[]>;
 
-  lotsFormArray = new FormArray([]);
+  lotsFormArray: FormArray = new FormArray([]);
 
   @Output("onSubmit") submit = new EventEmitter();
 
@@ -68,6 +68,7 @@ export class RegisterProductFormComponent implements OnInit {
     this._store.select(SELECT_FORMULARION_REGISTER_SAVE).subscribe((res) => {
       if (res) {
         this.form.reset();
+        this.lotsFormArray = new FormArray([]);
         this._store.dispatch(registerNewRegistration());
       }
     });
@@ -92,24 +93,22 @@ export class RegisterProductFormComponent implements OnInit {
     });
   }
 
-  onChangeDate(evt) {
-    let date = evt.detail.value.split("T")[0];
-    this.form.get("assignmentLot").get("dateEntry").setValue(date);
-  }
-
   onSubmit() {
     this.form
       .get("ingredient")
       .setValue(this.getLotsIdWithIngredientsId(this.lotsFormArray.value));
 
-    // const f = {
-    //   ...this.form.value,
-    //   lotId: parseInt(this.form.get("lotId").value),
-    // };
-    // console.log("[formComponent]: ", f);
-
-    this.submit.emit(this.form.value);
-    // this.form.reset();
+    const f = {
+      ...this.form.value,
+      assignmentLot: {
+        newLotId: this.form.get("assignmentLot").get("newLotId").value,
+        dateEntry: this.form
+          .get("assignmentLot")
+          .get("dateEntry")
+          .value.split("T")[0],
+      },
+    };
+    this.submit.emit(f);
   }
 
   getLotsIdWithIngredientsId(lotsId: number[]) {
@@ -138,9 +137,8 @@ export class RegisterProductFormComponent implements OnInit {
     await modal.present();
   }
 
-  onSelect(evt) {}
-
   createLotsFormArray(size?: number) {
+    this.lotsFormArray = new FormArray([]);
     for (let i = 0; i <= size - 1; i++) {
       this.lotsFormArray.push(new FormControl("", Validators.required));
     }

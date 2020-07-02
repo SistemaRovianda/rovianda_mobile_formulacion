@@ -1,7 +1,7 @@
 // /lot/ingredients
 
 export interface IngredientM {
-  productId: number;
+  id: number;
   description: string;
 }
 

@@ -85,7 +85,6 @@ export class AddIngredientComponent implements OnInit {
   }
 
   addIngredients(formValue) {
-    // console.log("Validacion: ", this.notSelected(this.getSelected(formValue)));
     if (this.notSelected(this.getSelected(formValue))) {
       this.showError = false;
       this._store.dispatch(

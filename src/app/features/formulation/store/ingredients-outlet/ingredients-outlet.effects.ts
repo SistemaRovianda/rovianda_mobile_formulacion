@@ -30,17 +30,18 @@ export class IngredientsOutletEffects {
         this._ingredientsService.getIngredients().pipe(
           switchMap((ingredients: IngredientM[]) => {
             let ingredientsM: IngredientC[] = ingredients.map((i) => {
+              // Agrega una propiedad checked a los ingredientes generales que tuvieron una salida (ingredientes que se muestran en modal)
               return {
-                ingredientId: i.productId,
+                ingredientId: i.id,
                 description: i.description,
-                checked: false,
+                checked: false, // false debido a que no esta checkeado por parte del producto
               };
             });
             return [
-              loadIngredientsOutletSuccess({ ingredientsOutlet: ingredients }),
+              loadIngredientsOutletSuccess({ ingredientsOutlet: ingredients }), // Carga los ingredientes con salida en arreglo 2
               addIngredientsModal({
-                ingredientsModal: ingredientsM,
-                ingredientsProductIn: action.ingredientsProductIn,
+                ingredientsModal: ingredientsM, // Agrega los intedientes con salida al arreglo 3 para futura mezcla
+                ingredientsProductIn: action.ingredientsProductIn, // Envia los ingredientes del producto seleccionados que se encuentran en el arreglo 3
               }),
             ];
           }),

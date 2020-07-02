@@ -40,5 +40,6 @@ export const lotsReducer = createReducer<LotsState>(
   on(clearLots, (state) => ({
     ...state,
     lots: [],
+    error: null,
   }))
 );

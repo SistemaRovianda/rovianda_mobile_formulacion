@@ -25,7 +25,9 @@ export class IngredientsEffects {
       ofType(addIngredientsProduct),
       exhaustMap((action) => {
         let ingredients: IngredientC[] = action.ingredients.map(
+          // De los ingredientes obtenidos por el producto se le agregara una propiedad más, checked
           (ingredient: IngredientP) => {
+            // Mapea cada ingrediente para colocar la propiedad
             return {
               ingredientId: ingredient.productId,
               description: ingredient.description,
@@ -34,11 +36,12 @@ export class IngredientsEffects {
           }
         );
         return [
-          addIngredientsProductSuccess({ ingredients: ingredients }),
+          addIngredientsProductSuccess({ ingredients: ingredients }), // Agrega al tercer arreglo (en memoria) los ingredientes provenientes del producto
           loadLots({
+            // Se le cargaran los ids de los ingredientes para cargar los lotes
             ingredientsId: ingredients
-              .filter((ing) => ing.checked)
-              .map((ing) => ing.ingredientId),
+              .filter((ing) => ing.checked) // verifica que sean true / checks activos para ingredientes que tenga el producto
+              .map((ing) => ing.ingredientId), // Obtiene los identificadores de los que cumplieron la condicion anterior
           }),
         ];
       })
@@ -49,20 +52,18 @@ export class IngredientsEffects {
     this._actions$.pipe(
       ofType(addIngredientsModal),
       exhaustMap((action) => {
-        console.log("action: ", action);
         let withCheckIn = new Set(
-          action.ingredientsProductIn.map((ip) => ip.ingredientId)
+          action.ingredientsProductIn.map((ip) => ip.ingredientId) // Obtiene los ids de los ingredientes que pertenecen al producto seleccionado
         );
         let merge: IngredientC[] = [
-          ...action.ingredientsProductIn,
+          // Mezcla de los ingredientes pertenecientes al producto seleccionado y los ingredientes con registro de salida
+          ...action.ingredientsProductIn, // Coloca los ingredientes del producto en el arreglo merge
           ...action.ingredientsModal.filter(
-            (im) => !withCheckIn.has(im.ingredientId)
+            // filtrara los ingredientes con salida para evitar repetición
+            (im) => !withCheckIn.has(im.ingredientId) // Evita que los identificadores entre arreglo 1 y 2 no se repitan, solo debe aparecer 1 vez el dato
           ),
         ];
-
-        console.log("merge: ", merge);
-
-        return [addIngredientsModalSuccess({ ingredients: merge })];
+        return [addIngredientsModalSuccess({ ingredients: merge })]; // Agrega ingredientes al arreglo 3 (ingredientes de modal)
       })
     )
   );

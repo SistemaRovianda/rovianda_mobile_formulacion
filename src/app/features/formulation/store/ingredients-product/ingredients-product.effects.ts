@@ -29,10 +29,10 @@ export class IngredientsProductEffects {
           .pipe(
             switchMap((product: Product) => [
               loadIngredientsByProductIDSuccess({
-                ingredients: product.ingredients,
+                ingredients: product.ingredients, // Carga los ingredientes del producto seleccionado en arreglo 1
               }),
               addIngredientsProduct({
-                ingredients: product.ingredients,
+                ingredients: product.ingredients, // Envia los ingrediente del producto al arreglo 3 para futura mezcla
               }),
             ]),
             catchError((error) =>

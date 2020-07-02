@@ -157,8 +157,8 @@
                 >Ingreso*</ion-label
               >
               <ion-datetime
+                formControlName="dateEntry"
                 style="font-size: 12px;"
-                (ionChange)="onChangeDate($event)"
                 placeholder="dd/mm/yyyy"
                 displayFormat="DD/MM/YYYY"
               >
@@ -199,7 +199,10 @@
                 <ion-label class="ion-text-sm-start ion-text-lg-start"
                   >Lote</ion-label
                 >
-                <ion-select [formControl]="lotsFormArray.controls[i]">
+                <ion-select
+                  interface="action-sheet"
+                  [formControl]="lotsFormArray.controls[i]"
+                >
                   <ion-select-option
                     *ngFor="let lotId of lot.lots"
                     [value]="lotId"
