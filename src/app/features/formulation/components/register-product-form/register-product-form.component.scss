@@ -1,57 +1,169 @@
+// .container {
+//   width: 100vw;
+//   padding: 20px 10px;
+// }
+
+// form {
+//   height: 100%;
+//   width: 100%;
+//   .form-input,
+//   ion-datetime {
+//     color: var(--ion-color-medium-tint);
+//     font-size: 1.3rem;
+//     color: black;
+
+//     ion-select {
+//       ::-webkit-input-placeholder {
+//         --color: red;
+//         font-size: 10px;
+//       }
+
+//       ::placeholder {
+//         --color: red;
+//         font-size: 10px;
+//       }
+//     }
+//   }
+//   .error {
+//     margin-top: 2%;
+//     color: tomato;
+//     font-size: 1.3rem;
+//     // height: 2%;
+//     transform: 2s;
+//   }
+//   ion-button {
+//     height: 10%;
+//     width: 100%;
+//     text-transform: none;
+//     font-size: 3vw;
+//     font-weight: 20;
+//     margin: 0;
+//     margin-top: 18%;
+//     border-radius: 5px;
+//     --ion-color-primary: var(--ion-color-primary);
+//   }
+// }
+
+// .ion-title {
+//   font-size: 0.9em;
+//   margin-left: 20px;
+//   color: (--ion-color-medium-tint);
+// }
+
+// .card {
+//   width: 100%;
+//   height: 200px;
+//   overflow: auto;
+// }
+
+@import "../../../../../theme/mixins.scss";
+
 .container {
-  width: 100vw;
-  padding: 20px 10px;
-}
-
-form {
   height: 100%;
-  width: 100%;
-  .form-input,
-  ion-datetime {
-    color: var(--ion-color-medium-tint);
-    font-size: 1.3rem;
-    color: black;
 
-    ion-select {
-      ::-webkit-input-placeholder {
-        --color: red;
-        font-size: 10px;
+  &__grid {
+    height: 100%;
+  }
+
+  &__item {
+    height: auto;
+
+    @include breakpoint-size(ms-extra-small) {
+      font-size: var(--fs-text-xsm);
+    }
+
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-sm);
+    }
+
+    @include breakpoint-size(ms-medium) {
+      font-size: var(--fs-text-md);
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      font-size: var(--fs-text-xl);
+    }
+  }
+
+  &__message-error {
+    height: auto;
+  }
+
+  &__subtitle {
+    &--lots {
+      height: auto;
+
+      @include breakpoint-size(ms-extra-small) {
+        font-size: var(--fs-text-title-xsm);
       }
 
-      ::placeholder {
-        --color: red;
-        font-size: 10px;
+      @include breakpoint-size(ms-small) {
+        font-size: var(--fs-text-title-sm);
+      }
+
+      @include breakpoint-size(ms-medium) {
+        font-size: var(--fs-text-title-md);
+      }
+
+      @include breakpoint-size(ms-extra-large) {
+        font-size: var(--fs-text-title-xl);
       }
     }
   }
-  .error {
-    margin-top: 2%;
-    color: tomato;
-    font-size: 1.3rem;
-    // height: 2%;
-    transform: 2s;
-  }
-  ion-button {
-    height: 10%;
-    width: 100%;
-    text-transform: none;
-    font-size: 3vw;
-    font-weight: 20;
-    margin: 0;
-    margin-top: 18%;
-    border-radius: 5px;
-    --ion-color-primary: var(--ion-color-primary);
-  }
-}
 
-.ion-title {
-  font-size: 0.9em;
-  margin-left: 20px;
-  color: (--ion-color-medium-tint);
+  &__column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__link {
+    color: var(--ion-color-primary);
+
+    @include breakpoint-size(ms-extra-small) {
+      font-size: var(--fs-text-xsm);
+    }
+
+    @include breakpoint-size(ms-medium) {
+      font-size: var(--fs-text-md);
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      font-size: var(--fs-text-xl);
+    }
+  }
+
+  &__row {
+    &--first {
+      height: 15%;
+    }
+
+    &--second {
+      height: 35%;
+    }
+
+    &--ingredients {
+      height: 40%;
+    }
+
+    &--add-ingredients {
+      height: 10%;
+    }
+
+    // fila interna para registro de lote
+    &--register-lots {
+      //
+    }
+  }
 }
 
 .card {
   width: 100%;
-  height: 200px;
-  overflow: auto;
+  height: 100%;
+  margin: 0;
+
+  &__header {
+    height: 15%;
+  }
 }

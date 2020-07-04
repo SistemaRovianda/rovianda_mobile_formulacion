@@ -1,36 +1,92 @@
-ion-grid {
+@import "../../../../../theme/mixins.scss";
+
+.container {
   height: 100%;
 
-  .title {
-    color: var(--ion-color-medium-shade);
-    font-size: 2em;
-    margin-top: 5%;
-    font-weight: 700;
-    margin-left: 5%;
-  }
-  .subtitle-menu {
-    font-size: 3.4vw;
-    margin-left: 5%;
+  &--all {
+    @include breakpoint-size(ms-extra-small) {
+      height: 800px;
+    }
+
+    @include breakpoint-size(ms-small) {
+      min-height: 1050px;
+    }
+
+    @include breakpoint-size(ms-medium) {
+      min-height: 800px;
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      min-height: 800px;
+    }
   }
 
-  .row {
-    &-1 {
+  &__title {
+    @include breakpoint-size(ms-extra-small) {
+      font-size: var(--fs-text-title-xsm);
+    }
+
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-title-sm);
+    }
+
+    @include breakpoint-size(ms-medium) {
+      font-size: var(--fs-text-title-md);
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      font-size: var(--fs-text-title-xl);
+    }
+  }
+
+  &__column {
+    &--button {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+
+    @include breakpoint-size(ms-extra-small) {
+      font-size: var(--fs-text-xsm);
+    }
+
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-sm);
+    }
+
+    @include breakpoint-size(ms-medium) {
+      font-size: var(--fs-text-md);
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      font-size: var(--fs-text-xl);
+    }
+  }
+
+  &__row {
+    &--title {
       height: 10%;
     }
 
-    &-2 {
-      height: 70%;
+    &--second {
+      height: 80%;
     }
 
-    &-3 {
-      height: 20%;
+    &--register-lots {
+      height: 100%;
+    }
 
-      ion-col {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
+    &--third {
+      height: 10%;
     }
   }
 }

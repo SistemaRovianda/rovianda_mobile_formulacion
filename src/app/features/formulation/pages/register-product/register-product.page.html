@@ -5,45 +5,46 @@
   (click)="logout()"
 ></title-header>
 
-<ion-content class="container">
-  <ion-grid>
-    <ion-row class="row row-1">
-      <ion-col size="12">
-        <h1 class="title ion-text-sm-start ion-text-lg-start ion-text-xl-start">
+<ion-content>
+  <ion-grid class="container container--all">
+    <ion-row class="container container__row container__row--title">
+      <ion-col class="container container__column" size="12">
+        <h1 class="container container__title">
           Información principal
         </h1>
       </ion-col>
     </ion-row>
-    <ion-row class="row row-2">
-      <ion-col size="12">
+    <ion-row class="container container__row container__row--second">
+      <ion-col class="container container__column" size="12">
         <register-product-form
           #form
           (onSubmit)="onSubmit($event)"
         ></register-product-form>
       </ion-col>
     </ion-row>
-    <ion-row
-      class="row row-3 ion-justify-content-center ion-align-items-center"
-    >
-      <ion-col class="ion-align-self-center" size="12">
-        <div>
-          <ion-button
-            expand="block"
-            size="large"
-            class="ion-text-sm-center ion-text-lg-center ion-text-xl-center"
-            color="primary"
-            (click)="form.onSubmit()"
-            [disabled]="form.form.invalid || form.lotsFormArray.status == 'INVALID'"
-          >
-            <ion-spinner *ngIf="loadingSave"></ion-spinner>
-            <span *ngIf="!loadingSave">Guardar registro</span>
-            <ion-icon
-              *ngIf="!loadingSave"
-              slot="end"
-              name="chevron-forward-outline"
-            ></ion-icon>
-          </ion-button>
-        </div>
+    <ion-row class="container container__row container__row--third">
+      <ion-col
+        class="container container__column container__column--button"
+        size="12"
+      >
+        <ion-button
+          class="container container__button"
+          color="primary"
+          (click)="form.onSubmit()"
+          [disabled]="form.form.invalid || form.lotsFormArray.status == 'INVALID'"
+        >
+          <ion-spinner
+            class="container container__spinner"
+            *ngIf="loadingSave"
+          ></ion-spinner>
+          Guardar registro
+          <ion-icon
+            class="container container__icon"
+            *ngIf="!loadingSave"
+            slot="end"
+            name="chevron-forward-outline"
+          ></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
