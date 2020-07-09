@@ -9,7 +9,7 @@ import {
 import { AppStateInterface } from "src/app/shared/models/storeState.interface";
 import { Store, select } from "@ngrx/store";
 import { Product } from "src/app/shared/models/product.interface";
-import { Observable } from "rxjs";
+import { Observable, from } from "rxjs";
 import { SELECT_PRODUCTS } from "../../store/products/products.selectors";
 import { loadIngredientsByProductID } from "../../store/ingredients-product/ingredients-product.actions";
 import { SELECT_INGREDIENTS_BY_PRODUCT_LOADING } from "../../store/ingredients-product/ingredients-product.selectors";
@@ -24,6 +24,11 @@ import { noWhiteSpace } from "src/app/shared/validators/white-space.validator";
 import { textValidator } from "src/app/shared/validators/text.validator";
 import { SELECT_FORMULARION_REGISTER_SAVE } from "../../store/register-formulation/register-formulation.selector";
 import { registerNewRegistration } from "../../store/register-formulation/register-formulation.action";
+import * as moment from "moment";
+import { UserVerified } from "src/app/shared/models/user.interface";
+import { usersVerifiedSelector } from "../../store/users-verified/users-verified.selector";
+import { Storage } from "@ionic/storage";
+
 @Component({
   selector: "register-product-form",
   templateUrl: "./register-product-form.component.html",
@@ -40,6 +45,10 @@ export class RegisterProductFormComponent implements OnInit {
 
   lots$: Observable<Lot[]>;
 
+  usersVerified$: Observable<UserVerified[]>;
+
+  nameElaborated: Observable<string>;
+
   lotsFormArray: FormArray = new FormArray([]);
 
   @Output("onSubmit") submit = new EventEmitter();
@@ -47,7 +56,8 @@ export class RegisterProductFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _store: Store<AppStateInterface>,
-    private _modalCtrl: ModalController
+    private _modalCtrl: ModalController,
+    private _storage: Storage
   ) {
     this.loadingIngredients = true;
     this.products$ = this._store.pipe(select(SELECT_PRODUCTS));
@@ -56,6 +66,11 @@ export class RegisterProductFormComponent implements OnInit {
       lotId: ["", [Validators.required, noWhiteSpace]],
       temperature: ["", [Validators.required, noWhiteSpace, textValidator]],
       temperatureWater: ["", [Validators.required, noWhiteSpace]],
+      date: [
+        { value: moment(new Date()).format("DD/MM/YYYY"), disabled: true },
+      ],
+      verifitId: ["", Validators.required],
+      makeId: [""],
       assignmentLot: fb.group({
         newLotId: ["", [Validators.required, noWhiteSpace]],
         dateEntry: ["", [Validators.required]],
@@ -91,6 +106,12 @@ export class RegisterProductFormComponent implements OnInit {
     this.lots$.subscribe((res) => {
       if (res.length != 0) this.createLotsFormArray(res.length);
     });
+
+    this.nameElaborated = from(
+      this._storage.get("uid").then((res) => Promise.resolve(res))
+    );
+
+    this.usersVerified$ = this._store.select(usersVerifiedSelector);
   }
 
   onSubmit() {
@@ -100,6 +121,7 @@ export class RegisterProductFormComponent implements OnInit {
 
     const f = {
       ...this.form.value,
+      date: moment(new Date()).format("DD/MM/YYYY"),
       assignmentLot: {
         newLotId: this.form.get("assignmentLot").get("newLotId").value,
         dateEntry: this.form

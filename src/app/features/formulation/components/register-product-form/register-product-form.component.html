@@ -3,7 +3,9 @@
     <ion-row class="container container__row container__row--first">
       <ion-col class="container container__column" size="6">
         <ion-item class="container container__item">
-          <ion-label class="container container__label" position="stacked"
+          <ion-label
+            class="container container__label ion-text-wrap"
+            position="stacked"
             >Producto*</ion-label
           >
 
@@ -49,19 +51,19 @@
         </ion-item>
         <div class="container container__message-error">
           <ion-label
-            class="container container__label container__label-error"
+            class="container container__label container__label--error"
             *ngIf="lotId.invalid && (lotId.dirty || lotId.touched)"
           >
             Campo requerido.-
           </ion-label>
           <ion-label
-            class="container container__label container__label-error"
+            class="container container__label container__label--error"
             *ngIf="lotId.touched && lotId.errors?.whitespace"
           >
             No se aceptan espacios en blanco
           </ion-label>
           <ion-label
-            class="container container__label container__label-error"
+            class="container container__label container__label--error"
             *ngIf="lotId.errors?.noValid"
           >
             Carácter no válido
@@ -71,6 +73,57 @@
     </ion-row>
 
     <ion-row class="container container__row container__row--second">
+      <ion-col class="container container_column" size="12">
+        <ion-item class="container container__item">
+          <ion-label class="container container__label" position="stacked"
+            >Elaboro</ion-label
+          >
+          <ion-input
+            class="container container__input"
+            type="text"
+            disabled="true"
+            placeholder="{{ nameElaborated | async }}"
+            value="{{ nameElaborated | async }}"
+            formControlName="makeId"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="container container__row container__row--third">
+      <ion-col class="container container__column" size="6">
+        <ion-item class="container container__item">
+          <ion-label class="container container__label" position="stacked"
+            >Verifico</ion-label
+          >
+          <ion-select
+            value="peperoni"
+            interface="action-sheet"
+            placeholder="Verifico"
+            formControlName="verifitId"
+          >
+            <ion-select-option
+              *ngFor="let uv of usersVerified$ | async"
+              [value]="uv.userId"
+              >{{ uv.fullName }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col class="container container__column" size="6">
+        <ion-item class="container container__item">
+          <ion-label class="container container__label" position="stacked"
+            >Fecha</ion-label
+          >
+          <ion-input
+            class="container container__input"
+            formControlName="date"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="container container__row container__row--four">
       <ion-col class="container container__column" size="5">
         <ion-item
           class="container container__item container__item--temperature"
@@ -118,7 +171,7 @@
         </ion-item>
         <div class="container container__message-error">
           <ion-label
-            class="container container__label"
+            class="container container__label container__label--error"
             *ngIf="
               temperatureWater.invalid &&
               (temperatureWater.dirty || temperatureWater.touched)
@@ -127,7 +180,7 @@
             Campo requerido.-
           </ion-label>
           <ion-label
-            class="container container__label"
+            class="container container__label container__label--error"
             *ngIf="
               temperatureWater.touched && temperatureWater.errors?.whitespace
             "
@@ -180,7 +233,6 @@
               <ion-datetime
                 class="container container__datetime"
                 formControlName="dateEntry"
-                style="font-size: 12px;"
                 placeholder="dd/mm/yyyy"
                 displayFormat="DD/MM/YYYY"
               >
@@ -226,19 +278,30 @@
                   class="container container__item"
                   *ngFor="let lot of lots$ | async; let i = index"
                 >
-                  <ion-label class="container container__label">Lote</ion-label>
+                  <ion-label class="container container__label" position="fixed"
+                    >Lote</ion-label
+                  >
                   <ion-select
-                    class="container container__selector"
+                    class="container container__select"
                     interface="action-sheet"
                     [formControl]="lotsFormArray.controls[i]"
                   >
                     <ion-select-option
-                      class="container container__selector-option"
+                      class="container container__select-option"
                       *ngFor="let lotId of lot.lots"
                       [value]="lotId"
                     >
                       {{ lotId }}
                     </ion-select-option>
+                    <ion-select-option value="peperoni"
+                      >Peperoni</ion-select-option
+                    >
+                    <ion-select-option value="peperoni"
+                      >Peperoni</ion-select-option
+                    >
+                    <ion-select-option value="peperoni"
+                      >Peperoni</ion-select-option
+                    >
                   </ion-select>
                 </ion-item>
               </ion-col>

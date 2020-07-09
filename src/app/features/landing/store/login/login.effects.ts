@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { from, of } from "rxjs";
+import { Storage } from "@ionic/storage";
 import { catchError, delay, exhaustMap, switchMap, tap } from "rxjs/operators";
 import * as fromLoginActions from "./login.action";
 import { AuthService } from "src/app/shared/Services/auth.service";
@@ -13,6 +14,7 @@ import { clearLots } from "src/app/features/formulation/store/lots/lots.actions"
 export class LogginEffects {
   constructor(
     private action$: Actions,
+    private _storage: Storage,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -23,14 +25,17 @@ export class LogginEffects {
       delay(2000),
       exhaustMap((action) =>
         this.authService.signIn(action.email, action.password).pipe(
-          switchMap(({ uid, token }) => [
-            fromLoginActions.startLoad(),
-            fromAuthenticationUser.loadUser({
-              uid,
-              token,
-            }),
-            fromAuthenticationUser.loadCurrentToken({ uid: uid }),
-          ]),
+          switchMap(({ uid, token }) => {
+            this._storage.set("uid", uid);
+            return [
+              fromLoginActions.startLoad(),
+              fromAuthenticationUser.loadUser({
+                uid,
+                token,
+              }),
+              fromAuthenticationUser.loadCurrentToken({ uid: uid }),
+            ];
+          }),
           catchError((error) =>
             of(
               fromLoginActions.finishLoad(),
@@ -48,7 +53,7 @@ export class LogginEffects {
       exhaustMap((action) =>
         this.authService.getTokenCurrentUser().pipe(
           switchMap(({ currentToken }) => {
-            localStorage.setItem("token", currentToken);
+            this._storage.set("token", currentToken);
             return [
               fromAuthenticationUser.loadUser({ currentToken }),
               fromLoginActions.signAuthSuccess({ uid: action.uid }),
@@ -70,12 +75,18 @@ export class LogginEffects {
       ofType(fromLoginActions.signAuthSuccess),
       exhaustMap((action) =>
         this.authService.getUserData(action.uid).pipe(
-          switchMap(({ email, name, rol }) => {
-            localStorage.setItem("role", rol);
+          switchMap(({ email, name, firstSurname, lastSurname, rol }) => {
+            this._storage.set("role", rol);
+            this._storage.set(
+              "currentUser",
+              name + " " + firstSurname + " " + lastSurname
+            );
             return [
               fromAuthenticationUser.loadUser({
                 email,
                 name,
+                firstSurname,
+                lastSurname,
                 rol,
               }),
               fromLoginActions.signInSuccess(),

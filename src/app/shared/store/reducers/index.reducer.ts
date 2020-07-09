@@ -8,6 +8,7 @@ import { ingredientsOutletReducer } from "src/app/features/formulation/store/ing
 import { ingredientsProductReducer } from "src/app/features/formulation/store/ingredients-product/ingredients-product.reducer";
 import { ingredientsReducer } from "src/app/features/formulation/store/ingredients/ingredients.reducer";
 import { lotsReducer } from "src/app/features/formulation/store/lots/lots.reducer";
+import { usersVerifiedReducer } from "src/app/features/formulation/store/users-verified/users-verified.reducer";
 export const reducers: ActionReducerMap<AppStateInterface> = {
   login: loginReducer,
   auth: authenticationReducer,
@@ -17,6 +18,7 @@ export const reducers: ActionReducerMap<AppStateInterface> = {
   ingredientsOutlet: ingredientsOutletReducer,
   ingredients: ingredientsReducer,
   lots: lotsReducer,
+  usersVerified: usersVerifiedReducer,
 };
 
 export const metaReducers: MetaReducer<AppStateInterface>[] = [];

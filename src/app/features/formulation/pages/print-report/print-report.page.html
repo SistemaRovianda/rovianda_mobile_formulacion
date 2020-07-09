@@ -5,31 +5,38 @@
 ></title-header>
 
 <ion-content class="main">
-  <ion-grid class="container">
-    <ion-row>
-      <ion-col>
-        <div class="file ion-justify-content-center">
-          <img class="logo" src="\assets\icons\Grupo_6.svg" alt="logo" />
+  <ion-grid class="container container--all">
+    <ion-row class="container container__row container__row--first">
+      <ion-col class="container container__column">
+        <div class="container container__image ion-justify-content-center">
+          <img
+            class="container container__logo"
+            src="\assets\icons\Grupo_6.svg"
+            alt="logo"
+          />
         </div>
+
+        <h1 class="container container__subtitle">
+          Reporte generado con éxito
+        </h1>
       </ion-col>
-      <ion-col size="12" class="ion-justify-content-center center">
-        <h1 size="8" class="title-menu">Reporte generado con éxito</h1>
+    </ion-row>
+
+    <ion-row class="container container__row container__row--second">
+      <ion-col
+        class="container container__column container__column--button ion-justify-content-center"
+        size="12"
+      >
+        <ion-button
+          class="container container__button"
+          expand="block"
+          style="text-transform: none; --background: #e1bc5c;"
+          size="large"
+          (click)="printReport()"
+        >
+          Imprimir Reporte
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div class="ion-justify-content-center">
-    <ion-col>
-      <ion-row class="ion-justify-content-center btn">
-        <div class="ion-justify-content-center btn">
-          <ion-button
-            expand="block"
-            style="text-transform: none; --background: #e1bc5c;"
-            size="large"
-          >
-            Imprimir Reporte
-          </ion-button>
-        </div>
-      </ion-row>
-    </ion-col>
-  </div>
 </ion-content>

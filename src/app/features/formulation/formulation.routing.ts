@@ -19,7 +19,7 @@ const routes: Routes = [
         component: RegisterProductPageComponent,
       },
       {
-        path: "print-report",
+        path: "print-report/:id",
         component: PrintReportPageComponent,
       },
     ],

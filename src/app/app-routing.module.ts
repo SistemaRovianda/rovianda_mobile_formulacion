@@ -6,6 +6,11 @@ import { IsAuthGuard } from "./shared/guards/isAuth.guard";
 const routes: Routes = [
   {
     path: "",
+    redirectTo: "login",
+    pathMatch: "full",
+  },
+  {
+    path: "login",
     canActivate: [IsAuthGuard],
     loadChildren: () =>
       import("./features/landing/layout/layout.module").then(

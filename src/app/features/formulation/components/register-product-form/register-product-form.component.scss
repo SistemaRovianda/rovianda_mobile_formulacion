@@ -67,6 +67,7 @@
 
   &__item {
     height: auto;
+    width: 100%;
 
     @include breakpoint-size(ms-extra-small) {
       font-size: var(--fs-text-xsm);
@@ -125,6 +126,65 @@
       font-size: var(--fs-text-xsm);
     }
 
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-sm);
+    }
+
+    @include breakpoint-size(ms-medium) {
+      font-size: var(--fs-text-md);
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      font-size: var(--fs-text-xl);
+    }
+  }
+
+  &__label {
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-sm);
+    }
+
+    &--error {
+      @include breakpoint-size(ms-small) {
+        font-size: var(--fs-text-error-sm);
+      }
+    }
+  }
+
+  &__datetime {
+    width: 100%;
+    @include breakpoint-size(ms-small) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__select {
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-xsm);
+    }
+
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-sm);
+    }
+
+    @include breakpoint-size(ms-medium) {
+      font-size: var(--fs-text-md);
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      font-size: var(--fs-text-xl);
+    }
+  }
+
+  &__select-option {
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-xsm);
+    }
+
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-sm);
+    }
+
     @include breakpoint-size(ms-medium) {
       font-size: var(--fs-text-md);
     }
@@ -136,15 +196,23 @@
 
   &__row {
     &--first {
-      height: 15%;
+      height: 10%;
     }
 
     &--second {
+      height: 10%;
+    }
+
+    &--third {
+      height: 10%;
+    }
+
+    &--four {
       height: 35%;
     }
 
     &--ingredients {
-      height: 40%;
+      height: 30%;
     }
 
     &--add-ingredients {
@@ -164,6 +232,24 @@
   margin: 0;
 
   &__header {
-    height: 15%;
+    height: auto;
+  }
+
+  &__subtitle {
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-xsm);
+    }
+
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-sm);
+    }
+
+    @include breakpoint-size(ms-medium) {
+      font-size: var(--fs-text-md);
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      font-size: var(--fs-text-xl);
+    }
   }
 }

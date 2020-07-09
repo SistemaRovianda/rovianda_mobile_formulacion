@@ -1,6 +1,5 @@
 import { createAction, props } from "@ngrx/store";
 import { Formulation } from "src/app/shared/models/formulation.interface";
-import { create } from "domain";
 
 const REGISTER_FORMULATION = "[REGISTER] Register formulation";
 const REGISTER_FORMULATION_SUCCESS = "[REGISTER] Register Formulation Success";
@@ -14,7 +13,7 @@ export const registerFormulation = createAction(
 
 export const registerFormulationSucess = createAction(
   REGISTER_FORMULATION_SUCCESS,
-  props<{ successSave: boolean }>()
+  props<{ id: string; successSave: boolean }>()
 );
 
 export const registerNewRegistration = createAction(REGISTER_NEW_FORMULATION);

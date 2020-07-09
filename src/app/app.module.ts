@@ -17,6 +17,7 @@ import { AppProvidersModule } from "./providers/app-providers.module";
 import { AuthGuard } from "./shared/guards/auth.guard";
 import { IsAuthGuard } from "./shared/guards/isAuth.guard";
 import { Keyboard } from "@ionic-native/keyboard/ngx";
+import { IonicStorageModule } from "@ionic/storage";
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { Keyboard } from "@ionic-native/keyboard/ngx";
     }),
     AppRoutingModule,
     AngularFireAuthModule,
+    IonicStorageModule.forRoot(),
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {

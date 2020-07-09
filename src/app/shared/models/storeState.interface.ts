@@ -4,6 +4,7 @@ import { IngredientsOutletState } from "src/app/features/formulation/store/ingre
 import { IngredientsState } from "src/app/features/formulation/store/ingredients/ingredients.reducer";
 import { LotsState } from "src/app/features/formulation/store/lots/lots.reducer";
 import { RegisterFormulationState } from "src/app/features/formulation/store/register-formulation/register-formulation.reducer";
+import { UsersVerifiedState } from "src/app/features/formulation/store/users-verified/users-verified.reducer";
 
 export interface LoginState {
   loading: boolean;
@@ -13,6 +14,8 @@ export interface LoginState {
 export interface AuthenticationUser {
   uid?: string;
   name?: string;
+  firstSurname?: string;
+  lastSurname?: string;
   email?: string;
   rol?: string;
   token?: string;
@@ -28,4 +31,5 @@ export interface AppStateInterface {
   ingredientsProduct: IngredientsProductState;
   ingredientsOutlet: IngredientsOutletState;
   lots: LotsState;
+  usersVerified: UsersVerifiedState;
 }

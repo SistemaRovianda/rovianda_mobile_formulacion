@@ -7,6 +7,7 @@ import {
 import { AppStateInterface } from "../models/storeState.interface";
 import { Store } from "@ngrx/store";
 import { loadProducts } from "src/app/features/formulation/store/products/products.actions";
+import { loadUsers } from "src/app/features/formulation/store/users-verified/users-verified.actions";
 
 @Injectable()
 export class ProductsResolve implements Resolve<boolean> {
@@ -17,6 +18,7 @@ export class ProductsResolve implements Resolve<boolean> {
     state: RouterStateSnapshot
   ): boolean | import("rxjs").Observable<boolean> | Promise<boolean> {
     this._store.dispatch(loadProducts());
+    this._store.dispatch(loadUsers());
     return true;
   }
 }

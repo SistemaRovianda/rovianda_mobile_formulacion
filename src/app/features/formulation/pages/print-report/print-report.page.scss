@@ -1,57 +1,114 @@
 $color-text-primary: #575552;
 $color-text-secondary: #b2b2b2;
 
-ion-grid {
-  .title-menu {
-    color: $color-text-primary;
-    font-size: 3.8vw;
-    margin-top: 5%;
-    font-weight: 700;
-    margin-left: 5%;
-  }
-  .subtitle-menu {
-    color: $color-text-secondary;
-    margin-top: 4%;
-    font-size: 3.4vw;
-    margin-left: 5%;
-    margin-bottom: 15%;
-  }
-}
+@import "../../../../../theme/mixins.scss";
+
+// ion-grid {
+//   .title-menu {
+//     color: $color-text-primary;
+//     font-size: 3.8vw;
+//     margin-top: 5%;
+//     font-weight: 700;
+//     margin-left: 5%;
+//   }
+//   .subtitle-menu {
+//     color: $color-text-secondary;
+//     margin-top: 4%;
+//     font-size: 3.4vw;
+//     margin-left: 5%;
+//     margin-bottom: 15%;
+//   }
+// }
+
+// .container {
+//   height: 69vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .btn {
+//   display: flex;
+// }
+
+// ion-button {
+//   width: 80vw;
+//   font-size: 4vw;
+// }
+
+// .file {
+//   height: 200px;
+//   max-height: 200px;
+//   background-image: url("src/assets/icons/file-regular.svg");
+//   background-repeat: no-repeat;
+//   background-position: center center;
+//   background-size: contain;
+//   display: flex;
+// }
+
+// img.logo {
+//   width: 150px;
+// }
+
+// .center {
+//   display: flex;
+// }
+
+// .main {
+//   overflow: auto;
+// }
 
 .container {
-  height: 69vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  height: 100%;
 
-.btn {
-  display: flex;
-}
+  &--all {
+    @include breakpoint-size(ms-small) {
+      min-height: 1000px;
+    }
 
-ion-button {
-  width: 80vw;
-  font-size: 4vw;
-}
+    @include breakpoint-size(ms-extra-large) {
+      min-height: 800px;
+    }
+  }
 
-.file {
-  height: 200px;
-  max-height: 200px;
-  background-image: url("src/assets/icons/file-regular.svg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain;
-  display: flex;
-}
+  &__row {
+    display: flex;
+    &--first {
+      height: 80%;
+    }
 
-img.logo {
-  width: 150px;
-}
+    &--second {
+      height: 20%;
+    }
+  }
 
-.center {
-  display: flex;
-}
+  &__column {
+    &--button {
+      display: flex;
+    }
+  }
 
-.main {
-  overflow: auto;
+  &__image {
+    height: 90%;
+    display: flex;
+  }
+
+  &__logo {
+    height: 50%;
+  }
+
+  &__subtitle {
+    height: 10%;
+    text-align: center;
+  }
+
+  &__button {
+    width: 80%;
+    height: 25%;
+
+    @include breakpoint-size(ms-extra-large) {
+      height: 50%;
+      font-size: var(--fs-text-xl);
+    }
+  }
 }

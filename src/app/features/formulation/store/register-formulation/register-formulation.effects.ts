@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
-import { catchError, exhaustMap, switchMap, tap, delay } from "rxjs/operators";
-import { Formulation } from "src/app/shared/models/formulation.interface";
+import { catchError, exhaustMap, switchMap, delay } from "rxjs/operators";
 import { FormulationService } from "src/app/shared/services/formulation.service";
 import * as fromRegisterActions from "./register-formulation.action";
 import { clearIngredients } from "../ingredients/ingredients.actions";
@@ -27,11 +26,15 @@ export class RegisterFormulationEffects {
       delay(2000),
       exhaustMap((payload) =>
         this.formulationService.addFormulation(payload.formulation).pipe(
-          switchMap((formulation: Formulation) => [
-            fromRegisterActions.registerFormulationSucess({
-              successSave: true,
-            }),
-          ]),
+          switchMap((response) => {
+            console.log("formulation: ", response);
+            return [
+              fromRegisterActions.registerFormulationSucess({
+                id: response.formulationId,
+                successSave: true,
+              }),
+            ];
+          }),
           catchError((error) => {
             return of(fromRegisterActions.registerFormulationError(error));
           })
@@ -43,9 +46,9 @@ export class RegisterFormulationEffects {
   registerFormulationSuccessEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromRegisterActions.registerFormulationSucess),
-      exhaustMap((_) => {
+      exhaustMap((action) => {
         this._toastService.presentToastSuccess();
-        this._router.navigate(["/formulation/print-report"]);
+        this._router.navigate([`/formulation/print-report/${action.id}`]);
         return [clearIngredients(), clearLots()];
       }),
       catchError((error) => {
