@@ -24,12 +24,8 @@ export class PrintReportPageComponent implements OnInit {
   ngOnInit() {}
 
   printReport() {
-    this.formulationService
-      .getReport(this.idFormulation)
-      .subscribe((response) => {
-        const blob = new Blob([response.body], { type: "application/pdf" });
-        const fileName = `formulacion-${this.idFormulation}.pdf`;
-        saveAs(blob, fileName);
-      });
+    console.log("Imprimir reporte");
+
+    this.formulationService.getReport(this.idFormulation);
   }
 }
