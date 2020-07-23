@@ -26,6 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap");
+@import "./theme/mixins.scss";
 
 * {
   font-size: 14px;
@@ -34,6 +35,15 @@
 
 .btn-confirm-dialog {
   --color: #e2bd53;
+}
+
+.add-ingredientes-modal {
+  --height: 870px;
+
+  @include breakpoint-size(ms-medium) {
+    --height: 620px;
+    --width: 700px;
+  }
 }
 
 ::-webkit-input-placeholder {

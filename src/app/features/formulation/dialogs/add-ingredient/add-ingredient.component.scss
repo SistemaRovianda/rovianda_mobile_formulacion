@@ -1,22 +1,50 @@
+@import "../../../../../theme/mixins.scss";
+
 ion-content {
   ion-card {
     box-shadow: none;
-    height: 95%;
+    height: 100%;
+
+    ion-card-header {
+      ion-card-title {
+        font-size: var(--fs-text-md);
+      }
+    }
 
     ion-card-content {
       height: 93%;
+
+      @include breakpoint-size(ms-medium) {
+        height: 85%;
+      }
     }
   }
 }
 
 .btn-add {
-  // --background: #e2bd53;
   width: 40%;
   height: 45px;
+
+  @include breakpoint-size(ms-medium) {
+    font-size: var(--fs-text-md);
+  }
 }
 
 .btn-cancel {
-  // --background: #575552;
   width: 40%;
   height: 45px;
+
+  @include breakpoint-size(ms-medium) {
+    font-size: var(--fs-text-md);
+  }
+}
+
+.label-error {
+  @include breakpoint-size(ms-small) {
+    font-size: var(--fs-text-ms);
+  }
+
+  @include breakpoint-size(ms-small) {
+    font-size: var(--fs-text-md);
+  }
 }

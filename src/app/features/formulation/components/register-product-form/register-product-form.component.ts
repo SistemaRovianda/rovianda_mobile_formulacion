@@ -154,6 +154,7 @@ export class RegisterProductFormComponent implements OnInit {
     );
     const modal = await this._modalCtrl.create({
       component: AddIngredientComponent,
+      cssClass: "add-ingredientes-modal",
     });
 
     await modal.present();
@@ -188,5 +189,9 @@ export class RegisterProductFormComponent implements OnInit {
 
   get dateEntry() {
     return this.form.get("assignmentLot").get("dateEntry");
+  }
+
+  get verifitId() {
+    return this.form.get("verifitId");
   }
 }

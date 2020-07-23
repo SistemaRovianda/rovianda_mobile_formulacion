@@ -9,7 +9,7 @@
     }
 
     @include breakpoint-size(ms-small) {
-      min-height: 1050px;
+      min-height: 1280px;
     }
 
     @include breakpoint-size(ms-medium) {
@@ -60,6 +60,7 @@
     }
 
     @include breakpoint-size(ms-small) {
+      height: 60px;
       font-size: var(--fs-text-sm);
     }
 
@@ -75,18 +76,26 @@
   &__row {
     &--title {
       height: 10%;
+
+      @include breakpoint-size(ms-small) {
+        height: 6%;
+      }
     }
 
     &--second {
       height: 80%;
-    }
 
-    &--register-lots {
-      height: 100%;
+      @include breakpoint-size(ms-small) {
+        height: 84%;
+      }
     }
 
     &--third {
       height: 10%;
+
+      @include breakpoint-size(ms-small) {
+        height: 10%;
+      }
     }
   }
 }

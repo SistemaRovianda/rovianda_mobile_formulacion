@@ -1,11 +1,6 @@
-<title-header
-  [titlePath]="'Salir'"
-  [path]="'/'"
-  [title]="'Registro'"
-  (click)="logout()"
-></title-header>
+<title-header [titlePath]="'Salir'" [path]="'/'" [title]="'Registro'" (click)="logout()"></title-header>
 
-<ion-content>
+<ion-content fixed>
   <ion-grid class="container container--all">
     <ion-row class="container container__row container__row--title">
       <ion-col class="container container__column" size="12">
@@ -16,34 +11,17 @@
     </ion-row>
     <ion-row class="container container__row container__row--second">
       <ion-col class="container container__column" size="12">
-        <register-product-form
-          #form
-          (onSubmit)="onSubmit($event)"
-        ></register-product-form>
+        <register-product-form #form (onSubmit)="onSubmit($event)"></register-product-form>
       </ion-col>
     </ion-row>
     <ion-row class="container container__row container__row--third">
-      <ion-col
-        class="container container__column container__column--button"
-        size="12"
-      >
-        <ion-button
-          class="container container__button"
-          color="primary"
-          (click)="form.onSubmit()"
-          [disabled]="form.form.invalid || form.lotsFormArray.status == 'INVALID'"
-        >
-          <ion-spinner
-            class="container container__spinner"
-            *ngIf="loadingSave"
-          ></ion-spinner>
+      <ion-col class="container container__column container__column--button" size="12">
+        <ion-button class="container container__button" color="primary" (click)="form.onSubmit()"
+          [disabled]="form.form.invalid || form.lotsFormArray.status == 'INVALID'">
+          <ion-spinner class="container container__spinner" *ngIf="loadingSave"></ion-spinner>
           Guardar registro
-          <ion-icon
-            class="container container__icon"
-            *ngIf="!loadingSave"
-            slot="end"
-            name="chevron-forward-outline"
-          ></ion-icon>
+          <ion-icon class="container container__icon" *ngIf="!loadingSave" slot="end" name="chevron-forward-outline">
+          </ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
