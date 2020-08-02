@@ -14,6 +14,6 @@ export class UsersVerifiedService {
   ) {}
 
   getUsersVerified(): Observable<UserVerified[]> {
-    return this.http.get<UserVerified[]>(`${this.endpoint}/user`);
+    return this.http.get<UserVerified[]>(`${this.endpoint}/user/rol/quality`);
   }
 }

@@ -49,6 +49,8 @@ export class RegisterProductFormComponent implements OnInit {
 
   nameElaborated: Observable<string>;
 
+  uidElaborated: Observable<String>;
+
   lotsFormArray: FormArray = new FormArray([]);
 
   @Output("onSubmit") submit = new EventEmitter();
@@ -108,7 +110,14 @@ export class RegisterProductFormComponent implements OnInit {
     });
 
     this.nameElaborated = from(
-      this._storage.get("uid").then((res) => Promise.resolve(res))
+      this._storage.get("currentUser").then((res) => Promise.resolve(res))
+    );
+
+    this.uidElaborated = from(
+      this._storage.get("uid").then((res) => {
+        this.form.get("makeId").setValue(res);
+        return Promise.resolve(res);
+      })
     );
 
     this.usersVerified$ = this._store.select(usersVerifiedSelector);
@@ -130,6 +139,7 @@ export class RegisterProductFormComponent implements OnInit {
           .value.split("T")[0],
       },
     };
+    console.log("form", f);
     this.submit.emit(f);
   }
 

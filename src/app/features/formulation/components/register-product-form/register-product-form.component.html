@@ -48,7 +48,7 @@
         <ion-item class="container container__item">
           <ion-label class="container container__label" position="stacked">Elaboro</ion-label>
           <ion-input class="container container__input" type="text" disabled="true"
-            placeholder="{{ nameElaborated | async }}" value="{{ nameElaborated | async }}" formControlName="makeId">
+            value="{{ nameElaborated | async }}">
           </ion-input>
         </ion-item>
       </ion-col>
@@ -184,9 +184,6 @@
                       [value]="lotId">
                       {{ lotId }}
                     </ion-select-option>
-                    <ion-select-option value="peperoni">Peperoni</ion-select-option>
-                    <ion-select-option value="peperoni">Peperoni</ion-select-option>
-                    <ion-select-option value="peperoni">Peperoni</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-col>
