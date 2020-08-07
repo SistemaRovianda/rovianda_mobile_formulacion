@@ -113,12 +113,11 @@ export class RegisterProductFormComponent implements OnInit {
       this._storage.get("currentUser").then((res) => Promise.resolve(res))
     );
 
-    this.uidElaborated = from(
-      this._storage.get("uid").then((res) => {
-        this.form.get("makeId").setValue(res);
-        return Promise.resolve(res);
-      })
-    );
+    this._storage.get("uid").then((res) => {
+      console.log("res uid", res);
+      this.form.get("makeId").setValue(res);
+      return Promise.resolve(res);
+    });
 
     this.usersVerified$ = this._store.select(usersVerifiedSelector);
   }

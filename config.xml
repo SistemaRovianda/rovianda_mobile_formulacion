@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.formulation" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Formulacion</name>
+    <name>Formulación</name>
     <description>Application for creating formulas for Rovianda</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Akatsuki Agency</author>
     <content src="index.html" />

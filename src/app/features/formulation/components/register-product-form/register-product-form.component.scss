@@ -218,4 +218,9 @@
       font-size: var(--fs-text-xl);
     }
   }
+
+  &__content {
+    height: 85%;
+    overflow-y: scroll;
+  }
 }

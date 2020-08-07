@@ -17,7 +17,7 @@
     <ion-row class="container container__row container__row--third">
       <ion-col class="container container__column container__column--button" size="12">
         <ion-button class="container container__button" color="primary" (click)="form.onSubmit()"
-          [disabled]="form.form.invalid || form.lotsFormArray.status == 'INVALID'">
+          [disabled]="form.form.invalid || form.lotsFormArray.status == 'INVALID' || loadingSave">
           <ion-spinner class="container container__spinner" *ngIf="loadingSave"></ion-spinner>
           Guardar registro
           <ion-icon class="container container__icon" *ngIf="!loadingSave" slot="end" name="chevron-forward-outline">

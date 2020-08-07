@@ -33,6 +33,7 @@ export class IngredientsService {
 
   // Se obtiene el producto seleccionado para despues obtener sus ingredientes
   getIngredientsByProductId(productId: string): Observable<Product> {
+    console.trace("products rovianda null");
     return this._http.get<Product>(`${this.url}/product-rovianda/${productId}`);
   }
 
