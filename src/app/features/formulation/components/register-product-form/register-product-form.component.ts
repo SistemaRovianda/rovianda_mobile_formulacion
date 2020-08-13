@@ -73,10 +73,6 @@ export class RegisterProductFormComponent implements OnInit {
       ],
       verifitId: ["", Validators.required],
       makeId: [""],
-      assignmentLot: fb.group({
-        newLotId: ["", [Validators.required, noWhiteSpace]],
-        dateEntry: ["", [Validators.required]],
-      }),
       ingredient: [[]],
     });
   }
@@ -130,13 +126,6 @@ export class RegisterProductFormComponent implements OnInit {
     const f = {
       ...this.form.value,
       date: moment(new Date()).format("DD/MM/YYYY"),
-      assignmentLot: {
-        newLotId: this.form.get("assignmentLot").get("newLotId").value,
-        dateEntry: this.form
-          .get("assignmentLot")
-          .get("dateEntry")
-          .value.split("T")[0],
-      },
     };
     console.log("form", f);
     this.submit.emit(f);

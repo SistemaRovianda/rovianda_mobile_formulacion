@@ -81,7 +81,7 @@
     </ion-row>
 
     <ion-row class="container container__row container__row--four">
-      <ion-col class="container container__column" size="5">
+      <ion-col class="container container__column" size="12">
         <ion-item class="container container__item container__item--temperature">
           <ion-label class="container container__label" position="floating">Temperatura</ion-label>
           <ion-input class="container container__input" formControlName="temperature" type="text"
@@ -118,45 +118,6 @@
             No se aceptan espacios en blanco
           </ion-label>
         </div>
-      </ion-col>
-      <ion-col class="container container__column" size="7">
-        <h1 class="container container__subtitle--lots">
-          Asignacion de lote
-        </h1>
-        <ion-row class="container container__row container__row--register-lots" formGroupName="assignmentLot">
-          <ion-col class="container container__column" size="6">
-            <ion-item class="container container__item">
-              <ion-label class="container container__label" position="floating">Lote</ion-label>
-              <ion-input class="container container__input" formControlName="newLotId" type="text" placeholder="######">
-              </ion-input>
-            </ion-item>
-            <div class="container container__message-error">
-              <ion-label class="container container__label container__label--error"
-                *ngIf="newLotId.invalid && (newLotId.dirty || newLotId.touched)">
-                Campo requerido.-
-              </ion-label>
-              <ion-label class="container container__label container__label--error"
-                *ngIf="newLotId.touched && newLotId.errors?.whitespace">
-                No se aceptan espacios en blanco
-              </ion-label>
-            </div>
-          </ion-col>
-          <ion-col class="container container__column" size="6">
-            <ion-item class="container container__item">
-              <ion-label class="container container__label" position="floating">Ingreso*</ion-label>
-              <ion-datetime class="container container__datetime" formControlName="dateEntry" placeholder="dd/mm/yyyy"
-                displayFormat="DD/MM/YYYY">
-              </ion-datetime>
-            </ion-item>
-            <div class="container container__message-error">
-              <ion-label class="container container__label container__label--error" *ngIf="
-                  dateEntry.invalid && (dateEntry.dirty || dateEntry.touched)
-                ">
-                Este campo es requerido.
-              </ion-label>
-            </div>
-          </ion-col>
-        </ion-row>
       </ion-col>
     </ion-row>
 

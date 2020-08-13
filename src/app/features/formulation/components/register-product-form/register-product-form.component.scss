@@ -162,10 +162,10 @@
     }
 
     &--four {
-      height: 35%;
+      height: 20%;
 
       @include breakpoint-size(ms-small) {
-        height: 30%;
+        height: 20%;
       }
     }
 
@@ -173,7 +173,7 @@
       height: 30%;
 
       @include breakpoint-size(ms-small) {
-        height: 25%;
+        height: 35%;
       }
     }
 
