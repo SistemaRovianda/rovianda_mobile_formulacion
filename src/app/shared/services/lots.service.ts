@@ -1,5 +1,5 @@
 import { Injectable, Inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { API_ENDPOINT_PROVIDER } from "src/app/providers/tokens";
 import { Observable } from "rxjs";
 import { Lot } from "../models/lot.interface";
@@ -22,5 +22,16 @@ export class LotService {
     return this._http.post<Lot[]>(`${this.url}/ingredients/lots`, {
       lotsId: ingredientsId,
     });
+  }
+
+  getCatalogLots(materialId: number): Observable<any> {
+    let params = new HttpParams({
+      fromObject: {
+        status: "USED",
+        rawMaterialId: materialId.toString(),
+      },
+    });
+
+    return this._http.get<any[]>(`${this.url}/meat/lots/output`, { params });
   }
 }

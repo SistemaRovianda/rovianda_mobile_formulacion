@@ -7,20 +7,17 @@ const LOAD_LOTS_SUCCESS = "[LOTS] Load Lots Success";
 
 const LOAD_LOTS_ERROR = "[LOTS] Load Lots Error";
 
-const CLEAR_LOTS = "[lOTS] Clear Lots";
-
-export const loadLots = createAction(
+export const catalogLoadLots = createAction(
   LOAD_LOTS,
-  props<{ ingredientsId: number[] }>()
+  props<{ materialId: number }>()
 );
 
-export const loadLotsSuccess = createAction(
+export const catalogLoadLotsSuccess = createAction(
   LOAD_LOTS_SUCCESS,
-  props<{ lots: Lot[] }>()
+  props<{ response: catalogLots[] }>()
 );
 
-export const loadLotsError = createAction(
+export const catalogLoadLotsError = createAction(
   LOAD_LOTS_ERROR,
   props<{ error: string }>()
 );
-export const clearLots = createAction(CLEAR_LOTS);

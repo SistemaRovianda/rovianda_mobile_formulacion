@@ -5,6 +5,7 @@ import { IngredientsState } from "src/app/features/formulation/store/ingredients
 import { LotsState } from "src/app/features/formulation/store/lots/lots.reducer";
 import { RegisterFormulationState } from "src/app/features/formulation/store/register-formulation/register-formulation.reducer";
 import { UsersVerifiedState } from "src/app/features/formulation/store/users-verified/users-verified.reducer";
+import { CatalogLotsState } from "src/app/features/formulation/store/catalogLots/catalogLots.reducer";
 
 export interface LoginState {
   loading: boolean;
@@ -32,4 +33,5 @@ export interface AppStateInterface {
   ingredientsOutlet: IngredientsOutletState;
   lots: LotsState;
   usersVerified: UsersVerifiedState;
+  catalogLots: CatalogLotsState;
 }
