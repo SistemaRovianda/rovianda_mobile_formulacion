@@ -11,14 +11,16 @@ import { Store, select } from "@ngrx/store";
 import { Product } from "src/app/shared/models/product.interface";
 import { Observable, from } from "rxjs";
 import { SELECT_PRODUCTS } from "../../store/products/products.selectors";
+import { SELECT_CATALOG_LOTS } from "../../store/catalogLots/catalogLots.selectors";
 import { loadIngredientsByProductID } from "../../store/ingredients-product/ingredients-product.actions";
+import * as fromActionsCatalogLots from "../../store/catalogLots/catalogLots.actions";
 import { SELECT_INGREDIENTS_BY_PRODUCT_LOADING } from "../../store/ingredients-product/ingredients-product.selectors";
 import { ModalController } from "@ionic/angular";
 import { AddIngredientComponent } from "../../dialogs/add-ingredient/add-ingredient.component";
 import { loadIngredientsOutlet } from "../../store/ingredients-outlet/ingredients-outlet.actions";
 import { SELECT_INGREDIENTS_CHECKED } from "../../store/ingredients/ingredients.selectors";
 import { IngredientC } from "src/app/shared/models/ingredient.interface";
-import { Lot } from "src/app/shared/models/lot.interface";
+import { Lot, catalogLots } from "src/app/shared/models/lot.interface";
 import { SELECT_LOTS } from "../../store/lots/lots.selectors";
 import { noWhiteSpace } from "src/app/shared/validators/white-space.validator";
 import { textValidator } from "src/app/shared/validators/text.validator";
@@ -40,6 +42,8 @@ export class RegisterProductFormComponent implements OnInit {
   loadingIngredients: boolean;
 
   products$: Observable<Product[]>;
+
+  catalogLots$: Observable<any[]>;
 
   ingredients$: Observable<IngredientC[]>;
 
@@ -63,6 +67,9 @@ export class RegisterProductFormComponent implements OnInit {
   ) {
     this.loadingIngredients = true;
     this.products$ = this._store.pipe(select(SELECT_PRODUCTS));
+
+    this.catalogLots$ = this._store.pipe(select(SELECT_CATALOG_LOTS));
+
     this.form = fb.group({
       productRoviandaId: ["", [Validators.required]],
       lotId: ["", [Validators.required, noWhiteSpace]],
@@ -103,6 +110,12 @@ export class RegisterProductFormComponent implements OnInit {
     this.lots$ = this._store.select(SELECT_LOTS);
     this.lots$.subscribe((res) => {
       if (res.length != 0) this.createLotsFormArray(res.length);
+    });
+
+    this.form.get("productRoviandaId").valueChanges.subscribe((productId) => {
+      this._store.dispatch(
+        fromActionsCatalogLots.catalogLoadLots({ materialId: productId })
+      );
     });
 
     this.nameElaborated = from(

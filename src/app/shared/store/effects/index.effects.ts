@@ -6,6 +6,7 @@ import { IngredientsOutletEffects } from "src/app/features/formulation/store/ing
 import { IngredientsEffects } from "src/app/features/formulation/store/ingredients/ingredients.effects";
 import { LotsEffects } from "src/app/features/formulation/store/lots/lots.effects";
 import { UsersVerifiedEffects } from "src/app/features/formulation/store/users-verified/users-verified.effects";
+import { CatalogLotsEffects } from "src/app/features/formulation/store/catalogLots/catalogLots.effects";
 
 export const effects = [
   LogginEffects,
@@ -16,4 +17,5 @@ export const effects = [
   IngredientsOutletEffects,
   LotsEffects,
   UsersVerifiedEffects,
+  CatalogLotsEffects,
 ];
