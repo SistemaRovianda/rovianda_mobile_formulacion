@@ -12,7 +12,7 @@ export interface RegisterFormulationState {
 const initialState: RegisterFormulationState = {
   formulation: {
     productRoviandaId: null,
-    lotId: "",
+    lotIdRecordId: "",
     temperature: "",
     temperatureWater: "",
     assigmentLot: {

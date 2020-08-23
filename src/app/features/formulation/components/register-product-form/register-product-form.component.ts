@@ -72,7 +72,7 @@ export class RegisterProductFormComponent implements OnInit {
 
     this.form = fb.group({
       productRoviandaId: ["", [Validators.required]],
-      lotId: ["", [Validators.required, noWhiteSpace]],
+      lotIdRecordId: ["", [Validators.required, noWhiteSpace]],
       temperature: ["", [Validators.required, noWhiteSpace, textValidator]],
       temperatureWater: ["", [Validators.required, noWhiteSpace]],
       date: [
@@ -182,8 +182,8 @@ export class RegisterProductFormComponent implements OnInit {
     return this.form.get("productRoviandaId");
   }
 
-  get lotId() {
-    return this.form.get("lotId");
+  get lotIdRecordId() {
+    return this.form.get("lotIdRecordId");
   }
 
   get temperature() {

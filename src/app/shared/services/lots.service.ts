@@ -24,14 +24,12 @@ export class LotService {
     });
   }
 
-  getCatalogLots(materialId: number): Observable<any> {
+  getCatalogLots(): Observable<any> {
     let params = new HttpParams({
       fromObject: {
-        status: "USED",
-        rawMaterialId: materialId.toString(),
-      },
+        status: "NOTUSED"
+      }
     });
-
     return this._http.get<any[]>(`${this.url}/meat/lots/output`, { params });
   }
 }

@@ -20,7 +20,7 @@ export class CatalogLotsEffects {
     this._actions$.pipe(
       ofType(catalogLoadLots),
       exhaustMap((action) =>
-        this._lotService.getCatalogLots(action.materialId).pipe(
+        this._lotService.getCatalogLots().pipe(
           switchMap((lots: catalogLots[]) => [
             catalogLoadLotsSuccess({ response: lots }),
           ]),

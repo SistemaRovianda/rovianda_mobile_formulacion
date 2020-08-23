@@ -46,13 +46,13 @@
             class="container container__select"
             interface="action-sheet"
             placeholder="Ingresa lote"
-            formControlName="lotId"
+            formControlName="lotIdRecordId"
           >
             <!-- <ion-select-option value="f">Female</ion-select-option> -->
             <ion-select-option
               class="container container__select-option"
               *ngFor="let product of catalogLots$ | async"
-              [value]="product.lotId"
+              [value]="product.outputId"
               >{{ product.name }}</ion-select-option
             >
           </ion-select>

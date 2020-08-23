@@ -1,6 +1,6 @@
 export interface Formulation {
   productRoviandaId: number;
-  lotId: string;
+  lotIdRecordId: string;
   temperature: string;
   temperatureWater: string;
   assigmentLot: AssigmentLot;
