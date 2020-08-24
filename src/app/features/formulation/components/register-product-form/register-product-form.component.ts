@@ -175,6 +175,10 @@ export class RegisterProductFormComponent implements OnInit {
       date: moment(new Date()).format("DD/MM/YYYY"),
     };
     console.log("form", f);
+    
+    this.form.reset();
+    this.lotsFormArray = new FormArray([]);
+
     this.submit.emit(f);
   }
 
