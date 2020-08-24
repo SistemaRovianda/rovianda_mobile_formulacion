@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { API_ENDPOINT_PROVIDER } from "src/app/providers/tokens";
 import { Observable } from "rxjs";
 import { Product } from "../models/product.interface";
+import { productsRovianda } from 'src/app/features/formulation/store/productsRovianda/reducer';
 
 @Injectable({
   providedIn: "root",
@@ -17,7 +18,12 @@ export class ProductsService {
     this.url = `${endpoint}`;
   }
 
-  getProducts(): Observable<Product[]> {
-    return this._http.get<Product[]>(`${this.url}/products-rovianda`);
+  getProducts(): Observable<productsRovianda[]> {
+    return this._http.get<productsRovianda[]>(`${this.url}/products-rovianda`);
+  }
+
+  getIngredientsByProductId(productId: number): Observable<Product> {
+    console.trace("products rovianda null");
+    return this._http.get<Product>(`${this.url}/product-rovianda/${productId}`);
   }
 }

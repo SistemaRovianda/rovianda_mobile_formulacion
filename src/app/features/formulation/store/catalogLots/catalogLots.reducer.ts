@@ -22,16 +22,23 @@ const initialState: CatalogLotsState = {
 
 export const CatalogLotsReducer = createReducer<CatalogLotsState>(
   initialState,
-  on(catalogLoadLots, (state) => ({
+  on(catalogLoadLots, (state) => 
+  {
+    console.log("VALOR INICIAL DE INGREDIENTES");
+    return ({
     ...state,
     loading: true,
-  })),
+  })
+}),
 
-  on(catalogLoadLotsSuccess, (state, { response }) => ({
+  on(catalogLoadLotsSuccess, (state, { response }) =>{ 
+    console.log("Seteando lotes de carne");
+    return ({
     ...state,
     loading: false,
     lots: response,
-  })),
+  })
+}),
   on(catalogLoadLotsError, (state, { error }) => ({
     ...state,
     loading: false,

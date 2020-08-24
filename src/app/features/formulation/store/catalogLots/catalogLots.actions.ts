@@ -9,7 +9,7 @@ const LOAD_LOTS_ERROR = "[LOTS] Load Lots Error";
 
 export const catalogLoadLots = createAction(
   LOAD_LOTS,
-  props<{ materialId: number }>()
+  props<{ materialId: string }>()
 );
 
 export const catalogLoadLotsSuccess = createAction(

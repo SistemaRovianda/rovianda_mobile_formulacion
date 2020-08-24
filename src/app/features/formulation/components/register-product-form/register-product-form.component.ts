@@ -11,7 +11,7 @@ import { Store, select } from "@ngrx/store";
 import { Product } from "src/app/shared/models/product.interface";
 import { Observable, from } from "rxjs";
 import { SELECT_PRODUCTS } from "../../store/products/products.selectors";
-import { SELECT_CATALOG_LOTS } from "../../store/catalogLots/catalogLots.selectors";
+//import { SELECT_CATALOG_LOTS } from "../../store/catalogLots/catalogLots.selectors";
 import { loadIngredientsByProductID } from "../../store/ingredients-product/ingredients-product.actions";
 import * as fromActionsCatalogLots from "../../store/catalogLots/catalogLots.actions";
 import { SELECT_INGREDIENTS_BY_PRODUCT_LOADING } from "../../store/ingredients-product/ingredients-product.selectors";
@@ -21,7 +21,7 @@ import { loadIngredientsOutlet } from "../../store/ingredients-outlet/ingredient
 import { SELECT_INGREDIENTS_CHECKED } from "../../store/ingredients/ingredients.selectors";
 import { IngredientC } from "src/app/shared/models/ingredient.interface";
 import { Lot, catalogLots } from "src/app/shared/models/lot.interface";
-import { SELECT_LOTS } from "../../store/lots/lots.selectors";
+//import { SELECT_LOTS } from "../../store/lots/lots.selectors";
 import { noWhiteSpace } from "src/app/shared/validators/white-space.validator";
 import { textValidator } from "src/app/shared/validators/text.validator";
 import { SELECT_FORMULARION_REGISTER_SAVE } from "../../store/register-formulation/register-formulation.selector";
@@ -30,6 +30,24 @@ import * as moment from "moment";
 import { UserVerified } from "src/app/shared/models/user.interface";
 import { usersVerifiedSelector } from "../../store/users-verified/users-verified.selector";
 import { Storage } from "@ionic/storage";
+import { productsRovianda } from '../../store/productsRovianda/reducer';
+import { GET_ALL_PRODUCTS_ROVIANDA, GET_INGREDIENTS_PRODUCT_ROVIANDA } from '../../store/productsRovianda/actions';
+import { GET_PRODUCTS_ROVIANDA_STORE } from '../../store/productsRovianda/selectors';
+import { OutputsMeat } from 'src/app/shared/models/outputsMeat';
+import { GET_ALL_OUTPUTS_MEAT } from '../../store/lotsMeat/actions';
+import { GET_LOTS_MEAT_STORE } from '../../store/lotsMeat/selector';
+import { GET_ALL_QUALITY_USERS } from '../../store/quality-user/actions';
+import { qualityUser } from '../../store/quality-user/reducer';
+import { GET_QUALITY_USERS_STORE } from '../../store/quality-user/selectors';
+import { ingredientsOfProductRovianda } from '../../store/ingredients-product-rovianda/reducer';
+import { GET_INGREDIENTS_PRODUCT_ROVIANDA_STORE } from '../../store/ingredients-product-rovianda/selector';
+import { lotsDrief } from '../../store/lotsDrief/reducer';
+
+import { GET_ALL_INGREDIENTS_AVAILABLES } from '../../store/ingredients-product-rovianda/actions';
+
+import { SELECT_USER_UID } from 'src/app/features/landing/store/authentication/authentication.selectors';
+import { GET_LOTS_DRIEF_STORE } from '../../store/lotsDrief/selectors';
+
 
 @Component({
   selector: "register-product-form",
@@ -41,21 +59,24 @@ export class RegisterProductFormComponent implements OnInit {
 
   loadingIngredients: boolean;
 
-  products$: Observable<Product[]>;
+  productsRovianda$: Observable<productsRovianda[]>;
+  ingredientsOfProductRovianda$:Observable<ingredientsOfProductRovianda[]>;
+  lotsMeat$: Observable<OutputsMeat[]>;
+  lotsDrief$: Observable<lotsDrief[]>;
 
-  catalogLots$: Observable<any[]>;
-
-  ingredients$: Observable<IngredientC[]>;
 
   lots$: Observable<Lot[]>;
 
-  usersVerified$: Observable<UserVerified[]>;
+  qualityUsers$: Observable<qualityUser[]>;
 
   nameElaborated: Observable<string>;
 
   uidElaborated: Observable<String>;
 
   lotsFormArray: FormArray = new FormArray([]);
+  userId:string;
+
+  ingredients:ingredientsOfProductRovianda[];
 
   @Output("onSubmit") submit = new EventEmitter();
 
@@ -66,9 +87,9 @@ export class RegisterProductFormComponent implements OnInit {
     private _storage: Storage
   ) {
     this.loadingIngredients = true;
-    this.products$ = this._store.pipe(select(SELECT_PRODUCTS));
+    
 
-    this.catalogLots$ = this._store.pipe(select(SELECT_CATALOG_LOTS));
+    //this.catalogLots$ = this._store.pipe(select(SELECT_CATALOG_LOTS));
 
     this.form = fb.group({
       productRoviandaId: ["", [Validators.required]],
@@ -85,57 +106,70 @@ export class RegisterProductFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._store.select(SELECT_FORMULARION_REGISTER_SAVE).subscribe((res) => {
-      if (res) {
-        this.form.reset();
-        this.lotsFormArray = new FormArray([]);
-        this._store.dispatch(registerNewRegistration());
-      }
+    this._store.dispatch(GET_ALL_PRODUCTS_ROVIANDA());
+    this._store.dispatch(GET_ALL_OUTPUTS_MEAT());
+    this._store.dispatch(GET_ALL_QUALITY_USERS());
+    this._store.dispatch(GET_ALL_INGREDIENTS_AVAILABLES());
+    this.productsRovianda$ = this._store.pipe(select(GET_PRODUCTS_ROVIANDA_STORE));
+    this.lotsMeat$ = this._store.pipe(select(GET_LOTS_MEAT_STORE));
+    this.qualityUsers$ = this._store.pipe(select(GET_QUALITY_USERS_STORE));
+    this.ingredientsOfProductRovianda$ = this._store.pipe(select(GET_INGREDIENTS_PRODUCT_ROVIANDA_STORE));
+    this.lotsDrief$ = this._store.pipe(select(GET_LOTS_DRIEF_STORE))
+    this.ingredientsOfProductRovianda$.subscribe((lots) => {
+      this.ingredients=lots;
+      this.createLotsFormArray(lots.length);
     });
+    // this._store.select(SELECT_FORMULARION_REGISTER_SAVE).subscribe((res) => {
+    //   if (res) {
+    //     this.form.reset();
+    //     this.lotsFormArray = new FormArray([]);
+    //     this._store.dispatch(registerNewRegistration());
+    //   }
+    // });
+    
+    // this._store
+    //   .select(SELECT_INGREDIENTS_BY_PRODUCT_LOADING)
+    //   .subscribe((loading) => {
+    //     this.loadingIngredients = loading;
+    //   });
 
-    this._store
-      .select(SELECT_INGREDIENTS_BY_PRODUCT_LOADING)
-      .subscribe((loading) => {
-        this.loadingIngredients = loading;
-      });
-
-    this.ingredients$ = this._store.select(SELECT_INGREDIENTS_CHECKED);
+    // this.ingredients$ = this._store.select(SELECT_INGREDIENTS_CHECKED);
 
     this.form.get("productRoviandaId").valueChanges.subscribe((productId) => {
       this._store.dispatch(
-        loadIngredientsByProductID({ productId: productId })
+        GET_INGREDIENTS_PRODUCT_ROVIANDA({ productId })
       );
     });
-
-    this.lots$ = this._store.select(SELECT_LOTS);
-    this.lots$.subscribe((res) => {
-      if (res.length != 0) this.createLotsFormArray(res.length);
+    this._store.pipe(select(SELECT_USER_UID)).subscribe((uid)=>{
+      this.userId=uid;
     });
 
-    this.form.get("productRoviandaId").valueChanges.subscribe((productId) => {
-      this._store.dispatch(
-        fromActionsCatalogLots.catalogLoadLots({ materialId: productId })
-      );
-    });
+    // //this.lots$ = this._store.select(SELECT_LOTS);
+    // this.lots$.subscribe((res) => {
+    //   console.log("RES",res);
+    //   if (res.length) this.createLotsFormArray(res.length);
+    // });
 
     this.nameElaborated = from(
       this._storage.get("currentUser").then((res) => Promise.resolve(res))
     );
 
-    this._storage.get("uid").then((res) => {
-      console.log("res uid", res);
-      this.form.get("makeId").setValue(res);
-      return Promise.resolve(res);
-    });
+    // this._storage.get("uid").then((res) => {
+    //   console.log("res uid", res);
+    //   this.form.get("makeId").setValue(res);
+    //   return Promise.resolve(res);
+    // });
 
-    this.usersVerified$ = this._store.select(usersVerifiedSelector);
+    // this.usersVerified$ = this._store.select(usersVerifiedSelector);
+
+
   }
 
   onSubmit() {
     this.form
       .get("ingredient")
       .setValue(this.getLotsIdWithIngredientsId(this.lotsFormArray.value));
-
+    this.form.get("makeId").setValue(this.userId);
     const f = {
       ...this.form.value,
       date: moment(new Date()).format("DD/MM/YYYY"),
@@ -144,25 +178,18 @@ export class RegisterProductFormComponent implements OnInit {
     this.submit.emit(f);
   }
 
-  getLotsIdWithIngredientsId(lotsId: number[]) {
-    let arr;
-    this.ingredients$.subscribe((lots) => {
-      arr = lots.map((ingredient, i) => {
-        return {
-          lotId: lotsId[i].toString(),
-          ingredientId: ingredient.ingredientId,
-        };
-      });
-    });
-    return arr;
+  getLotsIdWithIngredientsId(values:any){
+    console.log("Values",values);
+    return values.map(((x,index)=>{
+      return {
+        lotId:x,
+        ingredientId:this.ingredients[index].productId
+      }
+    }))
   }
+  
 
   async openModal() {
-    let ingredientsC: IngredientC[];
-    this.ingredients$.subscribe((res) => (ingredientsC = res));
-    await this._store.dispatch(
-      loadIngredientsOutlet({ ingredientsProductIn: ingredientsC })
-    );
     const modal = await this._modalCtrl.create({
       component: AddIngredientComponent,
       cssClass: "add-ingredientes-modal",
@@ -177,6 +204,8 @@ export class RegisterProductFormComponent implements OnInit {
       this.lotsFormArray.push(new FormControl("", Validators.required));
     }
   }
+
+  
 
   get productRoviandaId() {
     return this.form.get("productRoviandaId");

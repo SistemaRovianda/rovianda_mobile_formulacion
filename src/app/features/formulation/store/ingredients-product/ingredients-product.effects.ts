@@ -10,6 +10,9 @@ import { exhaustMap, switchMap, catchError } from "rxjs/operators";
 import { Product } from "src/app/shared/models/product.interface";
 import { of } from "rxjs";
 import { addIngredientsProduct } from "../ingredients/ingredients.actions";
+import { catalogLoadLots } from '../catalogLots/catalogLots.actions';
+import { Store } from '@ngrx/store';
+import { AppStateInterface } from 'src/app/shared/models/storeState.interface';
 
 @Injectable({
   providedIn: "root",
@@ -17,7 +20,8 @@ import { addIngredientsProduct } from "../ingredients/ingredients.actions";
 export class IngredientsProductEffects {
   constructor(
     private _actions$: Actions,
-    private _ingredientsService: IngredientsService
+    private _ingredientsService: IngredientsService,
+    private _store: Store<AppStateInterface>
   ) {}
 
   loadIngredientsByProductIdEffect$ = createEffect(() =>
@@ -28,12 +32,13 @@ export class IngredientsProductEffects {
           .getIngredientsByProductId(action.productId)
           .pipe(
             switchMap((product: Product) => [
-              loadIngredientsByProductIDSuccess({
-                ingredients: product.ingredients, // Carga los ingredientes del producto seleccionado en arreglo 1
-              }),
+              // loadIngredientsByProductIDSuccess({
+              //   ingredients: product.ingredients, // Carga los ingredientes del producto seleccionado en arreglo 1
+              // }),
               addIngredientsProduct({
                 ingredients: product.ingredients, // Envia los ingrediente del producto al arreglo 3 para futura mezcla
               }),
+              
             ]),
             catchError((error) =>
               of(loadIngredientsByProductIDError({ error: error }))

@@ -7,6 +7,10 @@ import { IngredientsEffects } from "src/app/features/formulation/store/ingredien
 import { LotsEffects } from "src/app/features/formulation/store/lots/lots.effects";
 import { UsersVerifiedEffects } from "src/app/features/formulation/store/users-verified/users-verified.effects";
 import { CatalogLotsEffects } from "src/app/features/formulation/store/catalogLots/catalogLots.effects";
+import { productRoviandaEffects } from 'src/app/features/formulation/store/productsRovianda/effects';
+import { LotsMeatEffects } from 'src/app/features/formulation/store/lotsMeat/effects';
+import { IngredientProductRoviandaEffects } from 'src/app/features/formulation/store/ingredients-product-rovianda/effects';
+import { QualityUsersEffects } from 'src/app/features/formulation/store/quality-user/effects';
 
 export const effects = [
   LogginEffects,
@@ -18,4 +22,8 @@ export const effects = [
   LotsEffects,
   UsersVerifiedEffects,
   CatalogLotsEffects,
+  productRoviandaEffects,
+  LotsMeatEffects,
+  IngredientProductRoviandaEffects,
+  QualityUsersEffects
 ];

@@ -16,17 +16,17 @@ import {
 export class CatalogLotsEffects {
   constructor(private _actions$: Actions, private _lotService: LotService) {}
 
-  loadLotsEffect$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(catalogLoadLots),
-      exhaustMap((action) =>
-        this._lotService.getCatalogLots().pipe(
-          switchMap((lots: catalogLots[]) => [
-            catalogLoadLotsSuccess({ response: lots }),
-          ]),
-          catchError((error) => of(catalogLoadLotsError(error)))
-        )
-      )
-    )
-  );
+  // loadLotsEffect$ = createEffect(() =>
+  //   this._actions$.pipe(
+  //     ofType(catalogLoadLots),
+  //     exhaustMap((action) =>
+  //       this._lotService.getCatalogLots().pipe(
+  //         switchMap((lots: catalogLots[]) => [
+  //           catalogLoadLotsSuccess({ response: lots }),
+  //         ]),
+  //         catchError((error) => of(catalogLoadLotsError(error)))
+  //       )
+  //     )
+  //   )
+  // );
 }

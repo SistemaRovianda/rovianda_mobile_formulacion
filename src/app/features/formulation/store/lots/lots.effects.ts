@@ -12,15 +12,15 @@ import { of } from "rxjs";
 export class LotsEffects {
   constructor(private _actions$: Actions, private _lotService: LotService) {}
 
-  loadLotsEffect$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(loadLots),
-      exhaustMap((action) =>
-        this._lotService.getLots(action.ingredientsId).pipe(
-          switchMap((lots: Lot[]) => [loadLotsSuccess({ lots: lots })]),
-          catchError((error) => of(loadLotsError(error)))
-        )
-      )
-    )
-  );
+  // loadLotsEffect$ = createEffect(() =>
+  //   this._actions$.pipe(
+  //     ofType(loadLots),
+  //     exhaustMap((action) =>
+  //       this._lotService.getLots(action.ingredientsId).pipe(
+  //         switchMap((lots: Lot[]) => [loadLotsSuccess({ lots: lots })]),
+  //         catchError((error) => of(loadLotsError(error)))
+  //       )
+  //     )
+  //   )
+  // );
 }

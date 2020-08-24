@@ -2,7 +2,6 @@ import { Ingredient } from "src/app/shared/models/formulation.interface";
 import { IngredientsService } from "src/app/shared/services/ingredients.service";
 import { on, createReducer, State } from "@ngrx/store";
 import {
-  addIngredientsProduct,
   addIngredientsModal,
   updateIngredients,
   addIngredientsProductSuccess,

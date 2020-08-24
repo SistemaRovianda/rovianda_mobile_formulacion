@@ -18,7 +18,7 @@
             <!-- <ion-select-option value="f">Female</ion-select-option> -->
             <ion-select-option
               class="container container__select-option"
-              *ngFor="let product of products$ | async"
+              *ngFor="let product of productsRovianda$ | async"
               [value]="product.id"
               >{{ product.name }}</ion-select-option
             >
@@ -51,18 +51,18 @@
             <!-- <ion-select-option value="f">Female</ion-select-option> -->
             <ion-select-option
               class="container container__select-option"
-              *ngFor="let product of catalogLots$ | async"
-              [value]="product.outputId"
-              >{{ product.name }}</ion-select-option
+              *ngFor="let lotMeat of lotsMeat$ | async"
+              [value]="lotMeat.outputId"
+              >{{lotMeat.lotId}}-{{ lotMeat.name }}-{{lotMeat.quantity}}</ion-select-option
             >
           </ion-select>
         </ion-item>
         <div class="container container__message-error">
           <ion-label
             class="container container__label container__label--error"
-            *ngIf="lotId.invalid && (lotId.dirty || lotId.touched)"
+            *ngIf="lotIdRecordId.invalid && (lotIdRecordId.dirty || lotIdRecordId.touched)"
           >
-            Campo requerido.-
+            Campo requerido.
           </ion-label>
         </div>
       </ion-col>
@@ -78,8 +78,9 @@
             class="container container__input"
             type="text"
             disabled="true"
-            value="{{ nameElaborated | async }}"
+          
           >
+          {{nameElaborated | async }}
           </ion-input>
         </ion-item>
       </ion-col>
@@ -98,7 +99,7 @@
             formControlName="verifitId"
           >
             <ion-select-option
-              *ngFor="let uv of usersVerified$ | async"
+              *ngFor="let uv of qualityUsers$ | async"
               [value]="uv.userId"
               >{{ uv.fullName }}
             </ion-select-option>
@@ -218,7 +219,7 @@
               >
                 <ion-item
                   class="container container__item"
-                  *ngFor="let lot of lots$ | async; let i = index"
+                  *ngFor="let lot of lotsDrief$ | async; let i = index"
                 >
                   <ion-label class="container container__label" position="fixed"
                     >Lote</ion-label
@@ -254,7 +255,7 @@
                 <!-- <div *ngIf="!loadingIngredients"> -->
                 <ion-item
                   class="container container__item"
-                  *ngFor="let ingredient of ingredients$ | async"
+                  *ngFor="let ingredient of ingredientsOfProductRovianda$ | async"
                 >
                   <ion-label class="container container__label">{{
                     ingredient.description

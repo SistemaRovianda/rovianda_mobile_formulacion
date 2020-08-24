@@ -2,7 +2,7 @@ import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { API_ENDPOINT_PROVIDER } from "src/app/providers/tokens";
 import { Observable } from "rxjs";
-import { UserVerified } from "../models/user.interface";
+import { qualityUser } from 'src/app/features/formulation/store/quality-user/reducer';
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +13,7 @@ export class UsersVerifiedService {
     @Inject(API_ENDPOINT_PROVIDER) private endpoint
   ) {}
 
-  getUsersVerified(): Observable<UserVerified[]> {
-    return this.http.get<UserVerified[]>(`${this.endpoint}/user/rol/quality`);
+  getUsersVerified(): Observable<qualityUser[]> {
+    return this.http.get<qualityUser[]>(`${this.endpoint}/user/rol/quality`);
   }
 }

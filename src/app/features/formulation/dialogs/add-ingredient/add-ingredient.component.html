@@ -6,10 +6,10 @@
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-spinner *ngIf="loading"></ion-spinner>
+      <!-- <ion-spinner *ngIf="loading"></ion-spinner> -->
       <ion-row style="overflow-y: scroll; height: 90%;">
         <ion-col style="overflow-y: scroll; height: 100%;">
-          <div *ngIf="!loading && !ingredientsNull" style="
+          <div *ngIf=" !ingredientsNull" style="
               display: flex;
               flex-direction: column;
               justify-content: center;
@@ -29,7 +29,7 @@
                   let ing of ingredientsForm.controls.ingredients.controls;
                   let i = index
                 ">
-                <ion-label> {{ ingredients[i].description }}</ion-label>
+                <ion-label> {{ ingredientsToModal$[i].description }}</ion-label>
                 <ion-checkbox class="ion-margin-start ion-margin-end" style="
                     --background-checked: #e2bd53;
                     --border-color-checked: #e2bd53;
