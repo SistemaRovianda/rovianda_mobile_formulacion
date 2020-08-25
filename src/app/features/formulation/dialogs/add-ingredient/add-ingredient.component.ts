@@ -42,7 +42,7 @@ export class AddIngredientComponent implements OnInit {
   ingredients: ingredientsOfProductRovianda[];
 
   ngOnInit() {
-    
+    this.ingredientsToModal$=[];
     this._store.select(GET_INGREDIENTS_AVAILABLES_STORE).subscribe((ingredientsToModal)=>{ // obtiene todos los ingrediente secos del catalogo
       this.ingredientsToModal$=ingredientsToModal;
       console.log("FOR MODAL",this.ingredientsToModal$);

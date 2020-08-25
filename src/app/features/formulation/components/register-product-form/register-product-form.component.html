@@ -231,10 +231,10 @@
                   >
                     <ion-select-option
                       class="container container__select-option"
-                      *ngFor="let lotId of lot.lots"
-                      [value]="lotId"
+                      *ngFor="let lotInt of lot.lots"
+                      [value]="lotInt.lotRecordId"
                     >
-                      {{ lotId }}
+                      {{ lotInt.loteId }}
                     </ion-select-option>
                   </ion-select>
                 </ion-item>

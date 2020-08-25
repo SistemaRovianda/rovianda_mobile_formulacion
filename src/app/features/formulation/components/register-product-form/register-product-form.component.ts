@@ -119,13 +119,13 @@ export class RegisterProductFormComponent implements OnInit {
       this.ingredients=lots;
       this.createLotsFormArray(lots.length);
     });
-    // this._store.select(SELECT_FORMULARION_REGISTER_SAVE).subscribe((res) => {
-    //   if (res) {
-    //     this.form.reset();
-    //     this.lotsFormArray = new FormArray([]);
-    //     this._store.dispatch(registerNewRegistration());
-    //   }
-    // });
+    this._store.select(SELECT_FORMULARION_REGISTER_SAVE).subscribe((res) => {
+      if (res) {
+        this.form.reset();
+        this.lotsFormArray = new FormArray([]);
+        this._store.dispatch(registerNewRegistration());
+      }
+    });
     
     // this._store
     //   .select(SELECT_INGREDIENTS_BY_PRODUCT_LOADING)
@@ -175,9 +175,6 @@ export class RegisterProductFormComponent implements OnInit {
       date: moment(new Date()).format("DD/MM/YYYY"),
     };
     console.log("form", f);
-    
-    this.form.reset();
-    this.lotsFormArray = new FormArray([]);
 
     this.submit.emit(f);
   }
@@ -186,7 +183,7 @@ export class RegisterProductFormComponent implements OnInit {
     console.log("Values",values);
     return values.map(((x,index)=>{
       return {
-        lotId:x,
+        lotRecordId:x,
         ingredientId:this.ingredients[index].productId
       }
     }))
