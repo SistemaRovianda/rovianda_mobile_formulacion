@@ -43,7 +43,7 @@ import { ingredientsOfProductRovianda } from '../../store/ingredients-product-ro
 import { GET_INGREDIENTS_PRODUCT_ROVIANDA_STORE } from '../../store/ingredients-product-rovianda/selector';
 import { lotsDrief } from '../../store/lotsDrief/reducer';
 
-import { GET_ALL_INGREDIENTS_AVAILABLES } from '../../store/ingredients-product-rovianda/actions';
+import { GET_ALL_INGREDIENTS_AVAILABLES, SET_INGREDIENTS } from '../../store/ingredients-product-rovianda/actions';
 
 import { SELECT_USER_UID } from 'src/app/features/landing/store/authentication/authentication.selectors';
 import { GET_LOTS_DRIEF_STORE } from '../../store/lotsDrief/selectors';
@@ -124,6 +124,11 @@ export class RegisterProductFormComponent implements OnInit {
         this.form.reset();
         this.lotsFormArray = new FormArray([]);
         this._store.dispatch(registerNewRegistration());
+        this._store.dispatch(SET_INGREDIENTS({ingredients:[]}));
+        this._store.dispatch(GET_ALL_PRODUCTS_ROVIANDA());
+        this._store.dispatch(GET_ALL_OUTPUTS_MEAT());
+        this._store.dispatch(GET_ALL_QUALITY_USERS());
+        this._store.dispatch(GET_ALL_INGREDIENTS_AVAILABLES());
       }
     });
     
