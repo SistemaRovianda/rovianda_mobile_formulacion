@@ -37,4 +37,22 @@ export class ToastService {
     // this.router.navigate(["/packaging/menu"]);
     toast.present();
   }
+
+  async presentToastMessageWarning(message: string) {
+    const toast = await this.toastCtrl.create({
+      message: `${message}`,
+      duration: 2000,
+      color: "warning",
+    });
+    toast.present();
+  }
+
+  async presentToastSuccessCustom(message: string) {
+    const toast = await this.toastCtrl.create({
+      message: `${message}`,
+      duration: 2000,
+      color: "success",
+    });
+    toast.present();
+  }
 }

@@ -11,12 +11,15 @@ import { lotsReducer } from "src/app/features/formulation/store/lots/lots.reduce
 import { usersVerifiedReducer } from "src/app/features/formulation/store/users-verified/users-verified.reducer";
 import { catalogLoadLotsError } from "src/app/features/formulation/store/catalogLots/catalogLots.actions";
 import { CatalogLotsReducer } from "src/app/features/formulation/store/catalogLots/catalogLots.reducer";
-import { ingredientProductRoviandaReducer } from 'src/app/features/formulation/store/ingredients-product-rovianda/reducer';
-import { lotsMeatReducer } from 'src/app/features/formulation/store/lotsMeat/reducer';
-import { lotsDriefReducer } from 'src/app/features/formulation/store/lotsDrief/reducer';
-import { productsRoviandaReducer } from 'src/app/features/formulation/store/productsRovianda/reducer';
-import { ingredientsProductRoviandaModalReducer } from 'src/app/features/formulation/store/ingrediente-product-modal/reducer';
-import { qualityUserReducer } from 'src/app/features/formulation/store/quality-user/reducer';
+import { ingredientProductRoviandaReducer } from "src/app/features/formulation/store/ingredients-product-rovianda/reducer";
+import { lotsMeatReducer } from "src/app/features/formulation/store/lotsMeat/reducer";
+import { lotsDriefReducer } from "src/app/features/formulation/store/lotsDrief/reducer";
+import { productsRoviandaReducer } from "src/app/features/formulation/store/productsRovianda/reducer";
+import { ingredientsProductRoviandaModalReducer } from "src/app/features/formulation/store/ingrediente-product-modal/reducer";
+import { qualityUserReducer } from "src/app/features/formulation/store/quality-user/reducer";
+import { basicRegisterReducer } from "src/app/features/process/store/basic-register/basic-register.reducer";
+import { recentRecordsReducer } from "src/app/features/process/store/recent-records/recent-records.reducer";
+import { processDetailReducer } from "src/app/features/process/store/process-detail/process-detail.reducer";
 export const reducers: ActionReducerMap<AppStateInterface> = {
   login: loginReducer,
   auth: authenticationReducer,
@@ -32,8 +35,11 @@ export const reducers: ActionReducerMap<AppStateInterface> = {
   lostMeat: lotsMeatReducer,
   lotsDrief: lotsDriefReducer,
   productsRovianda: productsRoviandaReducer,
-  ingredientsOfProductRoviandaModal:ingredientsProductRoviandaModalReducer,
-  qualityUsers:qualityUserReducer
+  ingredientsOfProductRoviandaModal: ingredientsProductRoviandaModalReducer,
+  qualityUsers: qualityUserReducer,
+  basicRegister: basicRegisterReducer,
+  recentRecords: recentRecordsReducer,
+  processDetail: processDetailReducer,
 };
 
 export const metaReducers: MetaReducer<AppStateInterface>[] = [];

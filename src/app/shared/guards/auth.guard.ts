@@ -31,7 +31,6 @@ export class AuthGuard implements CanActivate {
       mergeMap(
         (val) => this._authService.verifyRole(),
         (val1, val2) => {
-          console.log("[Auth] mergeMap: token: ", val1, "role: ", val2);
           return val1 && val2 ? true : false;
         }
       )

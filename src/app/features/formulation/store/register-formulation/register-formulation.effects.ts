@@ -27,7 +27,6 @@ export class RegisterFormulationEffects {
       exhaustMap((payload) =>
         this.formulationService.addFormulation(payload.formulation).pipe(
           switchMap((response) => {
-            console.log("formulation: ", response);
             return [
               fromRegisterActions.registerFormulationSucess({
                 id: response.formulationId,

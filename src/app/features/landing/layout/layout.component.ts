@@ -23,12 +23,10 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     window.addEventListener("keyboardWillShow", () => {
       this.openKeyboard = true;
-      console.log("Keyboard will Show");
     });
 
     window.addEventListener("keyboardWillHide", () => {
       this.openKeyboard = false;
-      console.log("Keyboard is Hidden");
     });
   }
 

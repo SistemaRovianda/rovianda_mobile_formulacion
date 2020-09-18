@@ -1,5 +1,9 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { MenuComponent } from "./features/menu/menu.component";
+import { MenuModule } from "./features/menu/menu.module";
+import { BasicRegistrationPageModule } from "./features/process/page/basic-registration/basic-registration.module";
+import { BasicRegistrationPage } from "./features/process/page/basic-registration/basic-registration.page";
 import { AuthGuard } from "./shared/guards/auth.guard";
 import { IsAuthGuard } from "./shared/guards/isAuth.guard";
 
@@ -18,6 +22,16 @@ const routes: Routes = [
       ),
   },
   {
+    path: "menu",
+    canActivate: [AuthGuard],
+    component: MenuComponent,
+  },
+  {
+    path: "process/basic-registration",
+    canActivate: [AuthGuard],
+    component: BasicRegistrationPage,
+  },
+  {
     path: "formulation",
     canActivate: [AuthGuard],
     loadChildren: () =>
@@ -30,6 +44,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    MenuModule,
+    BasicRegistrationPageModule,
   ],
   exports: [RouterModule],
 })

@@ -39,7 +39,6 @@ export class IngredientsService {
 
   // Ingredientes para modal
   getIngredients(): Observable<IngredientM[]> {
-    console.log("CONSUMIENDO SERVICIO DE MODAL");
     return this._http.get<IngredientM[]>(`${this.url}/lot/ingredients`);
   }
 }

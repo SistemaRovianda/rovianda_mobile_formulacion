@@ -18,7 +18,6 @@ export class PrintReportPageComponent implements OnInit {
     private formulationService: FormulationService
   ) {
     this.idFormulation = this.route.snapshot.params.id;
-    console.log("idFormulation: ", this.idFormulation);
   }
 
   ngOnInit() {}

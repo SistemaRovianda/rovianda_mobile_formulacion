@@ -18,21 +18,27 @@ import { SELECT_FORMULARION_REGISTER_SAVE } from "../../store/register-formulati
 import { registerNewRegistration } from "../../store/register-formulation/register-formulation.action";
 import * as moment from "moment";
 import { Storage } from "@ionic/storage";
-import { productsRovianda } from '../../store/productsRovianda/reducer';
-import { GET_ALL_PRODUCTS_ROVIANDA, GET_INGREDIENTS_PRODUCT_ROVIANDA } from '../../store/productsRovianda/actions';
-import { GET_PRODUCTS_ROVIANDA_STORE } from '../../store/productsRovianda/selectors';
-import { OutputsMeat } from 'src/app/shared/models/outputsMeat';
-import { GET_ALL_OUTPUTS_MEAT } from '../../store/lotsMeat/actions';
-import { GET_LOTS_MEAT_STORE } from '../../store/lotsMeat/selector';
-import { GET_ALL_QUALITY_USERS } from '../../store/quality-user/actions';
-import { qualityUser } from '../../store/quality-user/reducer';
-import { GET_QUALITY_USERS_STORE } from '../../store/quality-user/selectors';
-import { ingredientsOfProductRovianda } from '../../store/ingredients-product-rovianda/reducer';
-import { GET_INGREDIENTS_PRODUCT_ROVIANDA_STORE } from '../../store/ingredients-product-rovianda/selector';
-import { lotsDrief } from '../../store/lotsDrief/reducer';
-import { GET_ALL_INGREDIENTS_AVAILABLES, SET_INGREDIENTS } from '../../store/ingredients-product-rovianda/actions';
-import { SELECT_USER_UID } from 'src/app/features/landing/store/authentication/authentication.selectors';
-import { GET_LOTS_DRIEF_STORE } from '../../store/lotsDrief/selectors';
+import { productsRovianda } from "../../store/productsRovianda/reducer";
+import {
+  GET_ALL_PRODUCTS_ROVIANDA,
+  GET_INGREDIENTS_PRODUCT_ROVIANDA,
+} from "../../store/productsRovianda/actions";
+import { GET_PRODUCTS_ROVIANDA_STORE } from "../../store/productsRovianda/selectors";
+import { OutputsMeat } from "src/app/shared/models/outputsMeat";
+import { GET_ALL_OUTPUTS_MEAT } from "../../store/lotsMeat/actions";
+import { GET_LOTS_MEAT_STORE } from "../../store/lotsMeat/selector";
+import { GET_ALL_QUALITY_USERS } from "../../store/quality-user/actions";
+import { qualityUser } from "../../store/quality-user/reducer";
+import { GET_QUALITY_USERS_STORE } from "../../store/quality-user/selectors";
+import { ingredientsOfProductRovianda } from "../../store/ingredients-product-rovianda/reducer";
+import { GET_INGREDIENTS_PRODUCT_ROVIANDA_STORE } from "../../store/ingredients-product-rovianda/selector";
+import { lotsDrief } from "../../store/lotsDrief/reducer";
+import {
+  GET_ALL_INGREDIENTS_AVAILABLES,
+  SET_INGREDIENTS,
+} from "../../store/ingredients-product-rovianda/actions";
+import { SELECT_USER_UID } from "src/app/features/landing/store/authentication/authentication.selectors";
+import { GET_LOTS_DRIEF_STORE } from "../../store/lotsDrief/selectors";
 
 @Component({
   selector: "register-product-form",
@@ -40,7 +46,6 @@ import { GET_LOTS_DRIEF_STORE } from '../../store/lotsDrief/selectors';
   styleUrls: ["./register-product-form.component.scss"],
 })
 export class RegisterProductFormComponent implements OnInit {
-
   form: FormGroup;
   loadingIngredients: boolean;
   productsRovianda$: Observable<productsRovianda[]>;
@@ -65,7 +70,6 @@ export class RegisterProductFormComponent implements OnInit {
   ) {
     this.loadingIngredients = true;
 
-
     //this.catalogLots$ = this._store.pipe(select(SELECT_CATALOG_LOTS));
 
     this.form = fb.group({
@@ -87,11 +91,15 @@ export class RegisterProductFormComponent implements OnInit {
     this._store.dispatch(GET_ALL_OUTPUTS_MEAT());
     this._store.dispatch(GET_ALL_QUALITY_USERS());
     this._store.dispatch(GET_ALL_INGREDIENTS_AVAILABLES());
-    this.productsRovianda$ = this._store.pipe(select(GET_PRODUCTS_ROVIANDA_STORE));
+    this.productsRovianda$ = this._store.pipe(
+      select(GET_PRODUCTS_ROVIANDA_STORE)
+    );
     this.lotsMeat$ = this._store.pipe(select(GET_LOTS_MEAT_STORE));
     this.qualityUsers$ = this._store.pipe(select(GET_QUALITY_USERS_STORE));
-    this.ingredientsOfProductRovianda$ = this._store.pipe(select(GET_INGREDIENTS_PRODUCT_ROVIANDA_STORE));
-    this.lotsDrief$ = this._store.pipe(select(GET_LOTS_DRIEF_STORE))
+    this.ingredientsOfProductRovianda$ = this._store.pipe(
+      select(GET_INGREDIENTS_PRODUCT_ROVIANDA_STORE)
+    );
+    this.lotsDrief$ = this._store.pipe(select(GET_LOTS_DRIEF_STORE));
     this.ingredientsOfProductRovianda$.subscribe((lots) => {
       this.ingredients = lots;
       this.createLotsFormArray(lots.length);
@@ -118,9 +126,7 @@ export class RegisterProductFormComponent implements OnInit {
     // this.ingredients$ = this._store.select(SELECT_INGREDIENTS_CHECKED);
 
     this.form.get("productRoviandaId").valueChanges.subscribe((productId) => {
-      this._store.dispatch(
-        GET_INGREDIENTS_PRODUCT_ROVIANDA({ productId })
-      );
+      this._store.dispatch(GET_INGREDIENTS_PRODUCT_ROVIANDA({ productId }));
     });
     this._store.pipe(select(SELECT_USER_UID)).subscribe((uid) => {
       this.userId = uid;
@@ -143,8 +149,6 @@ export class RegisterProductFormComponent implements OnInit {
     // });
 
     // this.usersVerified$ = this._store.select(usersVerifiedSelector);
-
-
   }
 
   onSubmit() {
@@ -156,21 +160,17 @@ export class RegisterProductFormComponent implements OnInit {
       ...this.form.value,
       date: moment(new Date()).format("DD/MM/YYYY"),
     };
-    console.log("form", f);
-
     this.submit.emit(f);
   }
 
   getLotsIdWithIngredientsId(values: any) {
-    console.log("Values", values);
-    return values.map(((x, index) => {
+    return values.map((x, index) => {
       return {
         lotRecordId: x,
-        ingredientId: this.ingredients[index].productId
-      }
-    }))
+        ingredientId: this.ingredients[index].productId,
+      };
+    });
   }
-
 
   async openModal() {
     const modal = await this._modalCtrl.create({
@@ -187,8 +187,6 @@ export class RegisterProductFormComponent implements OnInit {
       this.lotsFormArray.push(new FormControl("", Validators.required));
     }
   }
-
-
 
   get productRoviandaId() {
     return this.form.get("productRoviandaId");

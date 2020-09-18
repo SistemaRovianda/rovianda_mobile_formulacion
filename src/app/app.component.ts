@@ -42,10 +42,8 @@ export class AppComponent {
           )
           .subscribe((res) => {
             if (res) {
-              console.log("product/list");
-              this._router.navigate(["formulation", "register-product"]);
+              this._router.navigate(["menu"]);
             } else {
-              console.log("login");
               this._router.navigate(["login"]);
             }
             splash.SplashScreen.hide();

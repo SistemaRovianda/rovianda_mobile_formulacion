@@ -48,7 +48,6 @@ export class FormulationService {
   // }
 
   getReport(idFormulation: string) {
-    console.log("pdfService... " + idFormulation);
     this.fileTransfer = this.transfer.create();
     this.fileTransfer
       .download(
@@ -56,12 +55,10 @@ export class FormulationService {
         this.file.dataDirectory + idFormulation + ".pdf"
       )
       .then((entry) => {
-        console.log("entry PDF: ", entry.toURL());
         this.fileOpener
           .open(entry.toURL(), "application/pdf")
           .then(() => {
             this.toastSuccessDownload();
-            console.log("File is opened");
           })
           .catch((error) => console.log("Error opening file", error));
       });

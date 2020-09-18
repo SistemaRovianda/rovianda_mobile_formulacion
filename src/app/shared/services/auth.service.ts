@@ -54,7 +54,6 @@ export class AuthService {
   isAuth(): Observable<any> {
     return from(
       this.storage.get("token").then((token) => {
-        console.log("Token: ", token);
         if (token) return Promise.resolve(true);
         return false;
       })

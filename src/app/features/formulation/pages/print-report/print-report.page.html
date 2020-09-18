@@ -1,11 +1,20 @@
-<title-header [titlePath]="'Regresar'" [path]="'/formulation/register-product'" [title]="'Registro'"></title-header>
+<title-header
+  [titlePath]="'Regresar'"
+  [path]="'/formulation/register-product'"
+  [title]="'Registro'"
+  style="background: #ffffff"
+></title-header>
 
 <ion-content class="main">
   <ion-grid class="container container--all">
     <ion-row class="container container__row container__row--first">
       <ion-col class="container container__column">
         <div class="container container__image ion-justify-content-center">
-          <img class="container container__logo" src="\assets\icons\Grupo_6.svg" alt="logo" />
+          <img
+            class="container container__logo"
+            src="\assets\icons\Grupo_6.svg"
+            alt="logo"
+          />
         </div>
 
         <h1 class="container container__subtitle">
@@ -15,9 +24,17 @@
     </ion-row>
 
     <ion-row class="container container__row container__row--second">
-      <ion-col class="container container__column container__column--button ion-justify-content-center" size="12">
-        <ion-button class="container container__button" expand="block"
-          style="text-transform: none; --background: #e1bc5c;" size="large" (click)="printReport()">
+      <ion-col
+        class="container container__column container__column--button ion-justify-content-center"
+        size="12"
+      >
+        <ion-button
+          class="container container__button"
+          expand="block"
+          style="text-transform: none; --background: #e1bc5c"
+          size="large"
+          (click)="printReport()"
+        >
           Imprimir Reporte
         </ion-button>
       </ion-col>

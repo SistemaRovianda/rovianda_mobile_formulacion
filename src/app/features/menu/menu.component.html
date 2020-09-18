@@ -1,0 +1,40 @@
+<title-header
+  [titlePath]="'Salir'"
+  [title]="'Formulación'"
+  (click)="logout()"
+  style="background: #ffffff"
+></title-header>
+
+<ion-content>
+  <ion-grid fixed class="menu">
+    <ion-row class="menu menu__row menu__header" size="12">
+      <ion-col class="menu menu__column" size="12">
+        <h1 class="menu menu__title">Menú</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="menu menu__row menu__options">
+      <ion-grid class="options">
+        <ion-row class="options options__row">
+          <ion-col class="options options__column" size="6">
+            <ion-button
+              class="options options__button"
+              color="secondary"
+              routerLink="/process/basic-registration"
+            >
+              Descongelamiento</ion-button
+            >
+          </ion-col>
+          <ion-col class="options options__column" size="6">
+            <ion-button
+              class="options options__button"
+              color="secondary"
+              routerLink="/formulation/register-product"
+            >
+              Formulación</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+  </ion-grid>
+</ion-content>
