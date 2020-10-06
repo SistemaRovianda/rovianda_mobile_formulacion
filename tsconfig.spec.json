@@ -5,7 +5,8 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "forceConsistentCasingInFileNames": false
   },
   "files": [
     "src/test.ts",

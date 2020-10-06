@@ -18,7 +18,7 @@ import { AuthGuard } from "./shared/guards/auth.guard";
 import { IsAuthGuard } from "./shared/guards/isAuth.guard";
 import { Keyboard } from "@ionic-native/keyboard/ngx";
 import { IonicStorageModule } from "@ionic/storage";
-import { FormulationService } from "./shared/services/formulation.service";
+
 import { FileOpener } from "@ionic-native/file-opener/ngx";
 import { File } from "@ionic-native/file/ngx";
 import {

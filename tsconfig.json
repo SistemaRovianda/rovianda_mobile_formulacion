@@ -13,10 +13,11 @@
     "target": "es2015",
     "typeRoots": ["node_modules/@types"],
     "skipLibCheck": true,
-    "lib": ["es2018", "dom"]
+    "lib": ["es2018", "dom"],
+    "forceConsistentCasingInFileNames": false
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
   }
 }
