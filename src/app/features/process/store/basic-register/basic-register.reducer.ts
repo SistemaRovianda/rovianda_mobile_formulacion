@@ -24,6 +24,8 @@ export const basicRegisterReducer = createReducer(
       };
     }
   ),
+  on(fromBasicRegisterActions.basicRegisterNewRegisterProcessSucess,(state)=>({...state,loading:false})),
+  on(fromBasicRegisterActions.basicRegisterLoadResultsNewRegisterProcess,(state,{result})=>({...state,result})),
   on(
     fromBasicRegisterActions.basicRegisterLoadLotsOutputMeat,
     (state, { lots }) => ({ ...state, lots })

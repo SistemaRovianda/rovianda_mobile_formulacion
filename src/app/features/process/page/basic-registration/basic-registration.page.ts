@@ -13,7 +13,7 @@ import {
 } from "../../store/basic-register/basic-register.select";
 import { processDetailStartLoadMaterials } from "../../store/process-detail/process-detail.actions";
 import { SELECT_PROCESS_DETAIL_MATERIALS } from "../../store/process-detail/process-detail.selector";
-import { SELECT_RECENT_RECORDS_IS_SELECTED_PROCESS } from "../../store/recent-records/recent-records.selector";
+
 
 @Component({
   selector: "app-basic-registration",
@@ -33,7 +33,7 @@ export class BasicRegistrationPage implements OnInit {
 
   result: boolean;
 
-  loading: boolean;
+  loading: boolean=false;
 
   isSelected: boolean;
 
@@ -50,8 +50,15 @@ export class BasicRegistrationPage implements OnInit {
 
     this.store
       .select(SELECT_BASIC_REGISTER_IS_LOADING)
-      .subscribe((loading) => (this.loading = loading));
-
+      .subscribe((loading) => {
+        if(this.loading==false && loading==true){
+        this.loading = loading;
+        }else if(this.loading==true && loading==false){
+          this.loading=false;
+          this.redirectBack();
+        }
+      });
+    
     // this.store
     //   .select(SELECT_RECENT_RECORDS_IS_SELECTED_PROCESS)
     //   .subscribe((selected) => (this.isSelected = selected));
@@ -108,7 +115,7 @@ export class BasicRegistrationPage implements OnInit {
   }
 
   redirectBack() {
-    this.router.navigate([`/process/process-detail`]);
+    this.router.navigate([`/menu`]);
   }
   reprocessing() {
     this.router.navigate([`/process/reprocessing`]);
