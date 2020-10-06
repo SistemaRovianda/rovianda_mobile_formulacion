@@ -46,11 +46,11 @@
             class="item-form"
             interface="action-sheet"
             placeholder="Seleccionar lote"
-            formControlName="lotId"
+            formControlName="outputCoolingId"
           
           >
-            <ion-select-option [value]="lot" *ngFor="let lot of lots"
-              >{{ lot.lotId }}: {{ lot.quantity }}</ion-select-option
+            <ion-select-option [value]="lot.recordId" *ngFor="let lot of lots"
+              >{{ lot.loteId }}: {{ lot.quantity }}</ion-select-option
             >
           </ion-select>
         </ion-item>
@@ -59,15 +59,15 @@
           <ion-input
             class="item-form"
             placeholder="Producto"
-            formControlName="lotId"
+            formControlName="outputCoolingId"
             disabled
           ></ion-input>
         </ion-item>
         <div class="error">
           <ion-label
             *ngIf="
-              form.hasError('required', 'lotId') &&
-              (form.controls.lotId.touched || form.controls.lotId.dirty)
+              form.hasError('required', 'outputCoolingId') &&
+              (form.controls.outputCoolingId.touched || form.controls.outputCoolingId.dirty)
             "
           >
             Ingrese un valor

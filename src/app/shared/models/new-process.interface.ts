@@ -13,3 +13,12 @@ export interface LotProduct {
   loteId: string;
   outputId: number;
 }
+
+
+export interface DefrostDTO{
+  outputCoolingId:number;
+  weight: string;
+  temp: string;
+  entranceHour: string;
+  dateInit: string; 
+}

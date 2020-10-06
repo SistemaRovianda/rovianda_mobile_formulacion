@@ -2,7 +2,7 @@ import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { API_ENDPOINT_PROVIDER } from "src/app/providers/tokens";
 import { Observable } from "rxjs";
-import { NewProcess } from "../models/new-process.interface";
+import { DefrostDTO, NewProcess } from "../models/new-process.interface";
 import { Defrost } from "../models/defrost.interface";
 
 @Injectable({
@@ -18,14 +18,14 @@ export class BasicRegisterService {
     this.url = `${endpoint}/process`;
   }
 
-  basicRegisterProcess(newProcess: NewProcess): Observable<any> {
-    console.log(newProcess);
-    return this.http.post<any>(`${this.url}`, {
-      ...newProcess,
+  basicRegisterDefrost(newDefrost: DefrostDTO): Observable<any> {
+    console.log(newDefrost);
+    return this.http.post<any>(`${this.endpoint}/defrost`, {
+      ...newDefrost,
     });
   }
 
-  basicRegisterDefrost(processId, data: Defrost): Observable<any> {
+  basicRegisterDefrostUpdate(processId, data: Defrost): Observable<any> {
     return this.http.patch<any>(`${this.url}/defrost/${processId}`, {
       ...data,
     });

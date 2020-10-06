@@ -67,7 +67,7 @@ export class FormBasicRegistrationComponent implements OnInit {
   ) {
     this.form = fb.group({
       productId: ["", Validators.required],
-      lotId: ["", Validators.required],
+      outputCoolingId: ["", Validators.required],
       weight: ["", [Validators.required, decimalValidator]],
       temperature: ["", Validators.required],
       hourEntrance: [new Date().toISOString(), Validators.required],
@@ -122,10 +122,10 @@ export class FormBasicRegistrationComponent implements OnInit {
 
   selectMaterial() {
     if (!this.onBack) {
-      this.lotId.setValue("");
+      this.outputCoolingId.setValue("");
       this.store.dispatch(
         basicRegisterSelectMaterial({
-          status: "USED",
+          status: "NOTUSED",
           rawMaterialId: this.productId.value.rawMaterialId,
         })
       );
@@ -168,12 +168,12 @@ export class FormBasicRegistrationComponent implements OnInit {
       },
       processId: this.process.id,
     };
-    this.defrost.emit(payload);
+    //this.defrost.emit(payload);
   }
 
   private registerNewProcess() {
     const {
-      lotId,
+      outputCoolingId,
       dateIni,
       hourEntrance,
       productId,
@@ -183,17 +183,11 @@ export class FormBasicRegistrationComponent implements OnInit {
     } = this.form.value;
     const payload = {
       productId: productId.rawMaterialId,
-      lote: {
-        loteId: lotId.lotId,
-        outputId: lotId.outputId,
-      },
+      outputCoolingId,
       weight,
-      temperature,
-      dateIni: moment(dateIni).format("YYYY-MM-DD"),
-      hourEntrance: moment(hourEntrance).format("HH:mm"),
-      processId: localStorage.getItem("processId"),
-      productName: productId.rawMaterial,
-      lote_interno: lotId.lotId,
+      temp:temperature,
+      dateInit: moment(dateIni).format("YYYY-MM-DD"),
+      entranceHour: moment(hourEntrance).format("HH:mm")
     };
 
     this.submit.emit(payload);
@@ -237,8 +231,8 @@ export class FormBasicRegistrationComponent implements OnInit {
   get productId() {
     return this.form.get("productId");
   }
-  get lotId() {
-    return this.form.get("lotId");
+  get outputCoolingId() {
+    return this.form.get("outputCoolingId");
   }
 
   get weight() {

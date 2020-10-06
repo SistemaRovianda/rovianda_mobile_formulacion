@@ -20,7 +20,7 @@ export class MeatService {
     rawMaterialId: number
   ): Observable<LotMeatOutput[]> {
     return this.http.get<LotMeatOutput[]>(
-      `${this.url}/lote/meat/process?status=${status}&rawMaterialId=${rawMaterialId}`
+      `${this.url}/product/lots/outputs/cooling?status=${status}&rawMaterialId=${rawMaterialId}`
     );
   }
 }

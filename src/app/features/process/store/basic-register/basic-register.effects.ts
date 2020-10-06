@@ -98,7 +98,7 @@ export class BasicRegisterEffect {
     this.action$.pipe(
       ofType(fromBasicRegisterActions.basicRegisterStartRegisterNewProcess),
       exhaustMap((action) =>
-        this.basicRegisterService.basicRegisterProcess(action.newProcess).pipe(
+        this.basicRegisterService.basicRegisterDefrost(action.newDefrost).pipe(
           switchMap((result) => {
             this.toastService.presentToastSuccess();
             return [
@@ -148,7 +148,7 @@ export class BasicRegisterEffect {
       ofType(fromBasicRegisterActions.basicRegisterRegisterDefrostProcess),
       exhaustMap((action) =>
         this.basicRegisterService
-          .basicRegisterDefrost(action.processId, action.defrost)
+          .basicRegisterDefrostUpdate(action.processId, action.defrost)
           .pipe(
             switchMap((action) => {
               this.toastService.presentToastSuccess();

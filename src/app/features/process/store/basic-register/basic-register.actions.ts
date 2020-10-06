@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { LotMeatOutput } from "src/app/shared/models/Lot-meat-output.interface";
-import { NewProcess } from "src/app/shared/models/new-process.interface";
+import { DefrostDTO, NewProcess } from "src/app/shared/models/new-process.interface";
 import { ProductsRovianda } from "src/app/shared/models/produts-rovianda.interface";
 import { Defrost } from "src/app/shared/models/defrost.interface";
 import { Process } from "src/app/shared/models/process.interface";
@@ -75,7 +75,7 @@ export const basicRegisterLoadLotsOutputMeat = createAction(
 
 export const basicRegisterStartRegisterNewProcess = createAction(
   BASIC_REGISTER_START_REGISTER_NEW_PROCESS,
-  props<{ newProcess: NewProcess }>()
+  props<{ newDefrost: DefrostDTO }>()
 );
 
 export const basicRegisterLoadResultsNewRegisterProcess = createAction(

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { NewProcess } from "src/app/shared/models/new-process.interface";
+import { DefrostDTO, NewProcess } from "src/app/shared/models/new-process.interface";
 import { RawMaterial } from "src/app/shared/models/raw-material.interface";
 import { AppStateInterface } from "src/app/shared/models/storeState.interface";
 import { AlertService } from "src/app/shared/services/alert.service";
@@ -59,10 +59,10 @@ export class BasicRegistrationPage implements OnInit {
     this.store.dispatch(processDetailStartLoadMaterials());
   }
 
-  onSubmit(newProcess: NewProcess) {
+  onSubmit(newDefrost: DefrostDTO) {
     this.store.dispatch(
       fromBasicRegisterActions.basicRegisterStartRegisterNewProcess({
-        newProcess,
+        newDefrost
       })
     );
   }
