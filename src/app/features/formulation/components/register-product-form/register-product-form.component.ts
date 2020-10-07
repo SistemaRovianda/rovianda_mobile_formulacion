@@ -88,7 +88,7 @@ export class RegisterProductFormComponent implements OnInit {
         { value: moment(new Date()).format("DD/MM/YYYY"), disabled: true },
       ],
       makeId: [""],
-      lostDefrost: ["", [Validators.required]],
+      lotsDefrost: ["", [Validators.required]],
       ingredient: [[]],
     });
   }
@@ -199,8 +199,8 @@ export class RegisterProductFormComponent implements OnInit {
     return this.form.get("productRoviandaId");
   }
 
-  get lostDefrost() {
-    return this.form.get("lostDefrost");
+  get lotsDefrost() {
+    return this.form.get("lotsDefrost");
   }
 
   get temperature() {
@@ -224,12 +224,12 @@ export class RegisterProductFormComponent implements OnInit {
   }
 
   onSelect() {
-    const values: [] = this.lostDefrost.value;
+    const values: [] = this.lotsDefrost.value;
 
     console.log(this.selected_values);
 
     if (this.selected_values.length <= 5) {
-      this.selected_values = values.map((value) => {
+      this.selected_values = values.map((value:any) => {
         return {
           lotId: value.lotId,
           defrostId: value.defrostId,
@@ -239,7 +239,7 @@ export class RegisterProductFormComponent implements OnInit {
       //do somthing
     } else {
       console.log(this.selected_values.length);
-      this.lostDefrost.setErrors({ maxLength: true });
+      this.lotsDefrost.setErrors({ maxLength: true });
     }
   }
 }

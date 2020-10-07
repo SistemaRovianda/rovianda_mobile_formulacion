@@ -2,10 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { DefrostDTO, NewProcess } from "src/app/shared/models/new-process.interface";
+import { DefrostDTO } from "src/app/shared/models/new-process.interface";
 import { RawMaterial } from "src/app/shared/models/raw-material.interface";
 import { AppStateInterface } from "src/app/shared/models/storeState.interface";
 import { AlertService } from "src/app/shared/services/alert.service";
+
 import * as fromBasicRegisterActions from "../../store/basic-register/basic-register.actions";
 import {
   SELECT_BASIC_REGISTER_IS_LOADING,
@@ -55,6 +56,7 @@ export class BasicRegistrationPage implements OnInit {
         this.loading = loading;
         }else if(this.loading==true && loading==false){
           this.loading=false;
+          
           this.redirectBack();
         }
       });

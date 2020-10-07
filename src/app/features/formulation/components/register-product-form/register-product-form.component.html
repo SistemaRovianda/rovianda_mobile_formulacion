@@ -46,7 +46,7 @@
             class="container container__select myCustomSelect"
             interface="alert"
             placeholder="Ingresa lote"
-            formControlName="lostDefrost"
+            formControlName="lotsDefrost"
             multiple="true"
             (ionChange)="onSelect()"
             [interfaceOptions]="customOptions"
@@ -66,9 +66,9 @@
           <ion-label
             class="container container__label container__label--error"
             *ngIf="
-              form.hasError('required', 'lostDefrost') &&
-              (form.controls.lostDefrost.touched ||
-                form.controls.lostDefrost.dirty)
+              form.hasError('required', 'lotsDefrost') &&
+              (form.controls.lotsDefrost.touched ||
+                form.controls.lotsDefrost.dirty)
             "
           >
             Campo requerido.
@@ -76,9 +76,9 @@
           <ion-label
             class="container container__label container__label--error"
             *ngIf="
-              ((!lostDefrost.hasError('required') && lostDefrost.dirty) ||
-                lostDefrost.touched) &&
-              lostDefrost.hasError('maxLength')
+              ((!lotsDefrost.hasError('required') && lotsDefrost.dirty) ||
+              lotsDefrost.touched) &&
+              lotsDefrost.hasError('maxLength')
             "
           >
             Limite maximo de 5 items
