@@ -168,7 +168,7 @@ export class BasicRegisterEffect {
         fromBasicRegisterActions.basicRegisterRegisterDefrostProcessSuccess
       ),
       exhaustMap(() =>
-        from(this.router.navigate(["/process/process-detail"])).pipe(
+        from(this.router.navigate(["/menu"])).pipe(
           switchMap((result) =>
             result
               ? [
