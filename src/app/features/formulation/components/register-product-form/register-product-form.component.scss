@@ -224,3 +224,15 @@
     overflow-y: scroll;
   }
 }
+
+.myCustomSelect {
+  max-width: 100% !important;
+}
+
+ion-select {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  overflow: hidden;
+  color: #808080;
+}

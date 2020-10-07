@@ -10,7 +10,6 @@
             placeholder="Seleccionar materia prima"
             formControlName="productId"
             (ionChange)="selectMaterial()"
-            
           >
             <ion-select-option
               [value]="material"
@@ -47,7 +46,6 @@
             interface="action-sheet"
             placeholder="Seleccionar lote"
             formControlName="outputCoolingId"
-          
           >
             <ion-select-option [value]="lot.recordId" *ngFor="let lot of lots"
               >{{ lot.loteId }}: {{ lot.quantity }}</ion-select-option
@@ -67,7 +65,8 @@
           <ion-label
             *ngIf="
               form.hasError('required', 'outputCoolingId') &&
-              (form.controls.outputCoolingId.touched || form.controls.outputCoolingId.dirty)
+              (form.controls.outputCoolingId.touched ||
+                form.controls.outputCoolingId.dirty)
             "
           >
             Ingrese un valor

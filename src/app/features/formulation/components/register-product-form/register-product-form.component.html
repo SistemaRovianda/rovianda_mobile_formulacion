@@ -43,28 +43,62 @@
           </ion-label>
 
           <ion-select
-            class="container container__select"
-            interface="action-sheet"
+            class="container container__select myCustomSelect"
+            interface="alert"
             placeholder="Ingresa lote"
-            formControlName="lotIdRecordId"
+            formControlName="lostDefrost"
+            multiple="true"
+            (ionChange)="onSelect()"
+            [interfaceOptions]="customOptions"
           >
-            <!-- <ion-select-option value="f">Female</ion-select-option> -->
             <ion-select-option
               class="container container__select-option"
+              style="--width: 500px !important"
               *ngFor="let lotMeat of lotsMeat$ | async"
-              [value]="lotMeat.outputId"
-              >{{lotMeat.lotId}}-{{ lotMeat.name }}-{{lotMeat.quantity}}</ion-select-option
+              [value]="lotMeat"
+              >{{ lotMeat.lotId }}-{{ lotMeat.rawMaterial }}-{{
+                lotMeat.quantity
+              }}</ion-select-option
             >
           </ion-select>
         </ion-item>
         <div class="container container__message-error">
           <ion-label
             class="container container__label container__label--error"
-            *ngIf="lotIdRecordId.invalid && (lotIdRecordId.dirty || lotIdRecordId.touched)"
+            *ngIf="
+              form.hasError('required', 'lostDefrost') &&
+              (form.controls.lostDefrost.touched ||
+                form.controls.lostDefrost.dirty)
+            "
           >
             Campo requerido.
           </ion-label>
+          <ion-label
+            class="container container__label container__label--error"
+            *ngIf="
+              ((!lostDefrost.hasError('required') && lostDefrost.dirty) ||
+                lostDefrost.touched) &&
+              lostDefrost.hasError('maxLength')
+            "
+          >
+            Limite maximo de 5 items
+          </ion-label>
         </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label class="container container__label" position="floating"
+            >Lotes seleccionados</ion-label
+          >
+          <ion-textarea [disabled]="true">
+            <p class="card__subtitle" *ngFor="let value of selected_values">
+              {{ value.lotId }}
+            </p>
+          </ion-textarea>
+        </ion-item>
       </ion-col>
     </ion-row>
 
@@ -78,9 +112,8 @@
             class="container container__input"
             type="text"
             disabled="true"
-          
           >
-          {{nameElaborated | async }}
+            {{ nameElaborated | async }}
           </ion-input>
         </ion-item>
       </ion-col>
@@ -196,7 +229,7 @@
     </ion-row>
 
     <ion-row class="container container__row container__row--ingredients">
-      <ion-col size="12" style="height: 100%;">
+      <ion-col size="12" style="height: 100%">
         <ion-card class="card">
           <ion-card-header class="card card__header">
             <ion-card-subtitle class="card card__subtitle">
@@ -206,7 +239,7 @@
           <ion-card-content class="card card__content">
             <ion-row
               class="container container__row container__row--selector-lots"
-              style="height: auto;"
+              style="height: auto"
             >
               <ion-col
                 class="container container__column"
@@ -255,7 +288,9 @@
                 <!-- <div *ngIf="!loadingIngredients"> -->
                 <ion-item
                   class="container container__item"
-                  *ngFor="let ingredient of ingredientsOfProductRovianda$ | async"
+                  *ngFor="
+                    let ingredient of ingredientsOfProductRovianda$ | async
+                  "
                 >
                   <ion-label class="container container__label">{{
                     ingredient.description

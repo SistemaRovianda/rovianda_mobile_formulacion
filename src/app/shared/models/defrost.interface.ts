@@ -8,6 +8,7 @@ export interface defrostList {
   defrostId: string;
   quantity: number;
   dateDefrost: string;
+  rawMaterial?: string;
 }
 
 export interface defrostDetail {

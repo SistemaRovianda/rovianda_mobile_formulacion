@@ -60,7 +60,14 @@ export class RegisterProductFormComponent implements OnInit {
   userId: string;
   ingredients: ingredientsOfProductRovianda[];
 
+  selected_values = [];
+
   @Output("onSubmit") submit = new EventEmitter();
+
+  customOptions: Record<string, string> = {
+    header: "Selecciona uno o máx. cinco lotes",
+    cssClass: "ion-select-max-height",
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -74,14 +81,14 @@ export class RegisterProductFormComponent implements OnInit {
 
     this.form = fb.group({
       productRoviandaId: ["", [Validators.required]],
-      lotIdRecordId: ["", [Validators.required, noWhiteSpace]],
       temperature: ["", [Validators.required, noWhiteSpace]],
       temperatureWater: ["", [Validators.required, noWhiteSpace]],
+      verifitId: ["", Validators.required],
       date: [
         { value: moment(new Date()).format("DD/MM/YYYY"), disabled: true },
       ],
-      verifitId: ["", Validators.required],
       makeId: [""],
+      lostDefrost: ["", [Validators.required]],
       ingredient: [[]],
     });
   }
@@ -192,8 +199,8 @@ export class RegisterProductFormComponent implements OnInit {
     return this.form.get("productRoviandaId");
   }
 
-  get lotIdRecordId() {
-    return this.form.get("lotIdRecordId");
+  get lostDefrost() {
+    return this.form.get("lostDefrost");
   }
 
   get temperature() {
@@ -214,5 +221,25 @@ export class RegisterProductFormComponent implements OnInit {
 
   get verifitId() {
     return this.form.get("verifitId");
+  }
+
+  onSelect() {
+    const values: [] = this.lostDefrost.value;
+
+    console.log(this.selected_values);
+
+    if (this.selected_values.length <= 5) {
+      this.selected_values = values.map((value) => {
+        return {
+          lotId: value.lotId,
+          defrostId: value.defrostId,
+        };
+      });
+
+      //do somthing
+    } else {
+      console.log(this.selected_values.length);
+      this.lostDefrost.setErrors({ maxLength: true });
+    }
   }
 }

@@ -34,7 +34,7 @@ export class FormBasicRegistrationComponent implements OnInit {
 
   @Input() materials: RawMaterial[];
 
-  lots: LotMeatOutput[];
+  lots: LotMeatOutput[] = [];
 
   @Output("onSubmit") submit = new EventEmitter();
 
@@ -185,9 +185,9 @@ export class FormBasicRegistrationComponent implements OnInit {
       productId: productId.rawMaterialId,
       outputCoolingId,
       weight,
-      temp:temperature,
+      temp: temperature,
       dateInit: moment(dateIni).format("YYYY-MM-DD"),
-      entranceHour: moment(hourEntrance).format("HH:mm")
+      entranceHour: moment(hourEntrance).format("HH:mm"),
     };
 
     this.submit.emit(payload);

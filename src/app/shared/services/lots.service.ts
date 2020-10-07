@@ -33,14 +33,7 @@ export class LotService {
   }
 
   getCatalogLots(): Observable<OutputsMeat[]> {
-    let params = new HttpParams({
-      fromObject: {
-        status: "NOTUSED",
-      },
-    });
-    return this._http.get<OutputsMeat[]>(`${this.url}/meat/lots/output`, {
-      params,
-    });
+    return this._http.get<OutputsMeat[]>(`${this.url}/defrost-getinactive`);
   }
 
   getDefrostLots() {

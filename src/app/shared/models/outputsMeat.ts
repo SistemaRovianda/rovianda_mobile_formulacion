@@ -1,6 +1,7 @@
-export interface OutputsMeat{
-    loteId:string;
-    quantity:number;
-    outputId:number;
-    name:string;
+export interface OutputsMeat {
+  lotId: string;
+  defrostId: string;
+  quantity: number;
+  dateDefrost: string;
+  rawMaterial?: string;
 }
