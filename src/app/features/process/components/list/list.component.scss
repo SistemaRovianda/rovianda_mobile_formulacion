@@ -1,0 +1,31 @@
+@import "../../../../../theme/mixins.scss";
+
+.item {
+  height: 40px;
+  background-color: #bababa;
+  border-radius: 5px;
+  margin-bottom: 5px;
+
+  cursor: pointer;
+
+  &_text {
+    height: auto;
+    width: 100%;
+
+    @include breakpoint-size(ms-extra-small) {
+      font-size: var(--fs-text-xsm);
+    }
+
+    @include breakpoint-size(ms-small) {
+      font-size: var(--fs-text-sm);
+    }
+
+    @include breakpoint-size(ms-medium) {
+      font-size: var(--fs-text-md);
+    }
+
+    @include breakpoint-size(ms-extra-large) {
+      font-size: var(--fs-text-xl);
+    }
+  }
+}

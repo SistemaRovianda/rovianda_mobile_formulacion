@@ -1,0 +1,53 @@
+<title-header
+  titlePath="Regresar"
+  [title]="'Formulación'"
+  path="/defrost/listing"
+  style="background: #ffffff"
+>
+</title-header>
+
+<ion-content>
+  <ion-grid class="container container--all">
+    <ion-row>
+      <ion-col>
+        <h1 class="title">Descongelamiento</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="container container__row container__row--forms">
+      <ion-col class="container container__column" size="12">
+        <div class="container container__form">
+          <defrost-listing-form
+            #form
+            [lots]="lots$ | async"
+            (onSubmit)="onSubmit($event)"
+          ></defrost-listing-form>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row
+      class="container container__row container__row--buttons ion-justify-content-around"
+    >
+      <ion-col class="container container__column" size="12">
+        <ion-button
+          (click)="form.onSubmit(form.form)"
+          class="container container_buttton"
+          color="secondary"
+          size="large"
+          expand="block"
+          ><ion-grid>
+            <ion-row *ngIf="!(loading$ | async)">
+              <ion-col>Guardar</ion-col></ion-row
+            >
+            <ion-spinner
+              *ngIf="loading$ | async"
+              name="crescent"
+            ></ion-spinner> </ion-grid
+        ></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+{{ loading$ | async }}

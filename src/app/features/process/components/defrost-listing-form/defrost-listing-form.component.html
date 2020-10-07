@@ -1,0 +1,111 @@
+<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label class="container container__label" position="stacked"
+            >Lote*</ion-label
+          >
+
+          <ion-input
+            class="container container__input"
+            type="text"
+            [disabled]="true"
+          >
+            {{ lots?.outputCooling?.loteInterno }}
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label class="container container__label" position="stacked"
+            >Fecha entrada</ion-label
+          >
+
+          <ion-input
+            class="container container__input"
+            type="text"
+            [disabled]="true"
+          >
+            {{ lots?.dateInit }}
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="5">
+        <ion-item>
+          <ion-label class="container container__label" position="stacked"
+            >Hora entrada</ion-label
+          >
+          <ion-input
+            class="container container__input"
+            type="text"
+            [disabled]="true"
+          >
+            {{ lots?.entranceHour }}
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Fecha salida*</ion-label>
+
+          <ion-datetime
+            displayFormat="MM/DD/YYYY"
+            display-timezone="utc"
+            class="item-form"
+            formControlName="dateEnd"
+            placeholder="MM/DD/YYYY"
+            [min]="minDate"
+            [max]="maxDate"
+          ></ion-datetime>
+        </ion-item>
+        <div class="error">
+          <ion-label
+            *ngIf="
+              form.hasError('required', 'dateEnd') &&
+              (form.controls.dateEnd.touched || form.controls.dateEnd.dirty)
+            "
+          >
+            Ingrese un valor
+          </ion-label>
+          <ion-label
+            *ngIf="
+              form.controls.dateEnd.touched &&
+              form.controls.dateEnd.errors?.isValidDecimal
+            "
+          >
+            Formato invalido
+          </ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="5">
+        <ion-item>
+          <ion-label position="floating">Hora salida*</ion-label>
+          <ion-datetime
+            class="item-form"
+            placeholder="HH:mm"
+            displayFormat="HH:mm"
+            formControlName="outputHour"
+          ></ion-datetime>
+        </ion-item>
+        <div class="error">
+          <ion-label
+            *ngIf="
+              form.hasError('required', 'outputHour') &&
+              (form.controls.outputHour.touched ||
+                form.controls.outputHour.dirty)
+            "
+          >
+            Ingrese un valor
+          </ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

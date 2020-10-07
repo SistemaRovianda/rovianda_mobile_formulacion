@@ -8,6 +8,7 @@ import { lotsDrief } from "src/app/features/formulation/store/lotsDrief/reducer"
 
 import { OutputsMeat } from "../models/outputsMeat";
 import { ingredientsOfProductRovianda } from "src/app/features/formulation/store/ingredients-product-rovianda/reducer";
+import { defrostList } from "../models/defrost.interface";
 
 @Injectable({
   providedIn: "root",
@@ -40,5 +41,17 @@ export class LotService {
     return this._http.get<OutputsMeat[]>(`${this.url}/meat/lots/output`, {
       params,
     });
+  }
+
+  getDefrostLots() {
+    return this._http.get<defrostList[]>(`${this.url}/defrost-getactive`);
+  }
+
+  getDetailDefrostLot(id: number) {
+    return this._http.get(`${this.url}/defrost/${id}`);
+  }
+
+  putDetailDefrostLot(id: number, body: any) {
+    return this._http.put(`${this.url}/defrost/${id}`, body);
   }
 }

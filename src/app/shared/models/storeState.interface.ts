@@ -15,6 +15,9 @@ import { qualityUser } from "src/app/features/formulation/store/quality-user/red
 import { BasicRegister } from "./basic-register.interface";
 import { RecentRecords } from "./recent-records.interface";
 import { ProcessDetail } from "./process-detail-page.interface";
+import { defrostList } from "./defrost.interface";
+import { defrostLotsState } from "src/app/features/process/store/defrost-listing/defrost-listing.reducer";
+import { defrostDetailState } from "src/app/features/process/store/defrost-detail/defrost-detail.reducer";
 
 export interface LoginState {
   loading: boolean;
@@ -52,4 +55,7 @@ export interface AppStateInterface {
   basicRegister: BasicRegister;
   recentRecords: RecentRecords;
   processDetail: ProcessDetail;
+  defrostListing: defrostLotsState;
+  defrostDetail: defrostDetailState;
+  defrost?: any;
 }

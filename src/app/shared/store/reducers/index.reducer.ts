@@ -20,6 +20,9 @@ import { qualityUserReducer } from "src/app/features/formulation/store/quality-u
 import { basicRegisterReducer } from "src/app/features/process/store/basic-register/basic-register.reducer";
 import { recentRecordsReducer } from "src/app/features/process/store/recent-records/recent-records.reducer";
 import { processDetailReducer } from "src/app/features/process/store/process-detail/process-detail.reducer";
+import { defrostListingReducer } from "src/app/features/process/store/defrost-listing/defrost-listing.reducer";
+import { defrostDetailReducer } from "src/app/features/process/store/defrost-detail/defrost-detail.reducer";
+import { defrostUpdateReducer } from "src/app/features/process/store/defrost/defrost.reducer";
 export const reducers: ActionReducerMap<AppStateInterface> = {
   login: loginReducer,
   auth: authenticationReducer,
@@ -40,6 +43,9 @@ export const reducers: ActionReducerMap<AppStateInterface> = {
   basicRegister: basicRegisterReducer,
   recentRecords: recentRecordsReducer,
   processDetail: processDetailReducer,
+  defrostListing: defrostListingReducer,
+  defrostDetail: defrostDetailReducer,
+  defrost: defrostUpdateReducer,
 };
 
 export const metaReducers: MetaReducer<AppStateInterface>[] = [];
