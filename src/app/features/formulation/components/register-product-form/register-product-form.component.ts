@@ -137,6 +137,7 @@ export class RegisterProductFormComponent implements OnInit {
     });
     this._store.pipe(select(SELECT_USER_UID)).subscribe((uid) => {
       this.userId = uid;
+      console.log(uid);
     });
 
     // //this.lots$ = this._store.select(SELECT_LOTS);
@@ -149,11 +150,11 @@ export class RegisterProductFormComponent implements OnInit {
       this._storage.get("currentUser").then((res) => Promise.resolve(res))
     );
 
-    // this._storage.get("uid").then((res) => {
-    //   console.log("res uid", res);
-    //   this.form.get("makeId").setValue(res);
-    //   return Promise.resolve(res);
-    // });
+    this._storage.get("uid").then((res) => {
+      console.log("res uid", res);
+      this.form.get("makeId").setValue(res);
+      return Promise.resolve(res);
+    });
 
     // this.usersVerified$ = this._store.select(usersVerifiedSelector);
   }
@@ -162,7 +163,10 @@ export class RegisterProductFormComponent implements OnInit {
     this.form
       .get("ingredient")
       .setValue(this.getLotsIdWithIngredientsId(this.lotsFormArray.value));
-    this.form.get("makeId").setValue(this.userId);
+
+    // this.form.get("makeId").setValue(this.userId);
+
+    this.form.get("lostDefrost").setValue(this.selected_values);
     const f = {
       ...this.form.value,
       date: moment(new Date()).format("DD/MM/YYYY"),
