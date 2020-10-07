@@ -166,7 +166,7 @@ export class RegisterProductFormComponent implements OnInit {
 
     // this.form.get("makeId").setValue(this.userId);
 
-    this.form.get("lostDefrost").setValue(this.selected_values);
+    this.form.get("lotsDefrost").setValue(this.selected_values);
     const f = {
       ...this.form.value,
       date: moment(new Date()).format("DD/MM/YYYY"),
@@ -233,7 +233,7 @@ export class RegisterProductFormComponent implements OnInit {
     console.log(this.selected_values);
 
     if (this.selected_values.length <= 5) {
-      this.selected_values = values.map((value:any) => {
+      this.selected_values = values.map((value: any) => {
         return {
           lotId: value.lotId,
           defrostId: value.defrostId,
