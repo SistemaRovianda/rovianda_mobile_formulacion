@@ -89,6 +89,7 @@ export class FormBasicRegistrationComponent implements OnInit {
         this.process = tempProcess;
         this.datesRegistered =
           this.process.endDate !== "" && this.process.outputHour !== "";
+          
         this.updateForm();
         this.emptyProcess = false;
       } else {
@@ -131,6 +132,7 @@ export class FormBasicRegistrationComponent implements OnInit {
       );
     }
   }
+
 
   onSubmit() {
     const buttons: any = [
@@ -191,6 +193,7 @@ export class FormBasicRegistrationComponent implements OnInit {
     };
 
     this.submit.emit(payload);
+    this.form.reset();
   }
 
   private updateForm() {

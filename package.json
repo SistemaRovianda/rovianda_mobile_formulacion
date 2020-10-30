@@ -5,7 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4004",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -42,6 +42,7 @@
     "file-saver": "^2.0.2",
     "firebase": "^7.14.3",
     "moment": "^2.27.0",
+    "nan": "^2.14.2",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

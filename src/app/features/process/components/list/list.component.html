@@ -1,5 +1,6 @@
 <ion-row size="12" class="item" routerLink="/defrost/{{ item.defrostId }}">
-  <ion-col class="item_text" size="4">{{ item.lotId }}</ion-col>
-  <ion-col class="item_text" size="5"> {{ item.dateDefrost }} </ion-col>
+  <ion-col class="item_text" size="3">{{ item.lotId }}</ion-col>
+  <ion-col class="item_text" size="3">{{ item.rawMaterial }}</ion-col>
+  <ion-col class="item_text" size="3"> {{ item.dateDefrost | date:'d-M-yyyy hh:mm' }} </ion-col>
   <ion-col class="item_text" size="3">{{ item.quantity }}</ion-col>
 </ion-row>

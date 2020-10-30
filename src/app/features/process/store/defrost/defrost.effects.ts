@@ -36,7 +36,7 @@ export class defrostUpdateEffects {
       exhaustMap((action) => {
         this.toastService.presentToastSuccess();
         this.router.navigate([`/menu`]);
-        return null;
+        return [];
       }),
       catchError((error) => {
         this.toastService.presentToastError();

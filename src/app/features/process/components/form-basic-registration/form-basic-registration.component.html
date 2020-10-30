@@ -46,9 +46,10 @@
             interface="action-sheet"
             placeholder="Seleccionar lote"
             formControlName="outputCoolingId"
+
           >
             <ion-select-option [value]="lot.recordId" *ngFor="let lot of lots"
-              >{{ lot.loteId }}: {{ lot.quantity }}</ion-select-option
+              >Lote: {{ lot.loteId }} : Cantidad {{ lot.quantity }}</ion-select-option
             >
           </ion-select>
         </ion-item>
