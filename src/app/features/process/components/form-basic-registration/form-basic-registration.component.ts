@@ -48,7 +48,7 @@ export class FormBasicRegistrationComponent implements OnInit {
 
   process: Process;
 
-  minDate = new Date().toISOString();
+  minDate = null;
 
   maxDate = new Date().getFullYear() + 5;
 
@@ -65,6 +65,8 @@ export class FormBasicRegistrationComponent implements OnInit {
     private store: Store<AppStateInterface>,
     private alert: AlertService
   ) {
+    this.minDate = new Date();
+    this.minDate.setHours(this.minDate.getHours()-6);
     this.form = fb.group({
       productId: ["", Validators.required],
       outputCoolingId: ["", Validators.required],
@@ -72,7 +74,7 @@ export class FormBasicRegistrationComponent implements OnInit {
       temperature: ["", Validators.required],
       hourEntrance: [new Date().toISOString(), Validators.required],
       hourExit: [],
-      dateIni: [this.minDate, Validators.required],
+      dateIni: [this.minDate.toISOString(), Validators.required],
       dateFinal: [""],
     });
   }

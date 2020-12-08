@@ -115,7 +115,7 @@
             formControlName="temperature"
             type="number"
             [disabled]="isSelected && !emptyProcess"
-            pattern="\d+"
+            
           ></ion-input>
         </ion-item>
         <div class="error">
@@ -185,7 +185,7 @@
             display-timezone="utc"
             class="item-form"
             formControlName="dateIni"
-            [min]="minDate"
+            
             [max]="maxDate"
             [disabled]="isSelected && !emptyProcess"
           ></ion-datetime>
