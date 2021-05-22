@@ -17,3 +17,14 @@ export const SELECT_INGREDIENTS_LOADING = createSelector(
   INGREDIENTS_STATE,
   (state) => state.loading
 );
+
+
+export const SELECT_PROCESS_INGREDIENTS = createSelector(
+  INGREDIENTS_STATE,
+  (state)=>state.processIngredients
+);
+
+export const isDeletingIngredients = createSelector(
+  INGREDIENTS_STATE,
+  (state)=>state.deletingIngredients
+);

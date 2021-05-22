@@ -7,19 +7,27 @@ import {
   addIngredientsProductSuccess,
   addIngredientsModalSuccess,
   clearIngredients,
+  setProcessIngredients,
+  deleteProcessIngredients,
+  deleteProcessIngredientsSuccess,
 } from "./ingredients.actions";
 import { IngredientC } from "src/app/shared/models/ingredient.interface";
+import { processIngredient } from "src/app/shared/models/process.interface";
 
 export interface IngredientsState {
   loading: boolean;
   ingredients: IngredientC[];
   error: string;
+  processIngredients:processIngredient[],
+  deletingIngredients:boolean
 }
 
 const initialState: IngredientsState = {
   loading: false,
   ingredients: [],
   error: null,
+  processIngredients:[],
+  deletingIngredients:false
 };
 
 export const ingredientsReducer = createReducer<IngredientsState>(
@@ -44,5 +52,10 @@ export const ingredientsReducer = createReducer<IngredientsState>(
   on(clearIngredients, (state) => ({
     ...state,
     ingredients: [],
-  }))
+  })),
+  on(setProcessIngredients,(state,{processIngredients})=>({
+    ...state,processIngredients
+  })),
+  on(deleteProcessIngredients,(state)=>({...state,deletingIngredients:true})),
+  on(deleteProcessIngredientsSuccess,(state)=>({...state,deletingIngredients:false}))
 );

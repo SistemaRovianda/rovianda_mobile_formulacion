@@ -1,0 +1,15 @@
+*{
+    color: black;
+}
+ul{
+  list-style-type: decimal;  
+  width: 100%;
+}
+li{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.listProcess{
+    overflow-y: scroll;
+    height: 500px;
+}

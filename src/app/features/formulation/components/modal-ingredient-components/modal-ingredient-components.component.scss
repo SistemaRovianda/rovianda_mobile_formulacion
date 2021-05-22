@@ -1,0 +1,20 @@
+*{
+    color: black;
+    font-size: 30px;
+}
+ul{
+    list-style-type: decimal;
+}
+
+li{
+    margin-bottom: 30px;
+}
+.title{
+    font-weight: bold;
+    
+}
+
+.listIngredients{
+    overflow-y: scroll;
+    height: 500px;
+}

@@ -1,0 +1,22 @@
+<h1>Ingredientes procesados</h1>
+<div>
+  <div class="listProcess">
+<ul>
+  <li *ngFor="let ingredient of processIngredients; let index=index">
+      {{ingredient.productName}}
+      <br>
+      Fecha de termino: {{ingredient.dateEnded}}
+      <br>
+      <ion-button (click)="showInfo(index)">Ver</ion-button><ion-button *ngIf="ingredient.assigned==false" color="primary" (click)="add(index)">Agregar</ion-button>
+      <ion-button *ngIf="ingredient.assigned==true" color="danger" (click)="remove(index)">Quitar</ion-button>
+      <ion-button  (click)="delete(index)" [disabled]="isDeleting">Eliminar</ion-button>
+      {{ingredient.assigned?'ASIGNADO':'NO ASIGNADO'}}
+  </li>
+</ul>
+</div>
+
+<div style="height: 60px;">
+  <ion-button color="danger" (click)="cancel()">Cancelar</ion-button>
+  <ion-button color="primary" (click)="closeAndAdd()">Agregar</ion-button>
+</div>
+</div>

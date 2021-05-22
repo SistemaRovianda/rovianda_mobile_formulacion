@@ -87,7 +87,51 @@
         </div>
       </ion-col>
     </ion-row>
-
+    <!-- <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          
+          <ion-select
+            placeholder="Ingredientes procesados"
+            (ionChange)="onSelectProcessIngredient($event)"
+            formControlName="processIngredienteSelected"
+            
+          >
+            <ion-select-option
+              *ngFor="let processIngredient of processIngredients"
+              [value]="processIngredient"
+              >
+              Proceso: {{ processIngredient.processId }} - {{processIngredient.dateEnded}}
+              - Product: {{processIngredient.productName}} 
+              </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-button color="primary" (click)="openModalProcessIngredients()">Agregar proceso/ingrediente</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+      <ion-item
+          class="container "
+        >
+        
+          <ion-checkbox (ionChange)="selectModeProcess('ingredient')" formControlName="processIngredient"></ion-checkbox>
+          Proceso de ingrediente
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item
+          class="container "
+        >
+          <ion-checkbox (ionChange)="selectModeProcess('normal')" formControlName="processNormal"></ion-checkbox>
+          Proceso de producto
+        </ion-item>
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col size="12">
         <ion-item>
@@ -102,7 +146,20 @@
         </ion-item>
       </ion-col>
     </ion-row>
-
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label class="container container__label" position="floating"
+            >Procesos/ingredientes</ion-label
+          >
+          <div>
+            <p class="itemProcessIngredient" *ngFor="let processIngredient of processIngredientsTaked; let index=index" (click)="showInfo(processIngredient,index)" (dblclick)="selectedProcessIngredientSlice(index)">
+              Proceso: {{processIngredient.processId}} Fecha de termino: {{processIngredient.dateEnded}}
+            </p>
+          </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
     <ion-row class="container container__row container__row--second">
       <ion-col class="container container_column" size="12">
         <ion-item class="container container__item">
@@ -193,6 +250,7 @@
             No se aceptan espacios en blanco
           </ion-label>
         </div>
+      
         <ion-item
           class="container container__item container__item--temperature"
         >
@@ -215,13 +273,11 @@
               (temperatureWater.dirty || temperatureWater.touched)
             "
           >
-            Campo requerido.-
+            Campo requerido.
           </ion-label>
           <ion-label
             class="container container__label container__label--error"
-            *ngIf="
-              temperatureWater.touched && temperatureWater.errors?.whitespace
-            "
+            *ngIf="temperatureWater.touched && temperatureWater.errors?.whitespace"
           >
             No se aceptan espacios en blanco
           </ion-label>
@@ -239,30 +295,48 @@
           </ion-card-header>
           <ion-card-content class="card card__content">
             <ion-row
-              class="container container__row container__row--selector-lots"
               style="height: auto"
+              *ngFor="let lot of lotsDrief$ | async; let i = index"
             >
               <ion-col
                 class="container container__column"
                 style="
                   display: flex;
                   flex-direction: column;
-                  justify-content: center;
-                  align-items: flex-end;
+                  width: 50%;
                 "
               >
                 <ion-item
-                  class="container container__item"
-                  *ngFor="let lot of lotsDrief$ | async; let i = index"
+                  class="container container__item scrollable_x"
                 >
-                  <ion-label class="container container__label" position="fixed"
+                 
+                  <ion-label class="container container__label"
+                  >{{
+                    mapIngredients.get(lot.productId)
+                    }}</ion-label>
+                  
+                </ion-item>
+                <!-- </div> -->
+              </ion-col>
+              <ion-col
+                style="
+                  width: 50%;
+                "
+              >
+                <ion-item>
+                  <ion-label class="container container__label"
+                  >{{
+                    mapIngredients.get(lot.productId)
+                    }}</ion-label>
+                    <ion-label  position="fixed"
                     >Lote</ion-label
                   >
                   <ion-select
-                    class="container container__select"
+                    
                     interface="action-sheet"
                     [formControl]="lotsFormArray.controls[i]"
                   >
+                  
                     <ion-select-option
                       class="container container__select-option"
                       *ngFor="let lotInt of lot.lots"
@@ -270,35 +344,8 @@
                     >
                       {{ lotInt.loteId }}
                     </ion-select-option>
-                  </ion-select>
+                  </ion-select>  
                 </ion-item>
-              </ion-col>
-              <ion-col
-                class="container container__column"
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: flex-end;
-                "
-              >
-                <ion-spinner
-                  class="container container__spinner"
-                  *ngIf="loadingIngredients"
-                ></ion-spinner>
-                <!-- <div *ngIf="!loadingIngredients"> -->
-                <ion-item
-                  class="container container__item"
-                  *ngFor="
-                    let ingredient of ingredientsOfProductRovianda$ | async
-                  "
-                >
-                  <ion-label class="container container__label">{{
-                    ingredient.description
-                  }}</ion-label>
-                </ion-item>
-
-                <!-- </div> -->
               </ion-col>
             </ion-row>
           </ion-card-content>

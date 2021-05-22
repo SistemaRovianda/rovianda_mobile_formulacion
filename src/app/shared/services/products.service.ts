@@ -23,7 +23,7 @@ export class ProductsService {
   }
 
   getIngredientsByProductId(productId: number): Observable<Product> {
-    console.trace("products rovianda null");
+    
     return this._http.get<Product>(`${this.url}/product-rovianda/${productId}`);
   }
 }

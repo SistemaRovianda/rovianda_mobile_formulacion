@@ -116,6 +116,12 @@
     @include breakpoint-size(ms-extra-large) {
       font-size: var(--fs-text-xl);
     }
+    width: 200px;
+  }
+
+  .scrollable_x{
+    width: max-content;
+    overflow-x: scroll;
   }
 
   &__select-option {
@@ -235,4 +241,8 @@ ion-select {
   display: flex;
   overflow: hidden;
   color: #808080;
+}
+
+.itemProcessIngredient{
+  padding: 10px;
 }

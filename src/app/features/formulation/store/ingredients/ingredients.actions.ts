@@ -4,6 +4,7 @@ import {
   IngredientM,
   IngredientC,
 } from "src/app/shared/models/ingredient.interface";
+import { processIngredient } from "src/app/shared/models/process.interface";
 
 const ADD_INGREDIENTS_PRODUCT = "[INGREDIENTS] Add Ingredients by Product";
 
@@ -48,3 +49,23 @@ export const updateIngredients = createAction(
 );
 
 export const clearIngredients = createAction(CLEAR_INGREDIENTS);
+
+
+export const getProcessIngredients  = createAction(
+  "[INGREDIENTS] getProcessIngredients",
+  props<{productId:number}>()
+);
+
+export const setProcessIngredients = createAction(
+  "[INGREDIENTS] setProcessIngredients",
+  props<{processIngredients:processIngredient[]}>()
+);
+
+export const deleteProcessIngredients = createAction(
+  "[INGREDIENTS] deletingProcessIngredient by id",
+  props<{processId:number}>()
+);
+
+export const deleteProcessIngredientsSuccess = createAction(
+  "[INGREDIENTS] deletingProcessIngredient by id success"
+);

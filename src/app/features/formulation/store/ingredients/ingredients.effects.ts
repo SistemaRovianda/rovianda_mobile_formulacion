@@ -6,19 +6,24 @@ import {
   addIngredientsProductSuccess,
   addIngredientsModalSuccess,
   updateIngredients,
+  getProcessIngredients,
+  setProcessIngredients,
+  deleteProcessIngredients,
+  deleteProcessIngredientsSuccess,
 } from "./ingredients.actions";
-import { exhaustMap } from "rxjs/operators";
+import { catchError, exhaustMap, switchMap } from "rxjs/operators";
 import {
   IngredientP,
   IngredientC,
 } from "src/app/shared/models/ingredient.interface";
 import { loadLots } from "../lots/lots.actions";
+import { ProcessService } from "src/app/shared/services/process.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class IngredientsEffects {
-  constructor(private _actions$: Actions) {}
+  constructor(private _actions$: Actions,private processService:ProcessService) {}
 
   addIngredientsByProductEffect$ = createEffect(() =>
     this._actions$.pipe(
@@ -46,6 +51,26 @@ export class IngredientsEffects {
         ];
       })
     )
+  );
+
+  deleteProcessIngredientsById= createEffect( () => 
+  this._actions$.pipe(
+    ofType(deleteProcessIngredients),
+    exhaustMap((action)=>this.processService.deleteProcessIngredientsById(action.processId).pipe(
+      switchMap(()=>[deleteProcessIngredientsSuccess()]),
+      catchError(()=>[deleteProcessIngredientsSuccess()])
+    )
+  ))
+);
+
+  getProcessIngredientsByProduct= createEffect( () => 
+    this._actions$.pipe(
+      ofType(getProcessIngredients),
+      exhaustMap((action)=>this.processService.getProcessIngredientsByProduct(action.productId).pipe(
+        switchMap((response)=>[setProcessIngredients({processIngredients:response})]),
+        catchError(()=>[setProcessIngredients({processIngredients:[]})])
+      )
+    ))
   );
 
   addIngredientsForModalEffect$ = createEffect(() =>

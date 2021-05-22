@@ -1,0 +1,12 @@
+<div>
+<h1>Ingredientes procesados</h1>
+<div class="listIngredients">
+  <ul>
+    <li *ngFor="let ingredient of ingredients.ingredients">
+      <label class="title">Producto: </label><label>{{ingredient.rawMaterial}}  </label>
+      <br>
+     <label class="title"> Lote:</label> <label>{{ingredient.lotId}}</label>
+    </li>
+  </ul>
+</div>
+</div>

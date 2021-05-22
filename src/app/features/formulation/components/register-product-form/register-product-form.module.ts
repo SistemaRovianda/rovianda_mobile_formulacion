@@ -6,6 +6,8 @@ import { IonicModule } from "@ionic/angular";
 import { RouterModule } from "@angular/router";
 import { AddIngredientComponent } from "../../dialogs/add-ingredient/add-ingredient.component";
 import { AddIngredientModule } from "../../dialogs/add-ingredient/add-ingredient.module";
+import { ModalSelectProcessIngredientModule } from "../modal-select-process-ingredient/modal-select-process-ingredient.module";
+import { ModalSelectProcessIngredientComponent } from "../modal-select-process-ingredient/modal-select-process-ingredient.component";
 
 const COMMON_IMPORTS = [
   CommonModule,
@@ -14,6 +16,7 @@ const COMMON_IMPORTS = [
   IonicModule,
   RouterModule,
   AddIngredientModule,
+  ModalSelectProcessIngredientModule
 ];
 
 const COMMON_DECLARATIONS = [RegisterProductFormComponent];
@@ -21,7 +24,8 @@ const COMMON_DECLARATIONS = [RegisterProductFormComponent];
 @NgModule({
   imports: COMMON_IMPORTS,
   declarations: COMMON_DECLARATIONS,
-  entryComponents: [AddIngredientComponent],
+  entryComponents: [AddIngredientComponent,ModalSelectProcessIngredientComponent],
   exports: COMMON_DECLARATIONS,
+  
 })
 export class RegisterProductFormModule {}

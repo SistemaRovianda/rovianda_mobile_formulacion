@@ -23,6 +23,7 @@ const initialState: RegisterFormulationState = {
       lotId: "",
       ingredientId: null,
     },
+    processIngredients:[]
   },
   successSave: false,
   error: null,
