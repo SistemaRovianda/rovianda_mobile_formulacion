@@ -37,4 +37,8 @@ export class DefrostListingFormComponent implements OnInit {
     };
     this.submit.emit(payload);
   }
+  parseDateStr(date:string){
+    let dateSplited = date.split("-");
+    return `${dateSplited[2]}/${dateSplited[1]}/${dateSplited[0]}`;
+  }
 }

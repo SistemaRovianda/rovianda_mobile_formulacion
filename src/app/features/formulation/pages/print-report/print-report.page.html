@@ -1,10 +1,13 @@
-<title-header
-  [titlePath]="'Regresar'"
-  [path]="'/formulation/register-product'"
-  [title]="'Registro'"
-  style="background: #ffffff"
-></title-header>
-
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToHome()">
+        <ion-icon name="arrow-back-outline" class="ionicon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title">Volver al inicio</ion-title>
+</ion-toolbar>
+</ion-header>
 <ion-content class="main">
   <ion-grid class="container container--all">
     <ion-row class="container container__row container__row--first">

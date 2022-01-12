@@ -5,7 +5,7 @@ export interface Formulation {
   assigmentLot: AssigmentLot;
   lotIdRecordId?: string;
   makeId?: string;
-  lotsDefrost?: losDefrost;
+  lotsDefrost?: losDefrost[];
   ingredient: Ingredient;
   processIngredients:number[]
 }

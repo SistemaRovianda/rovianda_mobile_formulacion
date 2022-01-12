@@ -30,7 +30,7 @@
             type="text"
             [disabled]="true"
           >
-            {{ lots?.dateInit }}
+            {{ (lots && lots.dateInit)?parseDateStr(lots?.dateInit):'' }}
           </ion-input>
         </ion-item>
       </ion-col>

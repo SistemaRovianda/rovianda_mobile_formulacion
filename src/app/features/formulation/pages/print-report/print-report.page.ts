@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { timeStamp } from "console";
 import { FormulationService } from "src/app/shared/services/formulation.service";
 
@@ -15,7 +15,8 @@ export class PrintReportPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private formulationService: FormulationService
+    private formulationService: FormulationService,
+    private router:Router
   ) {
     this.idFormulation = this.route.snapshot.params.id;
   }
@@ -26,5 +27,8 @@ export class PrintReportPageComponent implements OnInit {
     console.log("Imprimir reporte");
 
     this.formulationService.getReport(this.idFormulation);
+  }
+  backToHome(){
+    this.router.navigateByUrl("/menu");
   }
 }

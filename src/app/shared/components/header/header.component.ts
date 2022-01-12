@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "title-header",
@@ -10,7 +11,11 @@ export class TitleHeaderComponent implements OnInit {
   @Input() path: string;
   @Input() title: string;
 
-  constructor() {}
+  constructor(private router:Router) {}
 
   ngOnInit() {}
+  navigate(){
+    console.log("PATH: "+this.path);
+    this.router.navigateByUrl(this.path||"/");
+  }
 }

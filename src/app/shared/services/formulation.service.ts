@@ -37,6 +37,7 @@ export class FormulationService {
     //   ...payload,
     //   loteId: parseInt(payload.lotId),
     // };
+    console.log("Formulation:"+payload);
     return this.http.post<any>(`${this.url}/formulation`, payload);
   }
 
